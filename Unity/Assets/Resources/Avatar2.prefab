@@ -551,6 +551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4abc2a1824261d438aa4864d7efe57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myaudioSources: []
+  otheraudioSources: []
   audioSources:
   - {fileID: 0}
   - {fileID: 0}
@@ -561,7 +563,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  audioSourceTag: 
+  myaudioSourceTag: 
+  otheraudioSourceTag: 
   avatar: {fileID: 0}
   positionData: {fileID: 0}
   rotationData: {fileID: 0}
@@ -1026,8 +1029,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4abc2a1824261d438aa4864d7efe57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myaudioSources: []
+  otheraudioSources: []
   audioSources: []
-  audioSourceTag: Player2AudioSource
+  myaudioSourceTag: Player2AudioSource
+  otheraudioSourceTag: Player1AudioSource
   avatar: {fileID: 100008}
   positionData: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
   rotationData: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
