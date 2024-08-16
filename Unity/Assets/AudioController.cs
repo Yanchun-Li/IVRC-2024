@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
+     [SerializeField] private List<AudioSource> myaudioSources = new List<AudioSource>();
+     [SerializeField] private List<AudioSource> otheraudioSources = new List<AudioSource>();
      [SerializeField] private List<AudioSource> audioSources = new List<AudioSource>();
     //[SerializeField] private AudioSource audioBreath;
-    [SerializeField] private string audioSourceTag;
+    [SerializeField] private string myaudioSourceTag;
+    [SerializeField] private string otheraudioSourceTag;
     private List<Vector3> audioPositionList = new List<Vector3>();
     private Vector3 myPosition;
     private List<bool> audiostoplist= new List<bool>();
@@ -27,10 +30,10 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         FindAudioSources();
+        FindAudioSources();
         positionData.ClearPositions();
         rotationData.ClearRotations();
-        foreach (var audio in audioSources)
+        foreach (var audio in myaudioSources)
         {
             if (audio != null)
             {
@@ -45,7 +48,8 @@ public class AudioController : MonoBehaviour
     private void FindAudioSources()
     {
         // タグ付けされた全ての GameObjects を見つける
-        GameObject[] audioSourceObjects = GameObject.FindGameObjectsWithTag(audioSourceTag);
+        GameObject[] audioSourceObjects = GameObject.FindGameObjectsWithTag(myaudioSourceTag);
+        GameObject[] otheraudioSourceObjects = GameObject.FindGameObjectsWithTag(otheraudioSourceTag);
 
         // 見つかった各 GameObject から AudioSource コンポーネントを取得し、リストに追加
         foreach (GameObject obj in audioSourceObjects)
@@ -53,7 +57,15 @@ public class AudioController : MonoBehaviour
             AudioSource audioSource = obj.GetComponent<AudioSource>();
             if (audioSource != null)
             {
-                audioSources.Add(audioSource);
+                myaudioSources.Add(audioSource);
+            }
+        }
+        foreach (GameObject obj in otheraudioSourceObjects)
+        {
+            AudioSource audioSource = obj.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                otheraudioSources.Add(audioSource);
             }
         }
     }
@@ -63,7 +75,7 @@ public class AudioController : MonoBehaviour
     void Update()
     {
         audioPositionList.Clear();
-        foreach (var audio in audioSources)
+        foreach (var audio in myaudioSources)
         {
             if (audio != null)
             {
@@ -85,6 +97,7 @@ public class AudioController : MonoBehaviour
             //myPosition = OriginalPosition;
             this.transform.position = avatar.transform.position;
             myPosition = this.transform.position;
+            audioSources = myaudioSources;
             //Debug.Log("in this case");
         }
         List<int> indexlist=calcDistance(audioPositionList, myPosition);
@@ -132,6 +145,7 @@ public class AudioController : MonoBehaviour
     private IEnumerator Duration(float duration){
         accessOtherScene = true;
         float startTime = Time.time;
+        audioSources = otheraudioSources;
         //audioBreath.Play();
 
         while (Time.time - startTime < duration){
@@ -156,6 +170,7 @@ public class AudioController : MonoBehaviour
         //audioBreath.Stop();
         this.transform.position = avatar.transform.position;
         accessOtherScene = false;
+        audioSources = myaudioSources;
         //Debug.Log("stop access");
     }
 
