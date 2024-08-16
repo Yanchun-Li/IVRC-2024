@@ -20,9 +20,12 @@ using System.Collections.Generic;
      public override void OnJoinedRoom() {
          var position = new Vector3(0,0,0);
          var playerlist = new List<Player>(PhotonNetwork.PlayerList);
-         if (playerlist.Count==2){
+         if (playerlist.Count==1){
+            PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+         }else{
             position = new Vector3(200,0,0);
+            PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
          }
-         PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        
      }
  }
