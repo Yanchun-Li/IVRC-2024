@@ -13,6 +13,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private string otheraudioSourceTag;
     private List<Vector3> audioPositionList = new List<Vector3>();
     private Vector3 myPosition;
+    private Quaternion myRotation;
     private List<bool> audiostoplist= new List<bool>();
     [SerializeField] private GameObject avatar;
 
@@ -96,7 +97,9 @@ public class AudioController : MonoBehaviour
         if(!accessOtherScene){
             //myPosition = OriginalPosition;
             this.transform.position = avatar.transform.position;
+            this.transform.rotation = avatar.transform.rotation;
             myPosition = this.transform.position;
+            myRotation = this.transform.rotation;
             audioSources = myaudioSources;
             //Debug.Log("in this case");
         }
@@ -104,9 +107,11 @@ public class AudioController : MonoBehaviour
         audiomute(indexlist,audioSources);
         //Debug.Log(myPosition);
         //myPosition = this.transform.position;
-        this.transform.position=myPosition;
+        this.transform.position = myPosition;
+        this.transform.rotation = myRotation;
         //Debug.Log($"my position is {this.transform.position}");
-        Debug.Log($"my position is {this.transform.position} and avatar position is {avatar.transform.position}");
+        //Debug.Log($"my position is {this.transform.localPosition} and avatar position is {avatar.transform.position}");
+        Debug.Log($"my position is {this.transform.localRotation} and avatar position is {avatar.transform.rotation}");
     }
 
     private List<int> calcDistance(List<Vector3> audio,Vector3 origin)
@@ -150,8 +155,6 @@ public class AudioController : MonoBehaviour
         //audioBreath.Play();
 
         while (Time.time - startTime < duration){
-            //Position = SavePositionCopy.positioncopy;
-            //InvokeRepeating("ReadNextPosition",0f,0.1f);
             Vector3 Position = positionData.GetPosition(currentIndex);
             Quaternion Rotation = rotationData.GetRotation(currentIndex);
             //audioBreath.transform.position = Position;
@@ -159,6 +162,7 @@ public class AudioController : MonoBehaviour
             currentIndex++;
             //Position = position;
             myPosition = Position;
+            myRotation = Rotation;
             //Debug.Log($"myposition is {myPosition}");
             //Debug.Log("Get Position is "+Position.x+" "+Position.y+" "+Position.z);
             if (currentIndex>= positionData.positions.Count){
@@ -170,6 +174,7 @@ public class AudioController : MonoBehaviour
 
         //audioBreath.Stop();
         this.transform.position = avatar.transform.position;
+        this.transform.rotation = avatar.transform.rotation;
         accessOtherScene = false;
         audioSources = myaudioSources;
         //Debug.Log("stop access");
