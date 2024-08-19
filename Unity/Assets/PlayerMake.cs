@@ -24,7 +24,7 @@ using System.Collections.Generic;
             PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
          }else{
             position = new Vector3(200,0,0);
-            PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+            PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
          }
         
      }

@@ -5,6 +5,7 @@ using UnityEngine.XR;
 
 public class JoyStickMove : MonoBehaviour
 {
+    [SerializeField] private float movespeed = 0.05f;
     void Update()
     {
         Move();
@@ -14,7 +15,7 @@ public class JoyStickMove : MonoBehaviour
     {
         //右ジョイスティックの情報取得
         Vector2 stickR = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
-        Vector3 changePosition = new Vector3((0.05f*stickR.x), 0, (0.05f*stickR.y));
+        Vector3 changePosition = new Vector3((movespeed*stickR.x), 0, (movespeed*stickR.y));
         //HMDのY軸の角度取得
         Vector3 changeRotation = new Vector3(0, InputTracking.GetLocalRotation(XRNode.Head).eulerAngles.y, 0);
         //OVRCameraRigの位置変更
