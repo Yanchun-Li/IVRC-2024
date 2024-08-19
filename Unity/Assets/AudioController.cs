@@ -106,6 +106,7 @@ public class AudioController : MonoBehaviour
         //myPosition = this.transform.position;
         this.transform.position=myPosition;
         //Debug.Log($"my position is {this.transform.position}");
+        Debug.Log($"my position is {this.transform.position} and avatar position is {avatar.transform.position}");
     }
 
     private List<int> calcDistance(List<Vector3> audio,Vector3 origin)
