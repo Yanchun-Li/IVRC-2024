@@ -489,6 +489,7 @@
 "Assets/Photon/PhotonChat/Demos/DemoChat/NamePickGui.cs"
 "Assets/Photon/PhotonRealtime/Demos/DemoLoadBalancing/ConnectAndJoinRandomLb.cs"
 "Assets/PlayerMake.cs"
+"Assets/Timer.cs"
 -langversion:9.0
 /deterministic
 /optimize+

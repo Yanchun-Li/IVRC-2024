@@ -15,7 +15,7 @@ C:/Users/inamilab/Documents/GitHub/IVRC-2024/Unity
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-59540
+59281
 Successfully changed project path to: C:/Users/inamilab/Documents/GitHub/IVRC-2024/Unity
 C:/Users/inamilab/Documents/GitHub/IVRC-2024/Unity
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,13 +49,13 @@ C:/Users/inamilab/Documents/GitHub/IVRC-2024/Unity
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [6140] Host "[IP] 192.168.0.79 [Port] 0 [Flags] 2 [Guid] 2898689582 [EditorId] 2898689582 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-EPL94LAO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [7304] Host "[IP] 192.168.100.85 [Port] 0 [Flags] 2 [Guid] 3354022893 [EditorId] 3354022893 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-EPL94LAO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [6140] Host "[IP] 192.168.0.79 [Port] 0 [Flags] 2 [Guid] 2898689582 [EditorId] 2898689582 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-EPL94LAO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [7304] Host "[IP] 192.168.100.85 [Port] 0 [Flags] 2 [Guid] 3354022893 [EditorId] 3354022893 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-EPL94LAO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with 7 workers.
-Refreshing native plugins compatible for Editor in 36.01 ms, found 11 plugins.
-Preloading 3 native plugins for Editor in 3.60 ms.
+Refreshing native plugins compatible for Editor in 5364.45 ms, found 11 plugins.
+Preloading 3 native plugins for Editor in 2.93 ms.
 Initialize engine version: 2022.3.29f1 (8d510ca76d2b)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/inamilab/Documents/GitHub/IVRC-2024/Unity/Assets
@@ -72,49 +72,49 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56356
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56640
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.29f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.012835 seconds.
-- Loaded All Assemblies, in  0.456 seconds
+Registered in 0.649835 seconds.
+- Loaded All Assemblies, in 13.745 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 298 ms
+Android Extension - Scanning For ADB Devices 664 ms
 Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.701 seconds
-Domain Reload Profiling: 1155ms
-	BeginReloadAssembly (136ms)
+- Finished resetting the current domain, in  1.632 seconds
+Domain Reload Profiling: 15375ms
+	BeginReloadAssembly (9991ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (2ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (76ms)
-	LoadAllAssembliesAndSetupDomain (180ms)
-		LoadAssemblies (132ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (856ms)
+	RebuildNativeTypeToScriptingClass (21ms)
+	initialDomainReloadingComplete (736ms)
+	LoadAllAssembliesAndSetupDomain (2138ms)
+		LoadAssemblies (9985ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (177ms)
-			TypeCache.Refresh (176ms)
-				TypeCache.ScanAssembly (159ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (702ms)
+		AnalyzeDomain (2134ms)
+			TypeCache.Refresh (2132ms)
+				TypeCache.ScanAssembly (1750ms)
+			ScanForSourceGeneratedMonoScriptInfo (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (1632ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (633ms)
+		SetupLoadedEditorAssemblies (1531ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (430ms)
-			SetLoadedEditorAssemblies (4ms)
+			InitializePlatformSupportModulesInManaged (1202ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (146ms)
-			ProcessInitializeOnLoadMethodAttributes (51ms)
+			BeforeProcessingInitializeOnLoad (4ms)
+			ProcessInitializeOnLoadAttributes (234ms)
+			ProcessInitializeOnLoadMethodAttributes (85ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -123,8 +123,8 @@ Domain Reload Profiling: 1155ms
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.224 seconds
-Refreshing native plugins compatible for Editor in 20.60 ms, found 11 plugins.
+- Loaded All Assemblies, in 25.712 seconds
+Refreshing native plugins compatible for Editor in 31.75 ms, found 11 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for OSXStandalone target not found
@@ -135,6 +135,36 @@ Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
+
+=================================================================
+	Native Crash Reporting
+=================================================================
+Got a UNKNOWN while executing native code. This usually indicates
+a fatal error in the mono runtime or one of the native libraries 
+used by your application.
+=================================================================
+
+=================================================================
+	Managed Stacktrace:
+=================================================================
+	  at <unknown> <0xffffffff>
+	  at System.MonoCustomAttrs:GetCustomAttributesInternal <0x0007f>
+	  at System.MonoCustomAttrs:GetCustomAttributesBase <0x0007a>
+	  at System.MonoCustomAttrs:GetCustomAttributes <0x000ba>
+	  at System.Reflection.RuntimeMethodInfo:GetCustomAttributes <0x0002a>
+	  at System.Attribute:GetCustomAttributes <0x00159>
+	  at System.Reflection.CustomAttributeExtensions:GetCustomAttributes <0x0002a>
+	  at System.Reflection.CustomAttributeExtensions:GetCustomAttributes <0x0004a>
+	  at <>c:<.cctor>b__2_3 <0x0002a>
+	  at WhereEnumerableIterator`1:MoveNext <0x000ea>
+	  at Meta.XR.Guides.Editor.GuideProcessor:.cctor <0x004d9>
+	  at System.Object:runtime_invoke_void <0x00084>
+	  at <unknown> <0xffffffff>
+	  at System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor <0x00069>
+	  at System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor <0x0003a>
+	  at UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes <0x008da>
+	  at <Module>:runtime_invoke_void_object <0x00087>
+=================================================================
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
@@ -160,49 +190,49 @@ Mono: successfully reloaded assembly
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  5.353 seconds
-Domain Reload Profiling: 6570ms
-	BeginReloadAssembly (180ms)
+- Finished resetting the current domain, in  6.546 seconds
+Domain Reload Profiling: 32241ms
+	BeginReloadAssembly (376ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (14ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (43ms)
-	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (52ms)
-	LoadAllAssembliesAndSetupDomain (927ms)
-		LoadAssemblies (576ms)
+		CreateAndSetChildDomain (52ms)
+	RebuildCommonClasses (87ms)
+	RebuildNativeTypeToScriptingClass (25ms)
+	initialDomainReloadingComplete (106ms)
+	LoadAllAssembliesAndSetupDomain (25100ms)
+		LoadAssemblies (23921ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (462ms)
-			TypeCache.Refresh (378ms)
-				TypeCache.ScanAssembly (349ms)
-			ScanForSourceGeneratedMonoScriptInfo (62ms)
-			ResolveRequiredComponents (21ms)
-	FinalizeReload (5354ms)
+		AnalyzeDomain (1397ms)
+			TypeCache.Refresh (1272ms)
+				TypeCache.ScanAssembly (1160ms)
+			ScanForSourceGeneratedMonoScriptInfo (88ms)
+			ResolveRequiredComponents (35ms)
+	FinalizeReload (6547ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (5069ms)
+		SetupLoadedEditorAssemblies (6029ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (36ms)
-			SetLoadedEditorAssemblies (8ms)
+			InitializePlatformSupportModulesInManaged (72ms)
+			SetLoadedEditorAssemblies (10ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (151ms)
-			ProcessInitializeOnLoadAttributes (4291ms)
-			ProcessInitializeOnLoadMethodAttributes (567ms)
-			AfterProcessingInitializeOnLoad (16ms)
-			EditorAssembliesLoaded (1ms)
+			BeforeProcessingInitializeOnLoad (256ms)
+			ProcessInitializeOnLoadAttributes (4986ms)
+			ProcessInitializeOnLoadMethodAttributes (659ms)
+			AfterProcessingInitializeOnLoad (44ms)
+			EditorAssembliesLoaded (2ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (10ms)
+		AwakeInstancesAfterBackupRestoration (63ms)
 Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
 Shader 'Meta/MRUK/Scene/HighlightsAndShadows': fallback shader 'Off' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
-Refreshing native plugins compatible for Editor in 34.23 ms, found 11 plugins.
-Preloading 3 native plugins for Editor in 0.23 ms.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.14 seconds
+Refreshing native plugins compatible for Editor in 36.89 ms, found 11 plugins.
+Preloading 3 native plugins for Editor in 0.20 ms.
 Unloading 6946 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 131 unused Assets / (139.0 KB). Loaded Objects now: 7354.
-Memory consumption went from 246.3 MB to 246.2 MB.
-Total: 14.525900 ms (FindLiveObjects: 0.603900 ms CreateObjectMapping: 0.391800 ms MarkObjects: 13.204900 ms  DeleteObjects: 0.323300 ms)
+Memory consumption went from 246.2 MB to 246.1 MB.
+Total: 16.234000 ms (FindLiveObjects: 0.566600 ms CreateObjectMapping: 0.381200 ms MarkObjects: 14.838000 ms  DeleteObjects: 0.446100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -219,18 +249,106 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 70519.966915 seconds.
-  path: Assets/Resources/Avatar1.prefab
-  artifactKey: Guid(3650c168421b5c54786ec447a044b9e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Avatar1.prefab using Guid(3650c168421b5c54786ec447a044b9e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65d4ead2f0bd2d371710889bde51dd10') in 0.065099 seconds
+  Time since last request: 336350.305393 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_AmbientOcclusion.png
+  artifactKey: Guid(240c3ecb90e535546aebb246cc1186c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_AmbientOcclusion.png using Guid(240c3ecb90e535546aebb246cc1186c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df2cdc6f87ea571117f78163bee8100b') in 0.183712 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 62
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000086 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Height.png
+  artifactKey: Guid(36fd6ea3fae903748973fbf88c26e917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Height.png using Guid(36fd6ea3fae903748973fbf88c26e917) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c696f0430c1922b924bb4936ebd70ae2') in 0.037226 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000413 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_AmbientOcclusion.png
+  artifactKey: Guid(745e19efe0acb9f499cc85feb8959429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_AmbientOcclusion.png using Guid(745e19efe0acb9f499cc85feb8959429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe6e8915e8bc75ee01440f6b7e4d2860') in 0.083024 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000094 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_MaskMap.png
+  artifactKey: Guid(928a27901aacded4a909777cbf23b03f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_MaskMap.png using Guid(928a27901aacded4a909777cbf23b03f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '711047437e4e88c0d2023a459eb6fd6a') in 0.043567 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_MaskMap.png
+  artifactKey: Guid(c52350d3a1463ae4887bb347b437aa5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_MaskMap.png using Guid(c52350d3a1463ae4887bb347b437aa5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd66755924764b67a72ca581b5e9dc93a') in 0.058470 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000480 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Metallic.png
+  artifactKey: Guid(e418919905946fd4d827666bf57cda63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Metallic.png using Guid(e418919905946fd4d827666bf57cda63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4f7ce9628d2577681026a229eabcb76') in 0.050468 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Metallic.png
+  artifactKey: Guid(991e3b707f7e6d4498568bf75f3add40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Metallic.png using Guid(991e3b707f7e6d4498568bf75f3add40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba58eb78f0c5ff77182c4c612b5d4f27') in 0.055729 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Height.png
+  artifactKey: Guid(82dbe028efb524d4b9a1af28707c8034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Height.png using Guid(82dbe028efb524d4b9a1af28707c8034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab6709535edc504468a9f16bf8d6f1b4') in 0.054281 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000554 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Normal.png
+  artifactKey: Guid(290b84d8c3c56d045b266d049ad2eee1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Silver Metal (Chest Variation 001)_Normal.png using Guid(290b84d8c3c56d045b266d049ad2eee1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '150035b70443f845609fd9daa7bf3d7d') in 0.074302 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Albedo.png
+  artifactKey: Guid(602b3ef80317cc740986de5593a8c234) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Albedo.png using Guid(602b3ef80317cc740986de5593a8c234) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adbc447164cd652e2fc3e5e7140c356d') in 0.056538 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_BaseMap.png
+  artifactKey: Guid(3b9a789cbc2ff874cb3a5abf8eb83171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_BaseMap.png using Guid(3b9a789cbc2ff874cb3a5abf8eb83171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16317026f7c5078d3c9be6ccbbb48388') in 0.042208 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Normal.png
+  artifactKey: Guid(b95a83de11f5d4d43bbc263223f724cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Modular Dungeon/Components/Texture Maps/ModularDungeonSeperatedMaterials_Wood Brown (Chest Variation 001)_Normal.png using Guid(b95a83de11f5d4d43bbc263223f724cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a723002c36e2efd5144952de13fecbd4') in 0.046226 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  2.577 seconds
-Refreshing native plugins compatible for Editor in 119.37 ms, found 11 plugins.
+- Loaded All Assemblies, in  2.220 seconds
+Refreshing native plugins compatible for Editor in 69.26 ms, found 11 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for OSXStandalone target not found
@@ -262,142 +380,48 @@ Mono: successfully reloaded assembly
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  8.847 seconds
-Domain Reload Profiling: 11408ms
-	BeginReloadAssembly (452ms)
+- Finished resetting the current domain, in  6.299 seconds
+Domain Reload Profiling: 8488ms
+	BeginReloadAssembly (497ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
+		DisableScriptedObjects (10ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (153ms)
-	RebuildCommonClasses (118ms)
-	RebuildNativeTypeToScriptingClass (42ms)
-	initialDomainReloadingComplete (128ms)
-	LoadAllAssembliesAndSetupDomain (1820ms)
-		LoadAssemblies (1848ms)
+		CreateAndSetChildDomain (263ms)
+	RebuildCommonClasses (116ms)
+	RebuildNativeTypeToScriptingClass (45ms)
+	initialDomainReloadingComplete (111ms)
+	LoadAllAssembliesAndSetupDomain (1419ms)
+		LoadAssemblies (1402ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (219ms)
-			TypeCache.Refresh (50ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (1ms)
-			ResolveRequiredComponents (161ms)
-	FinalizeReload (8848ms)
+		AnalyzeDomain (183ms)
+			TypeCache.Refresh (45ms)
+				TypeCache.ScanAssembly (4ms)
+			ScanForSourceGeneratedMonoScriptInfo (58ms)
+			ResolveRequiredComponents (78ms)
+	FinalizeReload (6300ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (5954ms)
+		SetupLoadedEditorAssemblies (4878ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (57ms)
-			SetLoadedEditorAssemblies (10ms)
+			InitializePlatformSupportModulesInManaged (45ms)
+			SetLoadedEditorAssemblies (8ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (220ms)
-			ProcessInitializeOnLoadAttributes (5072ms)
-			ProcessInitializeOnLoadMethodAttributes (579ms)
-			AfterProcessingInitializeOnLoad (15ms)
-			EditorAssembliesLoaded (1ms)
+			BeforeProcessingInitializeOnLoad (203ms)
+			ProcessInitializeOnLoadAttributes (4306ms)
+			ProcessInitializeOnLoadMethodAttributes (306ms)
+			AfterProcessingInitializeOnLoad (9ms)
+			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (26ms)
+		AwakeInstancesAfterBackupRestoration (16ms)
 Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
 Shader 'Meta/MRUK/Scene/HighlightsAndShadows': fallback shader 'Off' not found
-Refreshing native plugins compatible for Editor in 45.57 ms, found 11 plugins.
-Preloading 3 native plugins for Editor in 0.33 ms.
-Unloading 6834 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 104 unused Assets / (119.0 KB). Loaded Objects now: 7360.
-Memory consumption went from 219.9 MB to 219.8 MB.
-Total: 19.246100 ms (FindLiveObjects: 1.521900 ms CreateObjectMapping: 0.531700 ms MarkObjects: 16.937100 ms  DeleteObjects: 0.253700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.080 seconds
-Refreshing native plugins compatible for Editor in 30.52 ms, found 11 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for OSXStandalone target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object
-  at Unity.XR.Oculus.OculusLoader.AssetPathToAbsolutePath (System.String assetPath) [0x0003d] in .\Library\PackageCache\com.unity.xr.oculus@4.2.0\Runtime\OculusLoader.cs:298 
-  at Unity.XR.Oculus.OculusLoader.EditorLoadOVRPlugin () [0x0008c] in .\Library\PackageCache\com.unity.xr.oculus@4.2.0\Runtime\OculusLoader.cs:283 
-  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <467a840a914a47078e4ae9b0b1e8779e>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00083] in <467a840a914a47078e4ae9b0b1e8779e>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <467a840a914a47078e4ae9b0b1e8779e>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x000a5] in <999670adb4c84ac4bad3ce4f6391c9c9>:0 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  6.983 seconds
-Domain Reload Profiling: 8056ms
-	BeginReloadAssembly (394ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (12ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (189ms)
-	RebuildCommonClasses (53ms)
-	RebuildNativeTypeToScriptingClass (29ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (545ms)
-		LoadAssemblies (625ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (50ms)
-			TypeCache.Refresh (12ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (35ms)
-	FinalizeReload (6984ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (5836ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (49ms)
-			SetLoadedEditorAssemblies (11ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (214ms)
-			ProcessInitializeOnLoadAttributes (4966ms)
-			ProcessInitializeOnLoadMethodAttributes (578ms)
-			AfterProcessingInitializeOnLoad (16ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (26ms)
-Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
-Shader 'Meta/MRUK/Scene/HighlightsAndShadows': fallback shader 'Off' not found
-Refreshing native plugins compatible for Editor in 57.15 ms, found 11 plugins.
-Preloading 3 native plugins for Editor in 0.58 ms.
+Refreshing native plugins compatible for Editor in 28.03 ms, found 11 plugins.
+Preloading 3 native plugins for Editor in 0.17 ms.
 Unloading 6835 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 104 unused Assets / (127.0 KB). Loaded Objects now: 7365.
-Memory consumption went from 220.2 MB to 220.1 MB.
-Total: 18.992800 ms (FindLiveObjects: 0.699400 ms CreateObjectMapping: 0.559200 ms MarkObjects: 17.380800 ms  DeleteObjects: 0.351000 ms)
+Unloading 104 unused Assets / (111.1 KB). Loaded Objects now: 7365.
+Memory consumption went from 219.9 MB to 219.8 MB.
+Total: 9.951000 ms (FindLiveObjects: 0.654100 ms CreateObjectMapping: 0.328900 ms MarkObjects: 8.710200 ms  DeleteObjects: 0.256300 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
