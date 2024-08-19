@@ -10,6 +10,7 @@
 -Assets内のSimple Modular Dungeon内のPrefabsを組み合わせて作る
 -基本的な部屋構造はAssets内のRoom Prefabsに入れてある
 -宝箱についてはChestで調べれば出てくる
+-player1がplayer2に介入する際、直接player2 roomに行くのではなく、player2 room copy（アクセス時に作成）に行く
 
 ## 共有について
 -位置情報（positionとrotation）はscriptableobjectに保存（Transform Dataに入れてある）
@@ -33,4 +34,5 @@
 -各音源との距離を計算し、近い二つのみ鳴らし、残り七つはオフにする
 -指定された入力があったとき（現在はキーボードでpを入力）に相手にアクセスする形になっているが、これを時間によってコントロールする形にしたい
 -相手にアクセスする場合はpositionDataやrotationDataからデータを取得しているが、どのインデックスの情報をとるかについてはまだ適当（RecordIntervalと合わせておよそ何番目以降という形で設定したい）
+-読みだす間隔はDuration内のWaitForSecondの引数になっている（これが保存の時と違う形なのがやりずらい）
 
