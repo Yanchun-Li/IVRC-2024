@@ -18,5 +18,6 @@ public class Timer : MonoBehaviour
         int remaining = timeLimit -(int)time;
         //timerTextを更新していく
         timerText.text=$"残り：{remaining.ToString("D3")}";
+       // Debug.Log($"my position is {this.transform.localPosition} and avatar position is {this.transform.position}");
     }
 }

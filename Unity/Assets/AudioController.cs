@@ -23,8 +23,10 @@ public class AudioController : MonoBehaviour
     
     private Vector3 OriginalPosition;
 
-    public ObjectPositionData positionData;
-    public ObjectRotationData rotationData;
+    public ObjectPositionData otherpositionData;
+    public ObjectRotationData otherrotationData;
+    public ObjectPositionData mypositionData;
+    public ObjectRotationData myrotationData;
     public int currentIndex = 0;
     
 
@@ -32,8 +34,8 @@ public class AudioController : MonoBehaviour
     void Start()
     {
         FindAudioSources();
-        positionData.ClearPositions();
-        rotationData.ClearRotations();
+        mypositionData.ClearPositions();
+        myrotationData.ClearRotations();
         foreach (var audio in myaudioSources)
         {
             if (audio != null)
@@ -111,7 +113,7 @@ public class AudioController : MonoBehaviour
         this.transform.rotation = myRotation;
         //Debug.Log($"my position is {this.transform.position}");
         //Debug.Log($"my position is {this.transform.localPosition} and avatar position is {avatar.transform.position}");
-        Debug.Log($"my position is {this.transform.localRotation} and avatar position is {avatar.transform.rotation}");
+        //Debug.Log($"my position is {this.transform.localRotation} and avatar position is {avatar.transform.rotation}");
     }
 
     private List<int> calcDistance(List<Vector3> audio,Vector3 origin)
@@ -155,8 +157,8 @@ public class AudioController : MonoBehaviour
         //audioBreath.Play();
 
         while (Time.time - startTime < duration){
-            Vector3 Position = positionData.GetPosition(currentIndex);
-            Quaternion Rotation = rotationData.GetRotation(currentIndex);
+            Vector3 Position = otherpositionData.GetPosition(currentIndex);
+            Quaternion Rotation = otherrotationData.GetRotation(currentIndex);
             //audioBreath.transform.position = Position;
             //Debug.Log($"position at index {currentIndex}: {Position}");
             currentIndex++;
@@ -165,11 +167,11 @@ public class AudioController : MonoBehaviour
             myRotation = Rotation;
             //Debug.Log($"myposition is {myPosition}");
             //Debug.Log("Get Position is "+Position.x+" "+Position.y+" "+Position.z);
-            if (currentIndex>= positionData.positions.Count){
+            if (currentIndex>= otherpositionData.positions.Count){
                 currentIndex = 0;
                 Debug.Log("currentIndex is clear");
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         //audioBreath.Stop();
@@ -181,12 +183,12 @@ public class AudioController : MonoBehaviour
     }
 
     void ReadNextPosition(){
-        Vector3 Position = positionData.GetPosition(currentIndex);
+        Vector3 Position = otherpositionData.GetPosition(currentIndex);
         //Debug.Log($"position at index {currentIndex}: {position}");
-        Quaternion Rotation = rotationData.GetRotation(currentIndex);
+        Quaternion Rotation = otherrotationData.GetRotation(currentIndex);
         currentIndex++;
 
-        if (currentIndex>= positionData.positions.Count){
+        if (currentIndex>= otherpositionData.positions.Count){
             currentIndex = 0;
             Debug.Log("currentIndex is clear");
         }
