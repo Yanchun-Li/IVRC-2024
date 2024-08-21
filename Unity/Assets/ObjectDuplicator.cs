@@ -15,7 +15,7 @@ public class ObjectDuplicator : MonoBehaviour
     public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
 
     private GameObject duplicatedObject;
-    private GameObject duplicatedAvatar;
+    public GameObject duplicatedAvatar;
     private bool isProcessing = false;
 
     void Update()
