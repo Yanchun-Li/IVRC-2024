@@ -22183,6 +22183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686960124748688747}
+  - component: {fileID: 6562653279513542373}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -22190,6 +22191,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6562653279513542373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562653279513542372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29788a4c5826af64e837ac74ed39c287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  number: 10
+  chestParent: {fileID: 5778406573754477521, guid: 50d4db3d451c3d449894a080f39ffa0f, type: 3}
+  CopyWorld: {fileID: 2819564986524353054}
+  chests: []
 --- !u!82 &6570230585650369696
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25035,8 +25052,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalObject: {fileID: 8571247359601563915}
   originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+  positionData: {fileID: 0}
+  rotationData: {fileID: 0}
   newPosition: {x: -200, y: 0, z: 0}
   duration: 10
+  startime: 2
 --- !u!82 &8597548624628191168
 AudioSource:
   m_ObjectHideFlags: 0
