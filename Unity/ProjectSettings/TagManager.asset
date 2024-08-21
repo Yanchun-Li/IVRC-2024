@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player1AudioSource
   - Player2AudioSource
+  - Chest
   layers:
   - Default
   - TransparentFX
