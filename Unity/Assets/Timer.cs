@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] Text timerText;
     //経過時間
     float time;
+    [SerializeField] GameObject Camera;
     void Update()
     {
         //フレーム毎の経過時間をtime変数に追加
@@ -18,6 +19,6 @@ public class Timer : MonoBehaviour
         int remaining = timeLimit -(int)time;
         //timerTextを更新していく
         timerText.text=$"残り：{remaining.ToString("D3")}";
-       // Debug.Log($"my position is {this.transform.localPosition} and avatar position is {this.transform.position}");
+        Debug.Log($"camera position is {Camera.transform.position} and position is {this.transform.position}");
     }
 }

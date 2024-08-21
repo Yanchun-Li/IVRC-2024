@@ -5546,6 +5546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLimit: 0
   timerText: {fileID: 755572262}
+  Camera: {fileID: 0}
 --- !u!114 &755572262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25033,6 +25034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalObject: {fileID: 8571247359601563915}
+  originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
   newPosition: {x: -200, y: 0, z: 0}
   duration: 10
 --- !u!82 &8597548624628191168

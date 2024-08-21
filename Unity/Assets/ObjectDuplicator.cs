@@ -1,15 +1,21 @@
 using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.XR;
 
 public class ObjectDuplicator : MonoBehaviour
 {
     public GameObject originalObject;
+    public GameObject originalAvatar;
+    public ObjectPositionData positionData;
+    public ObjectRotationData rotationData;
     public Vector3 newPosition;
     public float duration = 10f;
-
+    public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
 
     private GameObject duplicatedObject;
+    private GameObject duplicatedAvatar;
     private bool isProcessing = false;
 
     void Update()
@@ -28,8 +34,10 @@ public class ObjectDuplicator : MonoBehaviour
 
         isProcessing = true;
         duplicatedObject = Instantiate(originalObject, originalObject.transform.position, originalObject.transform.rotation);
+        duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
         duplicatedObject.transform.position = newPosition;
         StartCoroutine(UpdateAndDestroy());
+        StartCoroutine(UpdateAvatarPosition());
     }
 
     private IEnumerator UpdateAndDestroy()
@@ -37,6 +45,7 @@ public class ObjectDuplicator : MonoBehaviour
         yield return new WaitForSeconds(duration);
         UpdateOriginalObject(originalObject, duplicatedObject);
         Destroy(duplicatedObject);
+        Destroy(duplicatedAvatar);
         isProcessing = false; // 処理完了
     }
 
@@ -81,5 +90,23 @@ public class ObjectDuplicator : MonoBehaviour
 
         // 他のコンポーネントの更新もここに追加
         // 例: Rigidbody, Collider, Custom Scriptsなど
+    }
+
+    private IEnumerator UpdateAvatarPosition(){
+        //Avatar2の動きを反映
+        float floatindex = startime/0.5f;
+        int startindex = (int)floatindex;
+        Vector3 difforigin = newPosition - positionData.GetPosition(0);//原点の違い（向きは考慮しない）
+        while(duplicatedAvatar!=null){
+            if (startindex>= positionData.positions.Count){
+                startindex = 0;
+                Debug.Log("index is clear");
+            }
+            duplicatedAvatar.transform.position = positionData.GetPosition(startindex)+difforigin;
+            duplicatedAvatar.transform.rotation = rotationData.GetRotation(startindex);
+            startindex++;
+            yield return new WaitForSeconds(0.5f);
+        }
+        
     }
 }
