@@ -18,12 +18,12 @@ using System.Collections.Generic;
      }
 
      public override void OnJoinedRoom() {
-         var position = new Vector3(0,0,0);
+         var position = new Vector3(0,1.1f,0);
          var playerlist = new List<Player>(PhotonNetwork.PlayerList);
          if (playerlist.Count==1){
             PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
          }else{
-            position = new Vector3(200,0,0);
+            position = new Vector3(200,1.1f,0);
             PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
          }
         
