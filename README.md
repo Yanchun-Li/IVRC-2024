@@ -36,3 +36,6 @@
 -相手にアクセスする場合はpositionDataやrotationDataからデータを取得しているが、どのインデックスの情報をとるかについてはまだ適当（RecordIntervalと合わせておよそ何番目以降という形で設定したい）
 -読みだす間隔はDuration内のWaitForSecondの引数になっている（これが保存の時と違う形なのがやりずらい）
 
+## ワールドの複製について（ObjectDuplicator.cs）
+-プレイヤー2のワールドとプレイヤー2本人を複製
+-
