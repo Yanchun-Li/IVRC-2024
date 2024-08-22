@@ -345,8 +345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02a2070760103b46a839c21afe3be51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
-  rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
+  player1PositionData: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
+  player2PositionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+  player1RotationData: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
+  player2RotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   recordInterval: 0.1
 --- !u!1 &100010
 GameObject:
