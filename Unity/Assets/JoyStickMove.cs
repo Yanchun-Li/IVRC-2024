@@ -26,7 +26,7 @@ public class JoyStickMove : MonoBehaviour
         Vector2 input = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);   // 右ジョイスティックの情報取得
         Vector3 direction = new Vector3(input.x, 0, input.y);           // インプットから方向ベクトルを取得
 
-        direction = Quaternion.Euler(0, InputTracking.GetLocalRotation(XRNode.Head).eulerAngles.y, 0) * direction; // HMDのY軸の角度に基づいて角度を修正
+        direction = Quaternion.Euler(0, transform.eulerAngles.y, 0) * direction; // HMDのY軸の角度に基づいて角度を修正
         transform.position -= direction * movespeed * Time.deltaTime;   // 位置変更
     }
 }
