@@ -8,6 +8,8 @@ public class ObjectTransformSave : MonoBehaviour
     public ObjectRotationData player1RotationData;
     public ObjectRotationData player2RotationData;
 
+    public bool isPlayer1;
+
     public float recordInterval = 0.1f;
     private float timer = 0.0f;
     private float currenttime=0.0f;
@@ -19,7 +21,7 @@ public class ObjectTransformSave : MonoBehaviour
     void Start()
     {
 
-        if (PhotonNetwork.IsMasterClient)
+        if (isPlayer1)
         {
             activePositionData = player1PositionData;
             activeRotationData = player1RotationData;
@@ -39,6 +41,8 @@ public class ObjectTransformSave : MonoBehaviour
         if (timer > recordInterval)
         {
             activePositionData.AddPosition(transform.position);
+            //オブジェクトの座標を表示
+            Debug.Log(this.name + "Position:" + transform.position);
             activePositionData.isUpdating = true;
 
             activeRotationData.AddRotation(transform.rotation);

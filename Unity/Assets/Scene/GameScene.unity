@@ -7527,7 +7527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 3650c168421b5c54786ec447a044b9e3, type: 3}
       propertyPath: m_Name
-      value: Player1
+      value: Avatar1
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 3650c168421b5c54786ec447a044b9e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14097,13 +14097,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6312069960440248147, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+      propertyPath: player1PositionData
+      value: 
+      objectReference: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
+    - target: {fileID: -6312069960440248147, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+      propertyPath: player1RotationData
+      value: 
+      objectReference: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
+    - target: {fileID: -6312069960440248147, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+      propertyPath: player2PositionData
+      value: 
+      objectReference: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+    - target: {fileID: -6312069960440248147, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+      propertyPath: player2RotationData
+      value: 
+      objectReference: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
     - target: {fileID: -4874439533326677387, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: Avatar2
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
       propertyPath: m_LocalPosition.x
