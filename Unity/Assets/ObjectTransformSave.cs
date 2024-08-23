@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class ObjectTransformSave : MonoBehaviour
+public class ObjectTransformSave : MonoBehaviourPunCallbacks
 {
     public ObjectPositionData player1PositionData;
     public ObjectPositionData player2PositionData;
@@ -16,15 +16,23 @@ public class ObjectTransformSave : MonoBehaviour
     private ObjectPositionData activePositionData;
     private ObjectRotationData activeRotationData;
 
+    void Awake()
+    {
+        Debug.Log("Awake内のOwnerActorNr: " + photonView.OwnerActorNr);
+
+    }
+
     void Start()
     {
 
-        if (PhotonNetwork.IsMasterClient)
+         Debug.Log("OwnerActorNr: " + photonView.OwnerActorNr);
+
+        if (photonView.OwnerActorNr == 0)
         {
             activePositionData = player1PositionData;
             activeRotationData = player1RotationData;
         }
-        else
+        if(photonView.OwnerActorNr==1)
         {
             activePositionData = player2PositionData;
             activeRotationData = player2RotationData;
