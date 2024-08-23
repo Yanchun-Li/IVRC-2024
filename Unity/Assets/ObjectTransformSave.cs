@@ -1,12 +1,14 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class ObjectTransformSave : MonoBehaviourPunCallbacks
+public class ObjectTransformSave : MonoBehaviour
 {
     public ObjectPositionData player1PositionData;
     public ObjectPositionData player2PositionData;
     public ObjectRotationData player1RotationData;
     public ObjectRotationData player2RotationData;
+
+    public bool isPlayer1;
 
     public float recordInterval = 0.1f;
     private float timer = 0.0f;
@@ -16,23 +18,15 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
     private ObjectPositionData activePositionData;
     private ObjectRotationData activeRotationData;
 
-    void Awake()
-    {
-        Debug.Log("Awake内のOwnerActorNr: " + photonView.OwnerActorNr);
-
-    }
-
     void Start()
     {
 
-         Debug.Log("OwnerActorNr: " + photonView.OwnerActorNr);
-
-        if (photonView.OwnerActorNr == 0)
+        if (isPlayer1)
         {
             activePositionData = player1PositionData;
             activeRotationData = player1RotationData;
         }
-        if(photonView.OwnerActorNr==1)
+        else
         {
             activePositionData = player2PositionData;
             activeRotationData = player2RotationData;
@@ -47,6 +41,8 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
         if (timer > recordInterval)
         {
             activePositionData.AddPosition(transform.position);
+            //オブジェクトの座標を表示
+            Debug.Log(this.name + "Position:" + transform.position);
             activePositionData.isUpdating = true;
 
             activeRotationData.AddRotation(transform.rotation);

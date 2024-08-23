@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player2RotationData
   m_EditorClassIdentifier: 
   Rotations: []
-  isUpdating: 0
+  isUpdating: 1
