@@ -1,11 +1,14 @@
 using UnityEngine;
 using Oculus.Interaction;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ChestRayInteraction : MonoBehaviour
+public class ChestRayInteraction : MonoBehaviourPunCallbacks
 {
     public int scoreIncrement = 1;
-    private int score = 0;
+    private int myscore = 0;
+
 
     private List<InteractableUnityEventWrapper> chestInteractables = new List<InteractableUnityEventWrapper>();
 
@@ -13,6 +16,19 @@ public class ChestRayInteraction : MonoBehaviour
     {
         // ゲーム開始時に既存のチェストを探して登録
         FindAndRegisterChests();
+    }
+
+    void Update(){
+        int otherscore = -1;
+        var playerlist = new List<Player>(PhotonNetwork.PlayerList);
+        if (playerlist.Count == 2){
+            foreach (Player player in playerlist){
+                if (!player.IsLocal){
+                    otherscore = GetPlayerScore(player);
+                }
+            }
+            Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
+        }
     }
 
     void FindAndRegisterChests()
@@ -48,8 +64,8 @@ public class ChestRayInteraction : MonoBehaviour
     public void OnChestSelected()
     {
         // スコアを加算
-        score += scoreIncrement;
-        Debug.Log("Score: " + score);
+        myscore += scoreIncrement;
+        Debug.Log("Score: " + myscore);
     }
 
     // 新しいチェストが生成されたときに呼び出すメソッド
@@ -69,5 +85,18 @@ public class ChestRayInteraction : MonoBehaviour
                 wrapper.WhenSelect.RemoveListener(OnChestSelected);
             }
         }
+    }
+
+    public int GetScore(){
+        return myscore;
+    }
+
+    public int GetPlayerScore(Player player)
+    {
+        int ans = 0;
+        if (player.CustomProperties.TryGetValue("Score", out object score)){
+            ans = (int) score;
+        }
+        return ans;
     }
 }

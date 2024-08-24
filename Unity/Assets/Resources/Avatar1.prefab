@@ -191,6 +191,8 @@ GameObject:
   - component: {fileID: -4874439533326677387}
   - component: {fileID: 8026918847235439224}
   - component: {fileID: -6312069960440248147}
+  - component: {fileID: 4742384068856539382}
+  - component: {fileID: 7529155918020399116}
   m_Layer: 0
   m_Name: Avatar1
   m_TagString: Untagged
@@ -351,6 +353,31 @@ MonoBehaviour:
   player1RotationData: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
   player2RotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   recordInterval: 0.1
+--- !u!114 &4742384068856539382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d7ae04123b85c40bd622879cd932ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreIncrement: 1
+--- !u!114 &7529155918020399116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb689c281286914086567c601e1cb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0
