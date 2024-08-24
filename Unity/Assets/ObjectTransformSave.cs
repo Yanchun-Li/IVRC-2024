@@ -1,14 +1,14 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class ObjectTransformSave : MonoBehaviour
+public class ObjectTransformSave : MonoBehaviourPunCallbacks
 {
     public ObjectPositionData player1PositionData;
     public ObjectPositionData player2PositionData;
     public ObjectRotationData player1RotationData;
     public ObjectRotationData player2RotationData;
 
-    public bool isPlayer1;
+    //public bool isPlayer1;
 
     public float recordInterval = 0.1f;
     private float timer = 0.0f;
@@ -21,7 +21,7 @@ public class ObjectTransformSave : MonoBehaviour
     void Start()
     {
 
-        if (isPlayer1)
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
         {
             activePositionData = player1PositionData;
             activeRotationData = player1RotationData;
