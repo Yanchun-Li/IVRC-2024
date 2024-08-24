@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class AddTreasure : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class AddTreasure : MonoBehaviour
     void UpdateUI()
     {
         //両プレイヤーのUIを更新
-        UIManager.Instance.UpdateTreasureCount(totalTreasures);
+        UIChanger.Instance.UpdateTreasureCount(totalTreasures);
     }
     
 }
