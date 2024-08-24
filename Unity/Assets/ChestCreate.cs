@@ -13,10 +13,11 @@ public class ChestCreate : MonoBehaviourPunCallbacks
     [SerializeField] GameObject CopyWorld;//コピーすべき先
     private bool createTreasure = false;//宝の生成は1ゲームにつき1回
     public List<GameObject> chests = new List<GameObject>();
+    private ChestRayInteraction chestRayInteraction;
     // Start is called before the first frame update
     void Start()
     {
-
+        chestRayInteraction = FindObjectOfType<ChestRayInteraction>();
     }
 
     // Update is called once per frame
@@ -50,6 +51,11 @@ public class ChestCreate : MonoBehaviourPunCallbacks
             // GameObject chest2 =Instantiate(chestParent,localposition+CopyoriginalPosition,Quaternion.identity);
             chests.Add(chest1);
             chests.Add(chest2);
+            if (chestRayInteraction != null)
+            {
+                chestRayInteraction.OnNewChestSpawned(chest1);
+                chestRayInteraction.OnNewChestSpawned(chest2);
+            }
         }
         createTreasure = true;
     }
