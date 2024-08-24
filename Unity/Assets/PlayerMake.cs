@@ -22,7 +22,8 @@ using System.Collections.Generic;
          var playerlist = new List<Player>(PhotonNetwork.PlayerList);
          if (playerlist.Count==1){
             PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
-         }else{
+         }
+         if (playerlist.Count==2){
             position = new Vector3(200,1.1f,0);
             PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
          }

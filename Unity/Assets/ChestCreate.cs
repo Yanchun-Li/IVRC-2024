@@ -45,7 +45,9 @@ public class ChestCreate : MonoBehaviourPunCallbacks
             Vector3 originalPosition = origin.position;
             Vector3 CopyoriginalPosition = Copyorigin.position;
             GameObject chest1 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+originalPosition,Quaternion.identity);
-            GameObject chest2 =PhotonNetwork.Instantiate("Chest Parent 001",localposition+CopyoriginalPosition,Quaternion.identity);
+            GameObject chest2 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+CopyoriginalPosition,Quaternion.identity);
+            // GameObject chest1 = Instantiate(chestParent,localposition+originalPosition,Quaternion.identity);
+            // GameObject chest2 =Instantiate(chestParent,localposition+CopyoriginalPosition,Quaternion.identity);
             chests.Add(chest1);
             chests.Add(chest2);
         }
