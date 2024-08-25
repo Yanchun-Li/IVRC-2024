@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.XR;
+using Photon.Pun;
 
 public class ObjectDuplicator : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class ObjectDuplicator : MonoBehaviour
             Debug.Log("push A button");
             DuplicateAndMove();
         }
+
+        if (duplicatedAvatar != null)
+        {
+            SmoothMove();
+        }
     }
 
     public void DuplicateAndMove()
@@ -34,10 +40,13 @@ public class ObjectDuplicator : MonoBehaviour
 
         isProcessing = true;
         duplicatedObject = Instantiate(originalObject, originalObject.transform.position, originalObject.transform.rotation);
-        duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
+        // duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
+        duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
         duplicatedObject.transform.position = newPosition;
+
         StartCoroutine(UpdateAndDestroy());
         StartCoroutine(UpdateAvatarPosition());
+        
     }
 
     private IEnumerator UpdateAndDestroy()
@@ -108,5 +117,17 @@ public class ObjectDuplicator : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         
+    }
+    void SmoothMove()
+    {
+        // 获取右手摇杆的输入
+        Vector2 input = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
+        Vector3 direction = new Vector3(input.x, 0, input.y);
+
+        // 将方向矢量与玩家朝向匹配
+        direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * direction;
+
+        // 按照输入调整duplicatedAvatar的位置
+        duplicatedAvatar.transform.position += direction * moveSpeed * Time.deltaTime;
     }
 }
