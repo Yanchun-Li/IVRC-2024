@@ -18,6 +18,7 @@ public class ObjectDuplicator : MonoBehaviour
     private GameObject duplicatedObject;
     public GameObject duplicatedAvatar;
     private bool isProcessing = false;
+    private float moveSpeed = 0.05f;
 
     void Update()
     {
