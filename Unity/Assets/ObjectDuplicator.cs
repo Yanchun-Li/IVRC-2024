@@ -18,6 +18,7 @@ public class ObjectDuplicator : MonoBehaviour
     [SerializeField] public List<int> indexlist; //共有を開始するインデックス
     [SerializeField] public List<float> updateindextime; //更新をする時刻（秒）
     private int accessCount = 0;
+    private Vector3 difforigin = new Vector3(0.0f,0.0f,0.0f);//エラー回避用
 
     private GameObject duplicatedObject;
     public GameObject duplicatedAvatar;
@@ -27,11 +28,19 @@ public class ObjectDuplicator : MonoBehaviour
 
     void Start()
     {
+        //positionData.ClearPositions();
         updateindextime = indexlist.Select(item => item * 0.2f).ToList();; //0.1秒ごとにデータ保存かつplayer1はplayer2の倍の速さ
     }
 
     void Update()
     {
+        if (positionData.LengthPositions()!=0){
+            Debug.Log("positionData is not null");
+            difforigin = newPosition - positionData.GetPosition(0);//原点の違い（rotationは考慮しない）
+            time += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
+            
+        }
+
         // 指定されたボタンが押され、かつ現在処理中でない場合に実行
         if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
         {
@@ -44,7 +53,7 @@ public class ObjectDuplicator : MonoBehaviour
             Debug.Log("duplicated Avatar is null");
             SmoothMove();
         }
-        time += Time.deltaTime;
+        
     }
 
     public void DuplicateAndMove()
@@ -52,11 +61,10 @@ public class ObjectDuplicator : MonoBehaviour
         if (isProcessing) return; // 既に処理中なら新たに開始しない
 
         isProcessing = true;
-        duplicatedObject = Instantiate(originalObject, originalObject.transform.position, originalObject.transform.rotation);
-        // duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
-        duplicatedObject.transform.position = newPosition;
-
+        duplicatedObject = Instantiate(originalObject, newPosition, originalObject.transform.rotation);
+        duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
+        //duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
+        //duplicatedObject.transform.position = newPosition;
         StartCoroutine(UpdateAndDestroy());
         StartCoroutine(UpdateAvatarPosition());
         
@@ -111,9 +119,10 @@ public class ObjectDuplicator : MonoBehaviour
 
     private void UpdateTransform(Transform original, Transform duplicate)
     {
-        original.localPosition = duplicate.localPosition;
+        original.localPosition = duplicate.localPosition-difforigin;
         original.localRotation = duplicate.localRotation;
         original.localScale = duplicate.localScale;
+        original.gameObject.SetActive(duplicate.gameObject.activeSelf);
     }
 
     private void UpdateComponents(GameObject original, GameObject duplicate)
@@ -135,7 +144,6 @@ public class ObjectDuplicator : MonoBehaviour
         //float floatindex = startime/0.1f;
         //int startindex = (int)floatindex;
         int startindex = indexlist[accessCount];
-        Vector3 difforigin = newPosition - positionData.GetPosition(0);//原点の違い（rotationは考慮しない）
         while(duplicatedAvatar!=null){
             if (startindex>= positionData.positions.Count){
                 startindex = 0;

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 467104e195e5d8441bad3af0065c7296
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - positionData1: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
+  - positionData2: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+  - rotationData1: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
+  - rotationData2: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

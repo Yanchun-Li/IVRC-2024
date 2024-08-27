@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "ObjectPositionData", menuName = "ScriptableObject/ObjectPositionData")]
 public class ObjectPositionData : ScriptableObject
@@ -18,5 +19,9 @@ public class ObjectPositionData : ScriptableObject
 
     public void ClearPositions(){
         positions.Clear();
+    }
+
+    public int LengthPositions(){
+        return positions.Count();
     }
 }

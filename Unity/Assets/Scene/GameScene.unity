@@ -2260,6 +2260,7 @@ GameObject:
   - component: {fileID: 331707174}
   - component: {fileID: 331707176}
   - component: {fileID: 331707177}
+  - component: {fileID: 331707178}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2319,6 +2320,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45a90cf5b1a7e6429d08f3931d10a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &331707178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331707173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467104e195e5d8441bad3af0065c7296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionData1: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
+  positionData2: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+  rotationData1: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
+  rotationData2: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
 --- !u!1001 &341561420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25211,11 +25228,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalObject: {fileID: 8571247359601563915}
   originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
-  positionData: {fileID: 0}
-  rotationData: {fileID: 0}
+  positionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+  rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   newPosition: {x: -200, y: 0, z: 0}
   duration: 10
-  startime: 2
+  indexlist: 
+  updateindextime: []
   duplicatedAvatar: {fileID: 0}
 --- !u!82 &8597548624628191168
 AudioSource:
