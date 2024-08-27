@@ -36,10 +36,10 @@ public class ChestCreate : MonoBehaviourPunCallbacks
         
         for (int i=0;i<number;i++){
             System.Random rnd = new System.Random();
-            //float x = rnd.Next(-8,8);
-            //float z = rnd.Next(-8,8);
-            float x = 0;
-            float z = 0;
+            float x = rnd.Next(-8,8);
+            float z = rnd.Next(-8,8);
+            //float x = 0;
+            //float z = 0;
             Vector3 localposition = new Vector3(x,0.1f,z);
             Transform origin = this.transform.GetChild(randomNumbers[i]);
             Transform Copyorigin = CopyWorld.transform.GetChild(randomNumbers[i]);

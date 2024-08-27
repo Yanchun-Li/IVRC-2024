@@ -14,11 +14,12 @@ public class AccessCopyWorld : MonoBehaviour
 
     private int accessCount = 0;
     private Coroutine getPosition;
-    public ObjectDuplicator ObjectDuplicator;
+    ObjectDuplicator ObjectDuplicator;
 
     // Start is called before the first frame update
     void Start()
     {
+        ObjectDuplicator = GameObject.Find("Player2 Room").GetComponent<ObjectDuplicator>();
         indexlist =  ObjectDuplicator.indexlist;  
     }
 
