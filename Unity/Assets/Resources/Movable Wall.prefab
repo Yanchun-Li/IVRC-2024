@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7503556185033960949}
   - component: {fileID: 8735099329889444847}
   - component: {fileID: 44039298809520151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall Variation 004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,13 +123,13 @@ GameObject:
   - component: {fileID: -651228948491494242}
   - component: {fileID: 8789370047065321464}
   - component: {fileID: 4107650323976068104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Movable Wall
   m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6534347502814029905
 Transform:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 0.7}
+  m_LocalScale: {x: 1, y: 1.5, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3882587033344203246}
@@ -350,7 +350,19 @@ MonoBehaviour:
   _interactableView: {fileID: 13896990939794552}
   _whenHover:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5539356657749761588}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnhover:
     m_PersistentCalls:
       m_Calls: []
@@ -384,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2140d2b457bea84881488302059889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
+  _collider: {fileID: 4107650323976068104}
 --- !u!65 &4107650323976068104
 BoxCollider:
   m_ObjectHideFlags: 0

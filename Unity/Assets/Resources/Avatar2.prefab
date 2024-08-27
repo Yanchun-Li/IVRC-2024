@@ -604,6 +604,7 @@ MonoBehaviour:
   mypositionData: {fileID: 0}
   myrotationData: {fileID: 0}
   currentIndex: 0
+  AccessCopyWorld: {fileID: 0}
 --- !u!1 &100014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55124288432254628}
   - component: {fileID: 4756324449523504813}
-  - component: {fileID: 2071308340298001355}
+  - component: {fileID: 8109593149956620667}
   m_Layer: 0
   m_Name: Ear
   m_TagString: Untagged
@@ -1149,7 +1150,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5332501371808501440}
   m_Enabled: 1
---- !u!114 &2071308340298001355
+--- !u!114 &8109593149956620667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1158,7 +1159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5332501371808501440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4abc2a1824261d438aa4864d7efe57d, type: 3}
+  m_Script: {fileID: 11500000, guid: 982af01b9be9370428c92b4c68be7244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myaudioSources: []

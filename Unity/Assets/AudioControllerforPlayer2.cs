@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AudioController : MonoBehaviour
+public class AudioControllerforPlayer2 : MonoBehaviour
 {
      [SerializeField] private List<AudioSource> myaudioSources = new List<AudioSource>();
      [SerializeField] private List<AudioSource> otheraudioSources = new List<AudioSource>();
@@ -29,13 +29,10 @@ public class AudioController : MonoBehaviour
     public ObjectRotationData myrotationData;
     public int currentIndex = 0;
 
-    [SerializeField] private AccessCopyWorld AccessCopyWorld;
-    
-
     // Start is called before the first frame update
     void Start()
     {
-        accessOtherScene = AccessCopyWorld.accessOtherScene;
+        accessOtherScene = false;
         FindAudioSources();
         mypositionData.ClearPositions();
         myrotationData.ClearRotations();
@@ -82,17 +79,7 @@ public class AudioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (accessOtherScene != AccessCopyWorld.accessOtherScene){
-            FindAudioSources();
-        }
-
-        accessOtherScene = AccessCopyWorld.accessOtherScene;
-
-        if (accessOtherScene == false){
-            audioSources = myaudioSources;
-        }else{
-            audioSources = otheraudioSources;
-        }
+        audioSources = myaudioSources;
 
         audioPositionList.Clear();
         foreach (var audio in audioSources)
@@ -148,49 +135,5 @@ public class AudioController : MonoBehaviour
             audiostoplist[indexlist[i]] = true;
         }
         //Debug.Log("audio"+indexlist[0]+" "+"and"+" "+"audio"+indexlist[1]+" "+"play");
-    }
-
-    private IEnumerator Duration(float duration){
-        accessOtherScene = true;
-        float startTime = Time.time;
-        audioSources = otheraudioSources;
-        //audioBreath.Play();
-
-        while (Time.time - startTime < duration){
-            Vector3 Position = otherpositionData.GetPosition(currentIndex);
-            Quaternion Rotation = otherrotationData.GetRotation(currentIndex);
-            //audioBreath.transform.position = Position;
-            //Debug.Log($"position at index {currentIndex}: {Position}");
-            currentIndex++;
-            //Position = position;
-            myPosition = Position;
-            myRotation = Rotation;
-            //Debug.Log($"myposition is {myPosition}");
-            //Debug.Log("Get Position is "+Position.x+" "+Position.y+" "+Position.z);
-            if (currentIndex>= otherpositionData.positions.Count){
-                currentIndex = 0;
-                Debug.Log("currentIndex is clear");
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        //audioBreath.Stop();
-        this.transform.position = avatar.transform.position;
-        this.transform.rotation = avatar.transform.rotation;
-        accessOtherScene = false;
-        audioSources = myaudioSources;
-        //Debug.Log("stop access");
-    }
-
-    void ReadNextPosition(){
-        Vector3 Position = otherpositionData.GetPosition(currentIndex);
-        //Debug.Log($"position at index {currentIndex}: {position}");
-        Quaternion Rotation = otherrotationData.GetRotation(currentIndex);
-        currentIndex++;
-
-        if (currentIndex>= otherpositionData.positions.Count){
-            currentIndex = 0;
-            Debug.Log("currentIndex is clear");
-        }
     }
 }

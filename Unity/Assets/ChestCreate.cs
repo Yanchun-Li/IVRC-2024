@@ -40,7 +40,7 @@ public class ChestCreate : MonoBehaviourPunCallbacks
             //float z = rnd.Next(-8,8);
             float x = 0;
             float z = 0;
-            Vector3 localposition = new Vector3(x,0,z);
+            Vector3 localposition = new Vector3(x,0.1f,z);
             Transform origin = this.transform.GetChild(randomNumbers[i]);
             Transform Copyorigin = CopyWorld.transform.GetChild(randomNumbers[i]);
             Vector3 originalPosition = origin.position;

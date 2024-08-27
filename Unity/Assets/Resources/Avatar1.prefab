@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: -6312069960440248147}
   - component: {fileID: 4742384068856539382}
   - component: {fileID: 7529155918020399116}
+  - component: {fileID: 3929026962659121662}
   m_Layer: 0
   m_Name: Avatar1
   m_TagString: Untagged
@@ -379,6 +380,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb689c281286914086567c601e1cb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3929026962659121662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb1ae056d06d6848a4da87bc9361122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accessOtherScene: 0
+  otherpositionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
+  otherrotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
+  indexlist: 0000000064000000c8000000
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +621,7 @@ MonoBehaviour:
   mypositionData: {fileID: 0}
   myrotationData: {fileID: 0}
   currentIndex: 0
+  AccessCopyWorld: {fileID: 0}
 --- !u!1 &100014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1095,7 @@ MonoBehaviour:
   mypositionData: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
   myrotationData: {fileID: 11400000, guid: db40441e9075d1144817cd137111e86f, type: 2}
   currentIndex: 0
+  AccessCopyWorld: {fileID: 3929026962659121662}
 --- !u!1 &5403240436766461838
 GameObject:
   m_ObjectHideFlags: 0
