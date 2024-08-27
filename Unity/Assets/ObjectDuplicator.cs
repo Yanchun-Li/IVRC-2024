@@ -54,7 +54,7 @@ public class ObjectDuplicator : MonoBehaviour
         isProcessing = true;
         duplicatedObject = Instantiate(originalObject, originalObject.transform.position, originalObject.transform.rotation);
         // duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        duplicatedAvatar = PhotonNetwork.Instantiate("originalAvatar.name", newPosition, Quaternion.identity);
+        duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
         duplicatedObject.transform.position = newPosition;
 
         StartCoroutine(UpdateAndDestroy());
