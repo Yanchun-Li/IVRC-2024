@@ -16,7 +16,7 @@ public class ObjectDuplicator : MonoBehaviour
     public float duration = 10f;
     //public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
     [SerializeField] public List<int> indexlist; //共有を開始するインデックス
-    [SerializeField] public List<float> updateindextime; //更新をする時刻（秒）
+    public List<float> updateindextime; //更新をする時刻（秒）
     private int accessCount = 0;
     private Vector3 difforigin = new Vector3(0.0f,0.0f,0.0f);//エラー回避用
 

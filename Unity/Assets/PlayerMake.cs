@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
  public class PlayerMake : MonoBehaviourPunCallbacks
  {
+    public bool player2exist = false;
      private void Start() {
         // プレイヤー自身の名前を"Player"に設定する
         PhotonNetwork.NickName = "Player";
 
-         PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.ConnectUsingSettings();
      }
 
      public override void OnConnectedToMaster() {
@@ -23,10 +24,20 @@ using System.Collections.Generic;
          GameObject playerInstance = null;
          if (playerlist.Count==1){
             playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+            PhotonNetwork.NickName = "Player1";
          }
-         if (playerlist.Count==2){
+         else if (playerlist.Count==2 & !player2exist){
             position = new Vector3(200,1.1f,0);
             playerInstance=PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
+            PhotonNetwork.NickName = "Player2";
+            player2exist = true;
+         }
+         else if (playerlist.Count==2 & player2exist){
+            position = new Vector3(0,1.1f,0);
+            playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+         }else{
+            position = new Vector3(-1000f,0f,0f);
+            playerInstance=PhotonNetwork.Instantiate("Avatar3", position, Quaternion.identity);
          }
 
         if (playerInstance != null)
