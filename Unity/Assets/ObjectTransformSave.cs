@@ -42,7 +42,7 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
         {
             activePositionData.AddPosition(transform.position);
             //オブジェクトの座標を表示
-            Debug.Log(this.name + "Position:" + transform.position);
+            //Debug.Log(this.name + "Position:" + transform.position);
             activePositionData.isUpdating = true;
 
             activeRotationData.AddRotation(transform.rotation);

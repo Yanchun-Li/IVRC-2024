@@ -34,8 +34,8 @@ public class AudioControllerforPlayer2 : MonoBehaviour
     {
         accessOtherScene = false;
         FindAudioSources();
-        mypositionData.ClearPositions();
-        myrotationData.ClearRotations();
+        //mypositionData.ClearPositions();
+        //myrotationData.ClearRotations();
         foreach (var audio in myaudioSources)
         {
             if (audio != null)

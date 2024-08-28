@@ -8,7 +8,7 @@ using UnityEngine.XR;
 
 public class Player2Stop : MonoBehaviourPunCallbacks
 {
-    private List<Player> playerlist = new List<Player>(PhotonNetwork.PlayerList);
+    private List<Player> playerlist;
     GameObject player2;
     GameObject timer;
     GameObject loading;
@@ -17,6 +17,7 @@ public class Player2Stop : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+         playerlist = new List<Player>(PhotonNetwork.PlayerList);
         //playerの人数が二人になるまで、移動・座標保存・タイマーを止めておく
         player2 = GameObject.Find("Avatar2(Clone)");
         player2.GetComponent<OVRPlayerController>().enabled = false;

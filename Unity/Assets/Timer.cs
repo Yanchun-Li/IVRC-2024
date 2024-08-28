@@ -35,10 +35,10 @@ public class Timer : MonoBehaviourPunCallbacks
             }else if (player.IsLocal){
                 myscore = GameManager.GetPlayerScore(player);
             }
-            Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
+            //Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
         }
         //timerTextを更新していく
         timerText.text=$"残り時間：{remaining.ToString("D3")}秒\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
-        Debug.Log($"camera position is {Camera.transform.position} and position is {this.transform.position}");
+       // Debug.Log($"camera position is {Camera.transform.position} and position is {this.transform.position}");
     }
 }

@@ -29,12 +29,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         Vector3 position = transform.position;
         int score = chestRayInteraction.GetScore();
+        //int score = chestRayInteraction.myscore;
         Hashtable hash = new Hashtable();
         hash.Add("PosX", position.x);
         hash.Add("PosY", position.y);
         hash.Add("PosZ", position.z);
-        hash.Add("Score", score);
+        //hash.Add("Score", score);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        //Debug.Log($"score:{score} in playerController");
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

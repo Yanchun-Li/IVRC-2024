@@ -20,13 +20,30 @@ using System.Collections.Generic;
      public override void OnJoinedRoom() {
          var position = new Vector3(0,1.1f,0);
          var playerlist = new List<Player>(PhotonNetwork.PlayerList);
+         GameObject playerInstance = null;
          if (playerlist.Count==1){
-            PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+            playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
          }
          if (playerlist.Count==2){
             position = new Vector3(200,1.1f,0);
-            PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
+            playerInstance=PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
          }
-        
+
+        if (playerInstance != null)
+        {
+            ChestRayInteraction chestRayInteraction = playerInstance.GetComponent<ChestRayInteraction>();
+            if (chestRayInteraction != null)
+            {
+                chestRayInteraction.InitializeScore();
+            }
+            else
+            {
+                Debug.LogError("ChestRayInteraction component not found on player instance");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to instantiate player");
+        }
      }
  }

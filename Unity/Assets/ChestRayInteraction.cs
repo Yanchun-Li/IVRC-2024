@@ -7,7 +7,7 @@ using Photon.Realtime;
 public class ChestRayInteraction : MonoBehaviourPunCallbacks
 {
     public int scoreIncrement = 1;
-    private int myscore = 0;
+    public int myscore;
 
 
     private List<InteractableUnityEventWrapper> chestInteractables = new List<InteractableUnityEventWrapper>();
@@ -16,18 +16,31 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     {
         // ゲーム開始時に既存のチェストを探して登録
         FindAndRegisterChests();
+        //UpdateScore(0);
+        //myscore = 0;
+    }
+
+    public void InitializeScore()
+    {
+        myscore = 0;
+        UpdateScore(myscore);
+        Debug.Log($"Score initialized to {myscore}");
     }
 
     void Update(){
         int otherscore = -1;
         var playerlist = new List<Player>(PhotonNetwork.PlayerList);
-        if (playerlist.Count == 2){
+        if (playerlist.Count > 0){
             foreach (Player player in playerlist){
                 if (!player.IsLocal){
                     otherscore = GetPlayerScore(player);
+                    Debug.Log($"other score is {otherscore}");
+                }else if(player.IsLocal){
+                    //myscore = GetPlayerScore(player);
+                    Debug.Log($"my score is {myscore}");
                 }
             }
-            Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
+            //Debug.Log($"my score is {myscore}, and other score is {otherscore}");
         }
     }
 
@@ -65,7 +78,42 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     {
         // スコアを加算
         myscore += scoreIncrement;
-        Debug.Log("Score: " + myscore);
+        UpdateScore(myscore);
+        Debug.Log("Score updated: " + myscore);
+        // int updatedScore = GetScore();
+        // Debug.Log($"After update, GetScore returns: {updatedScore}");
+    }
+
+    private System.Collections.IEnumerator CheckScoreAfterUpdate(int expectedScore)
+    {
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    private void UpdateScore(int newScore)
+    {
+        //myscore = newScore;
+        // Photonのカスタムプロパティを更新
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { "Score", newScore } };
+        try
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            Debug.Log($"Attempting to set score in custom properties: {newScore}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error setting custom properties: {e.Message}");
+        }
+
+        StartCoroutine(CheckScoreAfterUpdate(newScore));
+
+        // if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Score", out object setScore))
+        // {
+        //     Debug.Log($"Score successfully set in custom properties: {setScore}");
+        // }
+        // else
+        // {
+        //     Debug.LogError("Failed to set score in custom properties");
+        // }
     }
 
     // 新しいチェストが生成されたときに呼び出すメソッド
@@ -87,8 +135,14 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         }
     }
 
-    public int GetScore(){
-        return myscore;
+    public int GetScore()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Score", out object score))
+        {
+            return (int)score;
+            Debug.Log($"we can get score: {score}");
+        }
+        return 0;
     }
 
     public int GetPlayerScore(Player player)
