@@ -11,6 +11,7 @@
 -基本的な部屋構造はAssets内のRoom Prefabsに入れてある
 -宝箱についてはChestで調べれば出てくる
 -player1がplayer2に介入する際、直接player2 roomに行くのではなく、player2 room copy（アクセス時に作成）に行く
+-20240829追記:layerを設定し、一部の衝突判定をなくしました
 
 ## 共有について
 -位置情報（positionとrotation）はscriptableobjectに保存（Transform Dataに入れてある）
@@ -25,7 +26,7 @@
 
 ## Avatarの構造について
 -OVRPlayerControllerが元になっている
--移動はJoyStickMove.csで設定（movespeedで移動速度管理）
+-移動はJoyStickMove.csで設定（movespeedで移動速度管理）→20240829:OVRPlayerControllerで管理（Avatar1の速度を0.1から0.2に変更）
 -Transformが変わるのはOVRCameraRigの中のEyeAnchor
 -デフォルトだとCenterEyeAnchorにAudioListenerがついてくるが、それをEarに変更
 -位置情報についてはAvatarの位置情報が変わる（EyeAnchorのlocalPositionも少し変わるけど誤差？）
@@ -41,14 +42,19 @@
 ## ワールドの複製について（ObjectDuplicator.cs）
 -プレイヤー2のワールドとプレイヤー2本人を複製
 -位置の更新はMovableとタグのついているもののみ行う
--今確認するのは位置・アクティブかどうか・レンダー
+-20240829追記：今確認するのは位置・アクティブかどうか・レンダー
 
-## インタラクションについて
+## インタラクションについて(20240829追記)
 -宝箱についてはトリガーを引くことで消すことが可能
 -壁についても現在は宝箱と同様（理想は色を変えて移動できるようにしたい、おそらくPlayerSpecificWallInteraction内のTryRemoveWallを書き換えれば良さそう）
 -壁との衝突判定が小さい（下の真ん中らへんのみ？）なのでこれも何とかしたい
 
-## PlayerStopについて
+## PlayerStopについて(20240829追記)
 -PlayerStop/Player2Stopは二人同時にアクセスするまで、移動・位置の保存・タイマーを止める
 -二人そろうとGame Start!!の文字が出て動けるようになる
 -一人でのテストプレイをする際にはこのスクリプトのチェックを外すことで動かすことができる
+
+## その他(20240829追記)
+-Avatarの作成はMakeHumanでfbxを適当に作ってavatarのPrefabと組み合わせるのが良さそう
+-AvatarMovementLimiterがどこに使われているか不明→まだ試していない？
+-音はもう少し変えても良さそう
