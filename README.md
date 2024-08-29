@@ -17,9 +17,11 @@
 -開始時にリセットされる
 -およそ0.1秒ごとに新しい位置情報が追加される（ObjectTransformSave.csで実行、RecordIntervalで記録時間を設定）
 -自分のデータが更新されるのは確認済みだが、他人の位置情報が更新されるのはまだ見ていない（だめなら別の方法を試す）
+-20240829追記：TransformSaveからGameManager内のPlayerDataControllerで保存するように変更しました
 
 ## ゲーム開始時について
 -ゲーム開始時にPlayerMake.csによってResources内のAvatar1およびAvatar2が生成される（OnJoinedRoom）
+-20240829追記：3人目以降は「他のプレイヤーがプレイ中ですという表示がでるようにした」
 
 ## Avatarの構造について
 -OVRPlayerControllerが元になっている
@@ -43,7 +45,8 @@
 
 ## インタラクションについて
 -宝箱についてはトリガーを引くことで消すことが可能
--壁についても現在は宝箱と同様（理想は色を変えて移動できるようにしたい）
+-壁についても現在は宝箱と同様（理想は色を変えて移動できるようにしたい、おそらくPlayerSpecificWallInteraction内のTryRemoveWallを書き換えれば良さそう）
+-壁との衝突判定が小さい（下の真ん中らへんのみ？）なのでこれも何とかしたい
 
 ## PlayerStopについて
 -PlayerStop/Player2Stopは二人同時にアクセスするまで、移動・位置の保存・タイマーを止める

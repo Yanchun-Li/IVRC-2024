@@ -12,6 +12,7 @@ public class Player2Stop : MonoBehaviourPunCallbacks
     GameObject player2;
     GameObject timer;
     GameObject loading;
+    GameObject GameManager;
     private bool gameStart = false;
 
     // Start is called before the first frame update
@@ -21,7 +22,9 @@ public class Player2Stop : MonoBehaviourPunCallbacks
         //playerの人数が二人になるまで、移動・座標保存・タイマーを止めておく
         player2 = GameObject.Find("Avatar2(Clone)");
         player2.GetComponent<OVRPlayerController>().enabled = false;
-        player2.GetComponent<ObjectTransformSave>().enabled = false;
+        //player2.GetComponent<ObjectTransformSave>().enabled = false;
+        GameManager = GameObject.Find("GameManager");
+        GameManager.GetComponent<PlayerDataController>().enabled=false;
         timer = GameObject.Find("Avatar2(Clone)/Canvas/Timer");
         timer.SetActive(false);
         loading = GameObject.Find("Avatar2(Clone)/Canvas/Loading");
@@ -34,7 +37,8 @@ public class Player2Stop : MonoBehaviourPunCallbacks
         playerlist = new List<Player>(PhotonNetwork.PlayerList);
         if (playerlist.Count == 2 & !gameStart){
             player2.GetComponent<OVRPlayerController>().enabled = true;
-            player2.GetComponent<ObjectTransformSave>().enabled = true;
+            GameManager.GetComponent<PlayerDataController>().enabled=true;
+            //player2.GetComponent<ObjectTransformSave>().enabled = true;
             StartCoroutine("GameStart");
         }
         // if (OVRInput.GetDown(OVRInput.Button.Two) & !gameStart){
