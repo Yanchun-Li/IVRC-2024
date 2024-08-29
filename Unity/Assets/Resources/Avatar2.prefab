@@ -1206,6 +1206,7 @@ MonoBehaviour:
   timeLimit: 0
   timerText: {fileID: 7275594914642575051}
   Camera: {fileID: 100012}
+  Timerspeed: 1
 --- !u!1 &5332501371808501440
 GameObject:
   m_ObjectHideFlags: 0

@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0950df82e7936c84983497630bde5b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 0.1
+  Acceleration: 0.2
   Damping: 0.3
   BackAndSideDampen: 0.5
   JumpForce: 0.3
@@ -1209,6 +1209,7 @@ MonoBehaviour:
   timeLimit: 0
   timerText: {fileID: 5327934651860650339}
   Camera: {fileID: 100004}
+  Timerspeed: 2
 --- !u!1 &6974750120590757570
 GameObject:
   m_ObjectHideFlags: 0

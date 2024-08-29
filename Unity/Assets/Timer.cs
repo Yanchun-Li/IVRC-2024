@@ -14,6 +14,7 @@ public class Timer : MonoBehaviourPunCallbacks
     //経過時間
     float time;
     [SerializeField] GameObject Camera;
+    [SerializeField] int Timerspeed;
     GameManager GameManager;
     int myscore;
     int otherscore;
@@ -24,7 +25,7 @@ public class Timer : MonoBehaviourPunCallbacks
     void Update()
     {
         //フレーム毎の経過時間をtime変数に追加
-        time += Time.deltaTime;
+        time += Time.deltaTime*Timerspeed;
         //time変数をint型にし制限時間から引いた数をint型のlimit変数に代入
         int remaining = timeLimit -(int)time;
         //スコアの取得
