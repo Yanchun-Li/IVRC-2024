@@ -19,6 +19,7 @@ public class AvatarMovementLimiter : MonoBehaviour
     {
         if (objectDuplicator != null && objectDuplicator.duplicatedAvatar != null)
         {
+            Debug.Log("duplicatedAvatar is created");
             Vector3 avatarPosition = objectDuplicator.duplicatedAvatar.transform.position;  //　duplicatedAvatarの現在位置
             circleCenter = playerTransform.position;                                        //　可動範囲の円心を更新
 
