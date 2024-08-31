@@ -16,7 +16,8 @@ public class ObjectDuplicator : MonoBehaviour
     public float duration = 10f;
     //public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
     [SerializeField] public List<int> indexlist; //共有を開始するインデックス
-    public List<float> updateindextime; //更新をする時刻（秒）
+    //public List<float> updateindextime; //更新をする時刻（秒）
+    public float updateindextime; //更新をする時刻（秒）
     private int accessCount = 0;
     private Vector3 difforigin = new Vector3(0.0f,0.0f,0.0f);//エラー回避用
 
@@ -24,18 +25,18 @@ public class ObjectDuplicator : MonoBehaviour
     public GameObject duplicatedAvatar;
     private bool isProcessing = false;
     private float moveSpeed = 0.05f;
-    private float time;
+    private float time=0.0f;
 
     void Start()
     {
         //positionData.ClearPositions();
-        updateindextime = indexlist.Select(item => item * 0.2f).ToList();; //0.1秒ごとにデータ保存かつplayer1はplayer2の倍の速さ
+        //updateindextime = indexlist.Select(item => item * 0.2f).ToList();; //0.1秒ごとにデータ保存かつplayer1はplayer2の倍の速さ
     }
 
     void Update()
     {
         if (positionData.LengthPositions()!=0){
-            Debug.Log("positionData is not null");
+            //Debug.Log("positionData is not null");
             difforigin = newPosition - positionData.GetPosition(0);//原点の違い（rotationは考慮しない）
             time += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
             
@@ -44,6 +45,7 @@ public class ObjectDuplicator : MonoBehaviour
         // 指定されたボタンが押され、かつ現在処理中でない場合に実行
         if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
         {
+            updateindextime = time * 2;
             Debug.Log("push A button and copy world");
             DuplicateAndMove();
         }
@@ -73,7 +75,7 @@ public class ObjectDuplicator : MonoBehaviour
     private IEnumerator UpdateAndDestroy()
     {
         yield return new WaitForSeconds(duration);
-        while (time < updateindextime[accessCount]){}
+        while (time < updateindextime){}
         UpdateOriginalObject(originalObject, duplicatedObject);
         Destroy(duplicatedObject);
         Destroy(duplicatedAvatar);

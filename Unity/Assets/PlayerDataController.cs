@@ -14,7 +14,7 @@ public class PlayerDataController : MonoBehaviourPunCallbacks
     [SerializeField] private ObjectRotationData player2rotations;
     public float recordInterval = 0.1f;
     private float timer = 0.0f;
-    private float currenttime=0.0f;
+    //private float currenttime=0.0f;
 
     void Awake()
     {

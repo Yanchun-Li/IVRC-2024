@@ -58,3 +58,10 @@
 -Avatarの作成はMakeHumanでfbxを適当に作ってavatarのPrefabと組み合わせるのが良さそう
 -AvatarMovementLimiterがどこに使われているか不明→まだ試していない？
 -音はもう少し変えても良さそう
+
+## アクセスのタイミングについて
+-ObjectDuplicator.csのInspectorで設定
+-使うスクリプト：AccessCopyWorld.cs（インデックス）、ObjectDuplicator.cs（インデックス、秒）
+-indexlistでアクセスするインデックスを設定し、updateindextimeで更新する時間を決める
+-updateindextimeはアクセスした時間の2倍の時刻（アクセスするタイミングを固定化してもいいかも→今はAボタンになっている）
+-indexlistはこちらで固定化

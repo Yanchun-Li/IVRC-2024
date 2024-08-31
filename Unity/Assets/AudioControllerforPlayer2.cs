@@ -18,7 +18,7 @@ public class AudioControllerforPlayer2 : MonoBehaviour
     [SerializeField] private GameObject avatar;
 
     private Vector3 Position;
-    private bool accessOtherScene;
+    //private bool accessOtherScene;
     private Coroutine getPosition;
     
     private Vector3 OriginalPosition;
@@ -32,7 +32,7 @@ public class AudioControllerforPlayer2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        accessOtherScene = false;
+        //accessOtherScene = false;
         FindAudioSources();
         //mypositionData.ClearPositions();
         //myrotationData.ClearRotations();
