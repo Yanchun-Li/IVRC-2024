@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private ObjectPositionData otherpositions;
     [SerializeField] private ObjectRotationData otherrotations;
     public float recordInterval = 0.1f;
-    private float timer = 0.0f;
-    private float currenttime=0.0f;
+    //private float timer = 0.0f;
+    //private float currenttime=0.0f;
 
     void Awake()
     {

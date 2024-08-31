@@ -139,8 +139,8 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Score", out object score))
         {
-            return (int)score;
             Debug.Log($"we can get score: {score}");
+            return (int)score;
         }
         return 0;
     }
