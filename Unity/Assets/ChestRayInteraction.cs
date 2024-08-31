@@ -32,10 +32,13 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         var playerlist = new List<Player>(PhotonNetwork.PlayerList);
         if (playerlist.Count > 0){
             foreach (Player player in playerlist){
-                if (!player.IsLocal){
+                if (!player.IsLocal)
+                {
                     otherscore = GetPlayerScore(player);
                     Debug.Log($"other score is {otherscore}");
-                }else if(player.IsLocal){
+                }
+                else if(player.IsLocal)
+                {
                     //myscore = GetPlayerScore(player);
                     Debug.Log($"my score is {myscore}");
                 }
@@ -139,8 +142,8 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Score", out object score))
         {
-            Debug.Log($"we can get score: {score}");
             return (int)score;
+            Debug.Log($"we can get score: {score}");
         }
         return 0;
     }
