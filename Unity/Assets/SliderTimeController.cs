@@ -1,66 +1,68 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Unity.VisualScripting;
 
-public class SliderTimeController : MonoBehaviour
+public class SliderTimeController : MonoBehaviourPunCallbacks
 {
-    public Slider timeSlider;         // スライダーオブジェクト
-    public Text currentTimeLabel;     // playerBの現在時刻を表示するテキストオブジェクト
-    private Timer timer;                // Timerクラスのインスタンスを取得
-    private float maxTime = 300f;     // スライダーの最大時間 (playerBの現在時刻)
-    private bool isTimerStarted = false;
+    public Slider timeSlider;
+    public Text currentTimeLabel;
+    private Timer timer;
+    private float maxTime = 300f;
+    private bool timerExist = false;
+
     void Start()
     {
-        //Timerオブジェクトを探して取得
-        timer= FindObjectOfType<Timer>();
-
+        timer = FindObjectOfType<Timer>();
         if (timer == null)
         {
-            Debug.LogError("Timerオブジェクトが見つかりません。シーンにTimerが存在することを確認してください。");
-            return; // これ以上処理を進めない
+            Debug.LogWarning("Timerオブジェクトが見つかりません。");
         }
-
-        // スライダーの最大値と最小値を設定
+        else{timerExist=true;}
+        
         timeSlider.minValue = 0;
         timeSlider.maxValue = maxTime;
+        timeSlider.value = 0;
 
-        // スライダーの値を現在の時間に設定（現在時刻より右に行かないようにClampで制限）
-        timeSlider.value = Mathf.Clamp(timer.realtime-10, 0, maxTime);
-
-        // 現在時刻をテキストに表示
         UpdateCurrentTimeLabel();
-    }
-void Update()
-    {
-        if(timer != null && timer.IsTimerStarted)
-        {
-            isTimerStarted = true;
-            // 現在時刻より右に行かないようにスライダーの値を制限
-            timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime-10);
-        }
         
     }
-void UpdateCurrentTimeLabel()
+
+    void Update()
     {
-        if(!isTimerStarted)
+        if (timerExist == false)
+        {
+            timer = FindObjectOfType<Timer>();
+            if (timer == null)
+            {
+                Debug.LogWarning("Timerオブジェクトが見つかりません。");
+            }
+            else{timerExist=true;}
+        }
+
+        if (timerExist && timer.realtime > 0)
+        {
+            // 現在時刻より右に行かないようにスライダーの値を制限
+            timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime - 10);
+            UpdateCurrentTimeLabel();
+        }
+    }
+
+    void UpdateCurrentTimeLabel()
+    {
+        if (!timerExist || timer.realtime <= 0)
         {
             currentTimeLabel.text = "Waiting for players...";
             return;
         }
-        // スライダーの〇の位置を取得
-    Vector3 handlePosition = timeSlider.handleRect.position;
 
-    // テキストをスライダーの直下に配置
-    Vector3 textPosition = handlePosition;
-    textPosition.y -= 20;  // 20 はスライダーからの距離（必要に応じて調整）
+        Vector3 handlePosition = timeSlider.handleRect.position;
+        Vector3 textPosition = handlePosition;
+        textPosition.y -= 20;
+        currentTimeLabel.transform.position = textPosition;
 
-    // テキストオブジェクトの位置を設定
-    currentTimeLabel.transform.position = textPosition;
-
-        // 時間を分と秒に変換して表示
-        int minutes = Mathf.FloorToInt(timer.realtime / 60); // 分
-        int seconds = Mathf.FloorToInt(timer.realtime % 60); // 秒
-
-        // テキストに時間を表示
-        currentTimeLabel.text = string.Format("playerB:"+"{0:D2}:{1:D2}", minutes, seconds);
+        int minutes = Mathf.FloorToInt(timeSlider.value / 60);
+        int seconds = Mathf.FloorToInt(timeSlider.value % 60);
+        currentTimeLabel.text = string.Format("playerB:" + "{0:D2}:{1:D2}", minutes, seconds);
     }
 }
