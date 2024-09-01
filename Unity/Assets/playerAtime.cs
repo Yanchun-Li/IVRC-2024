@@ -1,22 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 public class playerAtime : MonoBehaviour
 {
     public Slider timeSliderA;         // スライダーオブジェクト
     public Text currentTimeLabelA;     // PlayerAの現在時刻を表示するテキストオブジェクト
     private Timer timer;                // Timerクラスのインスタンスを取得
     private SliderTimeController sliderTimeController; // SliderTimeControllerの参照
+    private bool timerExist = false;
 
     void Start()
     {
+        timer = FindObjectOfType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogWarning("Timerオブジェクトが見つかりません。");
+        }
+        else{timerExist=true;}
         //Timerオブジェクトを探して取得
-        timer=GameObject.FindObjectOfType<Timer>();
 
         sliderTimeController = FindObjectOfType<SliderTimeController>();
-
-        // time の 2倍の値を持つスライダー位置を設定
-        timeSliderA.value = Mathf.Clamp(timer.realtime * 2, timeSliderA.minValue, timeSliderA.maxValue);
+        if(timer != null)
+        {        
+            // time の 2倍の値を持つスライダー位置を設定
+            timeSliderA.value = Mathf.Clamp(timer.realtime * 2, timeSliderA.minValue, timeSliderA.maxValue);
+        }
 
         // テキストの位置と内容を更新
         UpdateCurrentTimeLabel();
@@ -25,10 +33,24 @@ public class playerAtime : MonoBehaviour
     void Update()
     {
         // 必要な場合は、ここで他の処理を行う
+        if (timerExist == false)
+        {
+            timer = FindObjectOfType<Timer>();
+            if (timer == null)
+            {
+                Debug.LogWarning("Timerオブジェクトが見つかりません。");
+            }
+            else{timerExist=true;
+            // time の 2倍の値を持つスライダー位置を設定
+            timeSliderA.value = Mathf.Clamp(timer.realtime * 2, timeSliderA.minValue, timeSliderA.maxValue);
+            UpdateCurrentTimeLabel();
+            }
+        }
     }
 
     void UpdateCurrentTimeLabel()
     {
+        
         float time = timer.realtime;
 
         // スライダーのhandle（〇）の位置を取得
