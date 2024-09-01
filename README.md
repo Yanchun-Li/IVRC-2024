@@ -71,4 +71,4 @@ UIの通り、スライダーでplayer2の何分何秒に行けるかを操作�
 timeはObjectDuplicator.csのtimeを参照。
 playerBtimeで現在時刻（time）より右側にはスライダーを動かせない仕様。
 AボタンのRayドラッグでスライダーを動かせる。
-AbuttonMainToPast.csで、メイン画面でAボタンを押すと遷移画面に移る仕様。（objectduplicator.csとaccesscopyworld.csとかぶってるので直す）
+AbuttonMainToPast.csで、メイン画面でAボタンを任意の場所で押すと遷移画面（昨日のUI）に、そこでAボタンドラッグでスライダー操作、戻るor潜入するボタン上で（rayで）Aボタンを押すとメイン画面に戻ったり過去に潜入できたりするようになった
