@@ -66,7 +66,7 @@
 -updateindextimeはアクセスした時間の2倍の時刻（アクセスするタイミングを固定化してもいいかも→今はAボタンになっている）
 -indexlistはこちらで固定化
 
-##player2への遷移画面について
+## player2への遷移画面について
 UIの通り、スライダーでplayer2の何分何秒に行けるかを操作。今はスクリプト(playerBtime.cs)内でplayer1/2の速さの比率を決めている（現状2倍）。
 timeはObjectDuplicator.csのtimeを参照。
 playerBtimeで現在時刻（time）より右側にはスライダーを動かせない仕様。
