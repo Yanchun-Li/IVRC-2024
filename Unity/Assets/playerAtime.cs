@@ -24,10 +24,11 @@ public class playerAtime : MonoBehaviour
         {        
             // time の 2倍の値を持つスライダー位置を設定
             timeSliderA.value = Mathf.Clamp(timer.realtime * 2, timeSliderA.minValue, timeSliderA.maxValue);
+            UpdateCurrentTimeLabel();
         }
 
         // テキストの位置と内容を更新
-        UpdateCurrentTimeLabel();
+        
     }
 
     void Update()
