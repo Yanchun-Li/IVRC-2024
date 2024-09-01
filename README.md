@@ -67,7 +67,7 @@
 -indexlistはこちらで固定化
 
 ## player2への遷移画面について
-UIの通り、スライダーでplayer2の何分何秒に行けるかを操作。今はスクリプト(playerBtime.cs)内でplayer1/2の速さの比率を決めている（現状2倍）。潜入できる時間を10秒と設定しているので、スライダーの〇がplayerb現在時刻-10秒までしか動かない仕様。(10秒から変える際はplayerBtime.cs内で変える)
+UIの通り、スライダーでplayer2の何分何秒に行けるかを操作。今はスクリプト(SliderTimeController.cs)内でplayer1/2の速さの比率を決めている（現状2倍）。潜入できる時間を10秒と設定しているので、スライダーの〇がplayerb現在時刻-10秒までしか動かない仕様。(10秒から変える際はSliderTimeController.cs内で変える)
 timeはObjectDuplicator.csのrealtimeを参照。
 AボタンのRayドラッグでスライダーを動かせる。
 AbuttonMainToPast.csで、メイン画面でAボタンを任意の場所で押すと遷移画面に、そこでAボタンドラッグでスライダー操作、戻るor潜入するボタン上で（rayで）Aボタンを押すとメイン画面に戻ったり過去に潜入できたりするようになった
