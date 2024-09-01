@@ -40,7 +40,7 @@ public class AccessCopyWorld : MonoBehaviour
 
     public IEnumerator Duration(float duration){
         accessOtherScene = true;
-        float startTime = Time.time;
+        float pasttime = Time.time;
         Debug.Log("access player2 world");
 
         Vector3 Position = otherpositionData.GetPosition(indexlist[accessCount]);
@@ -51,7 +51,7 @@ public class AccessCopyWorld : MonoBehaviour
                 accessCount = 0;
                 Debug.Log("currentIndex is clear");
         }
-        while (Time.time - startTime < duration){
+        while (Time.time - pasttime < duration){
             yield return new WaitForSeconds(0.1f);
         }
 

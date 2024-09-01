@@ -5,17 +5,20 @@ public class SliderTimeController : MonoBehaviour
 {
     public Slider timeSlider;         // スライダーオブジェクト
     public Text currentTimeLabel;     // playerBの現在時刻を表示するテキストオブジェクト
-    public float time;                // ゲーム開始からの経過時間 (ObjectDuplicator.csで定義されている)
+    private Timer timer;                // Timerクラスのインスタンスを取得
     private float maxTime = 300f;     // スライダーの最大時間 (playerBの現在時刻)
 
     void Start()
     {
+        //Timerオブジェクトを探して取得
+        timer=GameObject.FindObjectOfType<Timer>();
+
         // スライダーの最大値と最小値を設定
         timeSlider.minValue = 0;
         timeSlider.maxValue = maxTime;
 
         // スライダーの値を現在の時間に設定（現在時刻より右に行かないようにClampで制限）
-        timeSlider.value = Mathf.Clamp(time-10, 0, maxTime);
+        timeSlider.value = Mathf.Clamp(timer.realtime-10, 0, maxTime);
 
         // 現在時刻をテキストに表示
         UpdateCurrentTimeLabel();
@@ -23,7 +26,7 @@ public class SliderTimeController : MonoBehaviour
 void Update()
     {
         // 現在時刻より右に行かないようにスライダーの値を制限
-        timeSlider.value = Mathf.Min(timeSlider.value, time-10);
+        timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime-10);
     }
     void UpdateCurrentTimeLabel()
     {
@@ -38,8 +41,8 @@ void Update()
     currentTimeLabel.transform.position = textPosition;
 
         // 時間を分と秒に変換して表示
-        int minutes = Mathf.FloorToInt(time / 60); // 分
-        int seconds = Mathf.FloorToInt(time % 60); // 秒
+        int minutes = Mathf.FloorToInt(timer.realtime / 60); // 分
+        int seconds = Mathf.FloorToInt(timer.realtime % 60); // 秒
 
         // テキストに時間を表示
         currentTimeLabel.text = string.Format("playerB:"+"{0:D2}:{1:D2}", minutes, seconds);

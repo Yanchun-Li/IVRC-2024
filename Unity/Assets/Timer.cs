@@ -12,7 +12,7 @@ public class Timer : MonoBehaviourPunCallbacks
     //タイマー用テキスト
     [SerializeField] Text timerText;
     //経過時間
-    float realtime;
+    public float realtime;
     [SerializeField] GameObject Camera;
     [SerializeField] int Timerspeed;
     GameManager GameManager;
