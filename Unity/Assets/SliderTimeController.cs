@@ -37,14 +37,15 @@ public class SliderTimeController : MonoBehaviourPunCallbacks
             {
                 Debug.LogWarning("Timerオブジェクトが見つかりません。");
             }
-            else{timerExist=true;}
+            else{timerExist=true;
+            UpdateCurrentTimeLabel();}
         }
 
         if (timerExist && timer.realtime > 0)
         {
             // 現在時刻より右に行かないようにスライダーの値を制限
             timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime - 10);
-            UpdateCurrentTimeLabel();
+            //UpdateCurrentTimeLabel();
         }
     }
 
