@@ -25,7 +25,7 @@ public class ObjectDuplicator : MonoBehaviour
     public GameObject duplicatedAvatar;
     private bool isProcessing = false;
     private float moveSpeed = 0.05f;
-    private float time=0.0f;
+    public float pasttime=0.0f;
 
     void Start()
     {
@@ -38,14 +38,14 @@ public class ObjectDuplicator : MonoBehaviour
         if (positionData.LengthPositions()!=0){
             //Debug.Log("positionData is not null");
             difforigin = newPosition - positionData.GetPosition(0);//原点の違い（rotationは考慮しない）
-            time += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
+            pasttime += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
             
         }
 
         // 指定されたボタンが押され、かつ現在処理中でない場合に実行
         if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
         {
-            updateindextime = time * 2;
+            updateindextime = pasttime * 2;
             Debug.Log("push A button and copy world");
             DuplicateAndMove();
         }
@@ -75,7 +75,7 @@ public class ObjectDuplicator : MonoBehaviour
     private IEnumerator UpdateAndDestroy()
     {
         yield return new WaitForSeconds(duration);
-        while (time < updateindextime){}
+        while (pasttime < updateindextime){}
         UpdateOriginalObject(originalObject, duplicatedObject);
         Destroy(duplicatedObject);
         Destroy(duplicatedAvatar);

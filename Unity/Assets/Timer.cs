@@ -12,7 +12,7 @@ public class Timer : MonoBehaviourPunCallbacks
     //タイマー用テキスト
     [SerializeField] Text timerText;
     //経過時間
-    float time;
+    float realtime;
     [SerializeField] GameObject Camera;
     [SerializeField] int Timerspeed;
     GameManager GameManager;
@@ -25,9 +25,9 @@ public class Timer : MonoBehaviourPunCallbacks
     void Update()
     {
         //フレーム毎の経過時間をtime変数に追加
-        time += Time.deltaTime*Timerspeed;
+        realtime += Time.deltaTime*Timerspeed;
         //time変数をint型にし制限時間から引いた数をint型のlimit変数に代入
-        int remaining = timeLimit -(int)time;
+        int remaining = timeLimit -(int)realtime;
         //スコアの取得
         var playerlist = new List<Player>(PhotonNetwork.PlayerList);
         foreach (Player player in playerlist){

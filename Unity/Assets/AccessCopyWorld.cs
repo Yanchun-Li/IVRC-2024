@@ -38,10 +38,10 @@ public class AccessCopyWorld : MonoBehaviour
         }
     }
 
-    private IEnumerator Duration(float duration){
+    public IEnumerator Duration(float duration){
         accessOtherScene = true;
         float startTime = Time.time;
-        Debug.Log("access copy world");
+        Debug.Log("access player2 world");
 
         Vector3 Position = otherpositionData.GetPosition(indexlist[accessCount]);
         Quaternion Rotation = otherrotationData.GetRotation(indexlist[accessCount]);
