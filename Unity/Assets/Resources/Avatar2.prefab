@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLimit: 0
   timerText: {fileID: 7275594914642575051}
+  realtime: 0
   Camera: {fileID: 100012}
   Timerspeed: 1
 --- !u!1 &5332501371808501440
@@ -1843,15 +1844,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0477ed8c023789841a5517e0735cd750, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.79787236
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0477ed8c023789841a5517e0735cd750, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.79787236
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0477ed8c023789841a5517e0735cd750, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.79787236
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0477ed8c023789841a5517e0735cd750, type: 3}
       propertyPath: m_LocalPosition.x
