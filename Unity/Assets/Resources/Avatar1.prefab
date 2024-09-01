@@ -1530,6 +1530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLimit: 0
   timerText: {fileID: 5327934651860650339}
+  realtime: 0
   Camera: {fileID: 100004}
   Timerspeed: 2
 --- !u!1 &6974750120590757570

@@ -13,6 +13,12 @@ public class SliderTimeController : MonoBehaviour
         //Timerオブジェクトを探して取得
         timer=GameObject.FindObjectOfType<Timer>();
 
+        if (timer == null)
+        {
+            Debug.LogError("Timerオブジェクトが見つかりません。シーンにTimerが存在することを確認してください。");
+            return; // これ以上処理を進めない
+        }
+
         // スライダーの最大値と最小値を設定
         timeSlider.minValue = 0;
         timeSlider.maxValue = maxTime;
