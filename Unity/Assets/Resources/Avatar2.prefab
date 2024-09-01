@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400006}
   - component: {fileID: 14300000}
-  - component: {fileID: 11400010}
+  - component: {fileID: 9201588818789562363}
   - component: {fileID: 11462408}
   - component: {fileID: 11493974}
   - component: {fileID: -4874439533326677387}
@@ -251,7 +251,7 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11400010
+--- !u!114 &9201588818789562363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,7 +274,7 @@ MonoBehaviour:
   FixedSpeedSteps: 0
   HmdResetsY: 1
   HmdRotatesY: 1
-  GravityModifier: 0
+  GravityModifier: 0.379
   useProfileData: 1
   EnableLinearMovement: 1
   EnableRotation: 1

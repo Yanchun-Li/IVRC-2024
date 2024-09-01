@@ -1562,14 +1562,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168735881}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e7a762b49ac37a448d21a1a143230c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeSlider: {fileID: 0}
   currentTimeLabel: {fileID: 805655710}
-  time: 0
+--- !u!114 &168735890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2704207422477994208, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+  m_PrefabInstance: {fileID: 1137256151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168735881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &206788759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8750,6 +8760,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1989161880251847474, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: timeSlider
+      value: 
+      objectReference: {fileID: 168735890}
     - target: {fileID: 2154499173520060496, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
