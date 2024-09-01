@@ -7,11 +7,11 @@ public class SliderTimeController : MonoBehaviour
     public Text currentTimeLabel;     // playerBの現在時刻を表示するテキストオブジェクト
     private Timer timer;                // Timerクラスのインスタンスを取得
     private float maxTime = 300f;     // スライダーの最大時間 (playerBの現在時刻)
-
+    private bool isTimerStarted = false;
     void Start()
     {
         //Timerオブジェクトを探して取得
-        timer=GameObject.FindObjectOfType<Timer>();
+        timer= FindObjectOfType<Timer>();
 
         if (timer == null)
         {
@@ -31,11 +31,21 @@ public class SliderTimeController : MonoBehaviour
     }
 void Update()
     {
-        // 現在時刻より右に行かないようにスライダーの値を制限
-        timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime-10);
+        if(timer != null && timer.IsTimerStarted)
+        {
+            isTimerStarted = true;
+            // 現在時刻より右に行かないようにスライダーの値を制限
+            timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime-10);
+        }
+        
     }
-    void UpdateCurrentTimeLabel()
+void UpdateCurrentTimeLabel()
     {
+        if(!isTimerStarted)
+        {
+            currentTimeLabel.text = "Waiting for players...";
+            return;
+        }
         // スライダーの〇の位置を取得
     Vector3 handlePosition = timeSlider.handleRect.position;
 
