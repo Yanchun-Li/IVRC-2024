@@ -2311,7 +2311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cb0d82ee9451644b0648ed2aadb557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player2exist: 0
 --- !u!4 &331707175
 Transform:
   m_ObjectHideFlags: 0
@@ -3934,6 +3933,10 @@ PrefabInstance:
     - target: {fileID: 7648564897465555080, guid: f54012181eacade4ea242c65f804720f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908692353090562265, guid: f54012181eacade4ea242c65f804720f, type: 3}
+      propertyPath: _maxRayVisualLength
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8345929444835859436, guid: f54012181eacade4ea242c65f804720f, type: 3}
       propertyPath: m_IsActive
@@ -25589,6 +25592,7 @@ MonoBehaviour:
   rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   newPosition: {x: -200, y: 0, z: 0}
   duration: 10
+  slider: {fileID: 0}
   indexlist: 
   updateindextime: 0
   duplicatedAvatar: {fileID: 0}
