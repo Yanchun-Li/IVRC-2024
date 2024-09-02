@@ -3,8 +3,10 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine.XR;
 using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 
 public class ObjectDuplicator : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class ObjectDuplicator : MonoBehaviour
     public ObjectRotationData rotationData;
     public Vector3 newPosition;
     public float duration = 10f;
+    public Slider slider; //スライダーを参照
     //public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
     [SerializeField] public List<int> indexlist; //共有を開始するインデックス
     //public List<float> updateindextime; //更新をする時刻（秒）
@@ -145,17 +148,25 @@ public class ObjectDuplicator : MonoBehaviour
         //Avatar2の動きを反映
         //float floatindex = startime/0.1f;
         //int startindex = (int)floatindex;
-        int startindex = indexlist[accessCount];
-        while(duplicatedAvatar!=null){
-            if (startindex>= positionData.positions.Count){
+        //Sliderの値を10倍してインデックスとして使用
+        int sliderValue = Mathf.Clamp((int)slider.value*10,0,indexlist.Count -1);
+        int startindex = indexlist[sliderValue];
+        float timeElapsed = 0f;
+        while(duplicatedAvatar!=null && timeElapsed <10f)//10秒間だけ更新
+        {
+            if (startindex>= positionData.positions.Count)
+            {
                 startindex = 0;
-                Debug.Log("index is clear");
+                Debug.Log("index is reset");
             }
             duplicatedAvatar.transform.position = positionData.GetPosition(startindex)+difforigin;
             duplicatedAvatar.transform.rotation = rotationData.GetRotation(startindex);
             startindex++;
+            timeElapsed += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
+
+        Destroy(duplicatedAvatar);//10秒経過後にアバターを削除
         accessCount++;
     }
 
