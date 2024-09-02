@@ -1,34 +1,37 @@
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.UI;
 
 public class AvatarMovementLimiter : MonoBehaviour
 {
     public ObjectDuplicator objectDuplicator; 
     public Transform playerTransform; 
     private Vector3 circleCenter;
-    private float radius = 2f;                 // 移動可能な半径を２ｍにする
+    private float radius = 2f;  // 移動可能な半径を2mに設定
 
     void Start()
     {
-        if (objectDuplicator != null && objectDuplicator.duplicatedAvatar != null)
-        {
-            circleCenter = objectDuplicator.duplicatedAvatar.transform.position;
-        }
+        // 特別な初期化は不要
     }
 
     void Update()
     {
-        if (objectDuplicator != null && objectDuplicator.duplicatedAvatar != null)
+        if (objectDuplicator == null || playerTransform == null)
         {
-            Debug.Log("duplicatedAvatar is created");
-            Vector3 avatarPosition = objectDuplicator.duplicatedAvatar.transform.position;  //　duplicatedAvatarの現在位置
-            circleCenter = playerTransform.position;                                        //　可動範囲の円心を更新
+            return; // objectDuplicatorやplayerTransformがnullなら何もしない
+        }
 
-            float distanceFromCenter = Vector3.Distance(circleCenter, avatarPosition);      //　円心からduplicatedAvatarまでの距離を計算
+        if (objectDuplicator.duplicatedAvatar != null)
+        {
+            Vector3 avatarPosition = objectDuplicator.duplicatedAvatar.transform.position;  // duplicatedAvatarの現在位置を取得
+            circleCenter = playerTransform.position;  // 可動範囲の円心を更新
 
-            if (distanceFromCenter > radius)                                                //　半径を越えたら，可動範囲に戻される
+            float distanceFromCenter = Vector3.Distance(circleCenter, avatarPosition);  // 円心からduplicatedAvatarまでの距離を計算
+
+            if (distanceFromCenter > radius)  // 半径を超えたら、可動範囲に戻す
             {
-                Vector3 direction = (avatarPosition - circleCenter).normalized;             //　円心からの方向ベクトル
-                objectDuplicator.duplicatedAvatar.transform.position = circleCenter + direction * radius;   //　エッジに戻る
+                Vector3 direction = (avatarPosition - circleCenter).normalized;  // 円心からの方向ベクトル
+                objectDuplicator.duplicatedAvatar.transform.position = circleCenter + direction * radius;  // エッジに戻す
             }
         }
     }
