@@ -8,6 +8,8 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
     public ObjectRotationData player1RotationData;
     public ObjectRotationData player2RotationData;
 
+    private PhotonView photonView;
+
     //public bool isPlayer1;
 
     public float recordInterval = 0.1f;
@@ -20,6 +22,7 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
 
         if (PhotonNetwork.LocalPlayer.IsMasterClient)
         {
@@ -42,7 +45,7 @@ public class ObjectTransformSave : MonoBehaviourPunCallbacks
         {
             activePositionData.AddPosition(transform.position);
             //オブジェクトの座標を表示
-            Debug.Log(this.name + "Position:" + transform.position);
+            Debug.Log(activePositionData + "Position:" + transform.position + "ID:" + photonView.OwnerActorNr);
             activePositionData.isUpdating = true;
 
             activeRotationData.AddRotation(transform.rotation);

@@ -32,17 +32,27 @@ public class ChestCreate : MonoBehaviourPunCallbacks
     }
 
     public void MakeTresure(){
-        int[] randomNumbers = Enumerable.Range(0, 24).OrderBy(_ => Guid.NewGuid()).ToArray();
+        int[] randomNumbers = Enumerable.Range(0, 20).OrderBy(_ => Guid.NewGuid()).ToArray();
+        int[] cornerNumbers = new int[] {21,22,23,24};
+        System.Collections.Generic.List<int>
+        mergedList = new System.Collections.Generic.List<int>(randomNumbers.Length + cornerNumbers.Length);
+        //配列をコレクションに追加する
         
+        mergedList.AddRange(cornerNumbers);
+        mergedList.AddRange(randomNumbers);
+
+        //配列に変換する
+        int[] mergedArray = mergedList.ToArray();
+
         for (int i=0;i<number;i++){
             System.Random rnd = new System.Random();
-            //float x = rnd.Next(-8,8);
-            //float z = rnd.Next(-8,8);
-            float x = 0;
-            float z = 0;
-            Vector3 localposition = new Vector3(x,0,z);
-            Transform origin = this.transform.GetChild(randomNumbers[i]);
-            Transform Copyorigin = CopyWorld.transform.GetChild(randomNumbers[i]);
+            float x = rnd.Next(-8,8);
+            float z = rnd.Next(-8,8);
+            //float x = 0;
+            //float z = 0;
+            Vector3 localposition = new Vector3(x,0.1f,z);
+            Transform origin = this.transform.GetChild(mergedArray[i]);
+            Transform Copyorigin = CopyWorld.transform.GetChild(mergedArray[i]);
             Vector3 originalPosition = origin.position;
             Vector3 CopyoriginalPosition = Copyorigin.position;
             GameObject chest1 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+originalPosition,Quaternion.identity);

@@ -7,6 +7,14 @@ TagManager:
   - Player1AudioSource
   - Player2AudioSource
   - Chest
+  - Movable
+  - Player1
+  - Player2
+  - MasterPlayer
+  - CameraRig
+  - TrackingSpace
+  - LHandTargetAnchor
+  - RHandTargetAnchor
   layers:
   - Default
   - TransparentFX
@@ -14,9 +22,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - room
+  - floor
+  - wall
   - 
   - 
   - 
