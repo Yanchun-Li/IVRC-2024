@@ -47,10 +47,13 @@ public class ChestCopy : MonoBehaviour
         while (objectduplicator.duplicatedObject == null){}//宝箱の移動をさけるため、部屋ができてから宝箱の生成に移る
         difforigin = objectduplicator.duplicatedObject.transform.position - Player2Room.transform.position;
         newChestPosition = originalChest.transform.position + difforigin;
+        if (originalChest.transform.position.x > 100)//player1 roomにある宝は生成不要
+        {
         copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
         Avatar1 = GameObject.Find("Avatar1(Clone)");
         Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
         StartCoroutine(UpdateAndDestroy());
+        }
     }
 
     private IEnumerator UpdateAndDestroy()
