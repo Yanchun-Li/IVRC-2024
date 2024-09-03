@@ -18,7 +18,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private GameObject avatar;
 
     private Vector3 Position;
-    private bool accessOtherScene = false;
+    private bool accessOtherScene;
     private Coroutine getPosition;
     
     private Vector3 OriginalPosition;
@@ -28,14 +28,17 @@ public class AudioController : MonoBehaviour
     public ObjectPositionData mypositionData;
     public ObjectRotationData myrotationData;
     public int currentIndex = 0;
+
+    [SerializeField] private AccessCopyWorld AccessCopyWorld;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        accessOtherScene = AccessCopyWorld.accessOtherScene;
         FindAudioSources();
-        mypositionData.ClearPositions();
-        myrotationData.ClearRotations();
+        //mypositionData.ClearPositions();
+        //myrotationData.ClearRotations();
         foreach (var audio in myaudioSources)
         {
             if (audio != null)
@@ -50,6 +53,8 @@ public class AudioController : MonoBehaviour
 
     private void FindAudioSources()
     {
+        myaudioSources = new List<AudioSource>();
+        otheraudioSources = new List<AudioSource>();
         // タグ付けされた全ての GameObjects を見つける
         GameObject[] audioSourceObjects = GameObject.FindGameObjectsWithTag(myaudioSourceTag);
         GameObject[] otheraudioSourceObjects = GameObject.FindGameObjectsWithTag(otheraudioSourceTag);
@@ -77,8 +82,20 @@ public class AudioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (accessOtherScene != AccessCopyWorld.accessOtherScene){
+            FindAudioSources();
+        }
+
+        accessOtherScene = AccessCopyWorld.accessOtherScene;
+
+        if (accessOtherScene == false){
+            audioSources = myaudioSources;
+        }else{
+            audioSources = otheraudioSources;
+        }
+
         audioPositionList.Clear();
-        foreach (var audio in myaudioSources)
+        foreach (var audio in audioSources)
         {
             if (audio != null)
             {
@@ -86,29 +103,11 @@ public class AudioController : MonoBehaviour
             }
             //audio.Play();
         }
+        myPosition = this.transform.position;
 
-        if (Input.GetKey(KeyCode.P)){
-
-            if (accessOtherScene && getPosition != null){
-                StopCoroutine(getPosition);
-            }
-
-            getPosition = StartCoroutine(Duration(5.0f));
-        }
-
-        if(!accessOtherScene){
-            //myPosition = OriginalPosition;
-            this.transform.position = avatar.transform.position;
-            this.transform.rotation = avatar.transform.rotation;
-            myPosition = this.transform.position;
-            myRotation = this.transform.rotation;
-            audioSources = myaudioSources;
-            //Debug.Log("in this case");
-        }
         List<int> indexlist=calcDistance(audioPositionList, myPosition);
         audiomute(indexlist,audioSources);
-        //Debug.Log(myPosition);
-        //myPosition = this.transform.position;
+        
         this.transform.position = myPosition;
         this.transform.rotation = myRotation;
         //Debug.Log($"my position is {this.transform.position}");
@@ -137,6 +136,7 @@ public class AudioController : MonoBehaviour
     }
 
     private void audiomute(List<int> indexlist, List<AudioSource> audioSources){
+        //近く2つは音を鳴らし、7つは音を止める（他は関与しない）
         for(int i =0;i<2;i++){
             if (audiostoplist[indexlist[i]]){
                 audioSources[indexlist[i]].Play();
