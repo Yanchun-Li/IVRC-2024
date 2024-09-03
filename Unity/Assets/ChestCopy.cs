@@ -16,6 +16,7 @@ public class ChestCopy : MonoBehaviour
     private bool isProcessing=false;
     private ObjectDuplicator objectduplicator;
     private GameObject Player2Room;
+    private GameObject Avatar1;
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +45,11 @@ public class ChestCopy : MonoBehaviour
         if (isProcessing) return; // 既に処理中なら新たに開始しない
         isProcessing = true;
         while (objectduplicator.duplicatedObject == null){}//宝箱の移動をさけるため、部屋ができてから宝箱の生成に移る
+        difforigin = objectduplicator.duplicatedObject.transform.position - Player2Room.transform.position;
         newChestPosition = originalChest.transform.position + difforigin;
         copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
+        Avatar1 = GameObject.Find("Avatar1(Clone)");
+        Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
         StartCoroutine(UpdateAndDestroy());
     }
 
@@ -54,6 +58,7 @@ public class ChestCopy : MonoBehaviour
         float duration = objectduplicator.duration;
         yield return new WaitForSeconds(duration);
         Destroy(copyChest);
+        Avatar1.GetComponent<ChestRayInteraction>().enabled = true;
         isProcessing = false; // 処理完了
     }
 
