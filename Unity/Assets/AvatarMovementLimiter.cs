@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AvatarMovementLimiter : MonoBehaviour
 {
-    public ObjectDuplicator objectDuplicator; 
+    private ObjectDuplicator objectDuplicator; 
     public ObjectPositionData objectPositionData; 
     private Vector3 player1position;
     private float radius = 2f;  // 移動可能な半径を2mに設定

@@ -34,7 +34,7 @@ public class AccessCopyWorld : MonoBehaviour
             if (accessOtherScene && getPosition != null){
                 StopCoroutine(getPosition);
             }
-            getPosition = StartCoroutine(Duration(5.0f));
+            getPosition = StartCoroutine(Duration(10.0f));
         }
     }
 
