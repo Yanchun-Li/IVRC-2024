@@ -18,8 +18,10 @@ public class Timer : MonoBehaviourPunCallbacks
     GameManager GameManager;
     int myscore;
     int otherscore;
+     [SerializeField] GameObject endPanel;
     void Start(){
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        endPanel.SetActive(false);
     }
 
     void Update()
@@ -40,6 +42,23 @@ public class Timer : MonoBehaviourPunCallbacks
         }
         //timerTextを更新していく
         timerText.text=$"残り時間：{remaining.ToString("D3")}秒\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+        if (remaining <= 0)
+        {
+            EndGame();
+        }
        // Debug.Log($"camera position is {Camera.transform.position} and position is {this.transform.position}");
+    }
+    void EndGame()
+    {
+        // 終了画面を表示する
+        endPanel.SetActive(true);
+        // 終了画面のテキストを設定する
+        Text endPanelText = endPanel.GetComponentInChildren<Text>(); // 子要素にTextコンポーネントを持つ要素が必要
+        if (endPanelText != null)
+        {
+            endPanelText.text = $"Final Score: {myscore}";
+        }
+        // ゲームの更新を止める
+        Time.timeScale = 0f;
     }
 }
