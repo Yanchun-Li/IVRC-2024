@@ -24,7 +24,7 @@ public class ObjectDuplicator : MonoBehaviour
     private int accessCount = 0;
     private Vector3 difforigin = new Vector3(0.0f,0.0f,0.0f);//エラー回避用
 
-    private GameObject duplicatedObject;
+    public GameObject duplicatedObject;
     public GameObject duplicatedAvatar;
     private bool isProcessing = false;
     private float moveSpeed = 0.05f;

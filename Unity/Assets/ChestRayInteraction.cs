@@ -68,7 +68,7 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         if (wrapper != null)
         {
             chestInteractables.Add(wrapper);
-            wrapper.WhenSelect.AddListener(OnChestSelected);
+            wrapper.WhenSelect.AddListener(() => OnChestSelected(chestObject));
             Debug.Log($"Registered chest: {chestObject.name}");
         }
         else
@@ -77,8 +77,22 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         }
     }
 
-    public void OnChestSelected()
+    public void OnChestSelected(GameObject chestObject)
     {
+        //部屋の位置によって点数変更（各部屋の中心から±8の領域に宝箱生成、余裕をもって±9とする）
+        //部屋の中心：21番（260,-60）、22番（140,60）、23番（260,60）、24番（140,-60）
+        Vector3 position = chestObject.transform.position;
+        if (260-9<position.x  & position.x<260+9 & -60-9<position.z & position.z<-60+9){
+            scoreIncrement = 2;
+        }else if (140-9<position.x  & position.x<140+9 & 60-9<position.z & position.z<60+9){
+            scoreIncrement = 2;
+        }else if (260-9<position.x  & position.x<260+9 & 60-9<position.z & position.z<60+9){
+            scoreIncrement = 2;
+        }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
+            scoreIncrement = 2;
+        }else{
+            scoreIncrement = 1;
+        }
         // スコアを加算
         myscore += scoreIncrement;
         UpdateScore(myscore);
@@ -133,7 +147,7 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         {
             if (wrapper != null)
             {
-                wrapper.WhenSelect.RemoveListener(OnChestSelected);
+                wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
             }
         }
     }
@@ -142,8 +156,8 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Score", out object score))
         {
-            return (int)score;
             Debug.Log($"we can get score: {score}");
+            return (int)score;
         }
         return 0;
     }
