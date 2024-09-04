@@ -11,6 +11,7 @@ public class ChestCopy : MonoBehaviour
 {
     public GameObject originalChest;
     public GameObject copyChest;
+    public Transform chestTransform;
     public Vector3 difforigin=new Vector3(-400f,0f,0f);//手動で計算
     private Vector3 newChestPosition;
     private bool isProcessing=false;
@@ -28,7 +29,8 @@ public class ChestCopy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (objectduplicator == null){
+        if (objectduplicator == null)
+        {
             Player2Room = GameObject.Find("Player2 Room");
             objectduplicator = Player2Room.GetComponent<ObjectDuplicator>();
         }
@@ -47,12 +49,36 @@ public class ChestCopy : MonoBehaviour
         while (objectduplicator.duplicatedObject == null){}//宝箱の移動をさけるため、部屋ができてから宝箱の生成に移る
         difforigin = objectduplicator.duplicatedObject.transform.position - Player2Room.transform.position;
         newChestPosition = originalChest.transform.position + difforigin;
-        if (originalChest.transform.position.x > 100)//player1 roomにある宝は生成不要
+        if (originalChest.transform.position.x > 100 )//player1 roomにある宝は生成不要
         {
-        copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
-        Avatar1 = GameObject.Find("Avatar1(Clone)");
-        Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
-        StartCoroutine(UpdateAndDestroy());
+            if(260-9<chestTransform.position.x  && chestTransform.position.x<260+9 && -60-9<chestTransform.position.z && chestTransform.position.z<-60+9)
+            {
+                copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
+                Avatar1 = GameObject.Find("Avatar1(Clone)");
+                Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
+                StartCoroutine(UpdateAndDestroy());
+            }
+            else if (140-9<chestTransform.position.x  && chestTransform.position.x<140+9 && 60-9<chestTransform.position.z && chestTransform.position.z<60+9)
+            {
+                copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
+                Avatar1 = GameObject.Find("Avatar1(Clone)");
+                Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
+                StartCoroutine(UpdateAndDestroy());
+            }
+            else if  (260-9<chestTransform.position.x  && chestTransform.position.x<260+9 && 60-9<chestTransform.position.z && chestTransform.position.z<60+9)
+            {
+                copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
+                Avatar1 = GameObject.Find("Avatar1(Clone)");
+                Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
+                StartCoroutine(UpdateAndDestroy());
+            }
+            else if  (140-9<chestTransform.position.x  && chestTransform.position.x<140+9 && -60-9<chestTransform.position.z && chestTransform.position.z<-60+9)
+            {
+                copyChest = Instantiate(originalChest, newChestPosition, originalChest.transform.rotation);
+                Avatar1 = GameObject.Find("Avatar1(Clone)");
+                Avatar1.GetComponent<ChestRayInteraction>().enabled = false;//アバター1はコピー世界にいるときは宝に関与できない
+                StartCoroutine(UpdateAndDestroy()); 
+            }
         }
     }
 
