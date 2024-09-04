@@ -14,7 +14,7 @@ public class Timer : MonoBehaviourPunCallbacks
     //経過時間
     public float realtime;
     [SerializeField] GameObject Camera;
-    [SerializeField] int Timerspeed;
+    public int Timerspeed;
     GameManager GameManager;
     int myscore;
     int otherscore;
