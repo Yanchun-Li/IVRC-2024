@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class AccessCopyWorld : MonoBehaviour
 {
@@ -20,7 +22,8 @@ public class AccessCopyWorld : MonoBehaviour
     void Start()
     {
         ObjectDuplicator = GameObject.Find("Player2 Room").GetComponent<ObjectDuplicator>();
-        indexlist =  ObjectDuplicator.indexlist;  
+        indexlist =  ObjectDuplicator.indexlist; 
+        UpdateBool(accessOtherScene); 
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class AccessCopyWorld : MonoBehaviour
 
     public IEnumerator Duration(float duration){
         accessOtherScene = true;
+        UpdateBool(accessOtherScene);
         float pasttime = Time.time;
         Debug.Log("access player2 world");
 
@@ -59,5 +63,19 @@ public class AccessCopyWorld : MonoBehaviour
         this.transform.rotation = originalRotation;
         accessCount++;
         accessOtherScene = false;
+        UpdateBool(accessOtherScene);
+    }
+
+    private void UpdateBool(bool accessing)
+    {
+        ExitGames.Client.Photon.Hashtable access = new ExitGames.Client.Photon.Hashtable() { { "isAccessing", accessing } };
+        try
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(access);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error setting custom properties: {e.Message}");
+        }
     }
 }

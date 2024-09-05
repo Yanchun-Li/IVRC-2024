@@ -23,6 +23,10 @@ public class Timer : MonoBehaviourPunCallbacks
     bool myPlaying;
     bool otherPlaying;
 
+    bool otherAccess = false;//相手がアクセスしてきたかどうか
+    bool popup = false;//ポップアップの表示
+    bool accessfinish = true;//一回のアクセスが終了したとき
+
     void Start(){
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlaying = true;
@@ -47,6 +51,7 @@ public class Timer : MonoBehaviourPunCallbacks
             if (!player.IsLocal){
                 otherscore = GameManager.GetPlayerScore(player);
                 otherPlaying = GetPlayerBool(player);
+                otherAccess = GetPlayerAccess(player);
             }else if (player.IsLocal){
                 myscore = GameManager.GetPlayerScore(player);
                 myPlaying = GetPlayerBool(player);
@@ -54,27 +59,33 @@ public class Timer : MonoBehaviourPunCallbacks
             //Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
         }
 
+        if (otherAccess == true & accessfinish == true){
+            popup = true;
+            accessfinish = false;
+            StartCoroutine(PopupWindow(timeLimit, (int)realtime));
+        }
 
-        //timerTextを更新していく
-        if (remaining > 0){
-            //残り時間がある場合
-            timerText.text=$"残り時間：{remaining.ToString("D3")}秒\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
-            isPlaying = true;
-        }else if(otherPlaying == true){
-            //player2を待つ状態
-            timerText.text="ゲーム終了！\nもう一人のプレイヤーが終了するまでお待ちください";
-        }else{
-            //両方終了した状態
-            int totalscore = myscore + otherscore;
-            if (totalscore < maxscore*0.7f){
-                timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！";
-            }else if(totalscore < maxscore){
-                timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！\nほぼすべての宝を獲得しましたね";
+        //timerTextを更新していく（他人が介入していないとき）
+        if (popup == false){
+            if (remaining > 0){
+                //残り時間がある場合
+                timerText.text=$"残り時間：{remaining.ToString("D3")}秒\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+                isPlaying = true;
+            }else if(otherPlaying == true){
+                //player2を待つ状態
+                timerText.text="ゲーム終了！\nもう一人のプレイヤーが終了するまでお待ちください";
             }else{
-                 timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！\n満点です、お見事！！";
+                //両方終了した状態
+                int totalscore = myscore + otherscore;
+                if (totalscore < maxscore*0.7f){
+                    timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！";
+                }else if(totalscore < maxscore){
+                    timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！\nほぼすべての宝を獲得しましたね";
+                }else{
+                    timerText.text=$"お疲れさまでした！\nお二人の点数は{totalscore}/{maxscore}です！\n満点です、お見事！！";
+                }
             }
         }
-       // Debug.Log($"camera position is {Camera.transform.position} and position is {this.transform.position}");
     }
 
     private void UpdateBool(bool playing)
@@ -104,6 +115,33 @@ public class Timer : MonoBehaviourPunCallbacks
             playcheck = (bool) play;
         }
         return playcheck;
+    }
+
+    private bool GetPlayerAccess(Player player)
+    {
+        bool accesscheck=false;//エラー回避用に初期値false（player2はずっとTryGetValueができない→ずっとfalse）
+        if (player.CustomProperties.TryGetValue("isAccessing", out object accessing)){
+            accesscheck = (bool) accessing;
+        }
+        return accesscheck;
+    }
+
+    private System.Collections.IEnumerator PopupWindow(int timelimit, int realtime)
+    {
+        int updatetime = timelimit - realtime*2;
+        timerText.text = $"相手がこちらの世界に介入しました\nこちらの世界に反映されるのは残り時間{updatetime}秒の時です\n※このウィンドウは自動的に消滅します";
+        yield return new WaitForSeconds(3.0f);
+        popup = false;
+        while(otherAccess==true){
+            var playerlist = new List<Player>(PhotonNetwork.PlayerList);
+            foreach (Player player in playerlist){
+                if (!player.IsLocal){
+                    otherAccess = GetPlayerAccess(player);
+                }
+            }
+        }
+        //アクセスが終了したらtrueに戻す
+        accessfinish = true;
     }
 
 }
