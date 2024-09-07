@@ -21,7 +21,7 @@ public class AccessCopyWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ObjectDuplicator = GameObject.Find("Player2 Room").GetComponent<ObjectDuplicator>();
+        ObjectDuplicator = GameObject.Find("Player2 Room Copy").GetComponent<ObjectDuplicator>();
         indexlist =  ObjectDuplicator.indexlist; 
         UpdateBool(accessOtherScene); 
     }
