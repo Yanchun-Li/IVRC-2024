@@ -128,7 +128,7 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private System.Collections.IEnumerator PopupWindow(int timelimit, int realtime)
     {
-        int updatetime = timelimit - realtime*2;
+        int updatetime = timelimit - realtime;
         timerText.text = $"相手がこちらの世界に介入しました\nこちらの世界に反映されるのは残り時間{updatetime}秒の時です\n※このウィンドウは自動的に消滅します";
         yield return new WaitForSeconds(3.0f);
         popup = false;
