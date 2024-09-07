@@ -37,28 +37,41 @@ public class AbuttonMainToPast : MonoBehaviour
                 }
                 else
                 {
-                    // 遷移画面が表示されている場合、Raycastでボタンを検出
+                    // 遷移画面が表示されている場合、Raycastでボタンやスライダーの〇を検出
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // VRの場合はコントローラのRayを使う
                     RaycastHit hit;
 
                     if (Physics.Raycast(ray, out hit))
-                    {
-                        Button buttonHit = hit.transform.GetComponent<Button>();
-                        if (buttonHit != null)
                         {
-                            if (buttonHit == enterButton)
+                            // ボタンの検出
+                            Button buttonHit = hit.transform.GetComponent<Button>();
+                            if (buttonHit != null)
                             {
-                                // Rayが潜入ボタンにヒットしていて、Aボタンが押された場合
-                                OnEnterButtonPressed();
+                                if (buttonHit == enterButton)
+                                {
+                                    // Rayが潜入ボタンにヒットしていて、Aボタンが押された場合
+                                    OnEnterButtonPressed();
+                                }
+                                else if (buttonHit == backButton)
+                                {
+                                    // Rayが戻るボタンにヒットしていて、Aボタンが押された場合
+                                    OnBackButtonPressed();
+                                }
                             }
-                            else if (buttonHit == backButton)
+                            else
                             {
-                                // Rayが戻るボタンにヒットしていて、Aボタンが押された場合
-                                OnBackButtonPressed();
+                                // スライダーの検出
+                                Slider sliderHit = hit.transform.GetComponent<Slider>();
+                                if (sliderHit != null && OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.RTouch))
+                                {
+                                    // Aボタンが押されている間、コントローラの左右でスライダーの値を調整
+                                    float horizontalInput = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x;  // コントローラの左右の入力
+                                    sliderHit.value += horizontalInput * Time.deltaTime * 10f;  // スライダーの値を調整
+                                }
                             }
                         }
-                    }
                 }
+
             }
         }
 
