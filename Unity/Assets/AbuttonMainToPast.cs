@@ -29,6 +29,7 @@ public class AbuttonMainToPast : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
+                Debug.Log("check uiCanvas");
                 if (!uiCanvas.activeSelf)
                 {
                     // Aボタンで遷移画面を表示
