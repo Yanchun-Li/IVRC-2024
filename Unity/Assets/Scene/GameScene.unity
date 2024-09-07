@@ -11115,7 +11115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1141292432}
   - component: {fileID: 1141292431}
-  - component: {fileID: 1141292430}
   - component: {fileID: 1141292433}
   m_Layer: 0
   m_Name: Player2 Room Copy
@@ -11124,30 +11123,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1141292430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141292429}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1d3fe44ea24e145b46e912615205d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalObject: {fileID: 1141292429}
-  originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
-  positionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
-  rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
-  newPosition: {x: -200, y: 0, z: 0}
-  duration: 10
-  slider: {fileID: 0}
-  indexlist: 
-  updateindextime: 0
-  duplicatedObject: {fileID: 0}
-  duplicatedAvatar: {fileID: 0}
-  pasttime: 0
 --- !u!54 &1141292431
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11210,7 +11185,7 @@ MonoBehaviour:
   rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   newPosition: {x: 0, y: 0, z: 0}
   duration: 10
-  slider: {fileID: 0}
+  slider: {fileID: 168735890}
   indexlist: 
   updateindextime: 0
   duplicatedObject: {fileID: 1141292429}
@@ -29739,7 +29714,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5725270511483907459}
   - component: {fileID: 2501044241778765929}
-  - component: {fileID: 8571247359601563916}
   m_Layer: 0
   m_Name: Player2 Room
   m_TagString: Untagged
@@ -29747,30 +29721,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8571247359601563916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8571247359601563915}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1d3fe44ea24e145b46e912615205d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalObject: {fileID: 8571247359601563915}
-  originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
-  positionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
-  rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
-  newPosition: {x: -200, y: 0, z: 0}
-  duration: 10
-  slider: {fileID: 0}
-  indexlist: 
-  updateindextime: 0
-  duplicatedObject: {fileID: 0}
-  duplicatedAvatar: {fileID: 0}
-  pasttime: 0
 --- !u!82 &8597548624628191168
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using Photon.Realtime;
 public class SetPosition : MonoBehaviourPunCallbacks
 {
     private Vector3 startposition1 = new Vector3(0f,0f,0f);
-    private Vector3 startposition2 = new Vector3(200f,0f,0f);
+    private Vector3 startposition2 = new Vector3(0f,0f,0f);
     private Vector3 position;
     private bool avatarname = false;
 

@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 5414893660517582245}
   - component: {fileID: -5807917275751097548}
   - component: {fileID: -9082970766885750062}
-  - component: {fileID: 5942247307870589062}
   m_Layer: 0
   m_Name: Chest Parent 001
   m_TagString: Chest
@@ -313,22 +312,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5942247307870589062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5778406573754477521}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bccd1dc3bf6a9e14d841d2d3b027fd5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalChest: {fileID: 5778406573754477521}
-  copyChest: {fileID: 0}
-  chestTransform: {fileID: 0}
-  difforigin: {x: -400, y: 0, z: 0}
 --- !u!1 &7269347836744094840
 GameObject:
   m_ObjectHideFlags: 0

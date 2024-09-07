@@ -8,7 +8,7 @@ using UnityEngine.XR;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
 
-public class ObjectUpdater : MonoBehaviour
+public class ObjectDuplicator : MonoBehaviour
 {
     public GameObject originalObject;
     public GameObject originalAvatar;
