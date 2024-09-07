@@ -35,8 +35,10 @@ public class SetPosition : MonoBehaviourPunCallbacks
             }else if (PhotonNetwork.NickName == "Player2"){
                 position = startposition2;
                 avatarname = true;
+                Debug.Log($"Player2 instantiated at MASTERposition {position}");
             }
             this.transform.position += position;
+            
         }
     }
 }
