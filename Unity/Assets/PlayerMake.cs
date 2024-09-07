@@ -35,13 +35,15 @@ using System.Collections.Generic;
             PhotonNetwork.NickName = "Player1";
          }
          else if (playerlist.Count==2 && player2number == 0){
-            position = new Vector3(200,1.1f,0);
+            position = new Vector3(200f,1.1f,0);
             playerInstance=PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
             PhotonNetwork.NickName = "Player2";
+            Debug.Log($"Player instantiated at position {position} with player2");
          }
          else if (playerlist.Count==2 && player2number == 1){
             position = new Vector3(0,1.1f,0);
             playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
+            Debug.Log($"Player instantiated at position {position} with player1");
          }else{
             position = new Vector3(-1000f,0f,0f);
             playerInstance=PhotonNetwork.Instantiate("Avatar3", position, Quaternion.identity);

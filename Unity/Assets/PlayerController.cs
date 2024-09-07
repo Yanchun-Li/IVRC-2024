@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            transform.position = (Vector3)stream.ReceiveNext();
+            //transform.position = (Vector3)stream.ReceiveNext();
         }
     }
 }
