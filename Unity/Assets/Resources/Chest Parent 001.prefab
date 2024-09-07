@@ -327,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalChest: {fileID: 5778406573754477521}
   copyChest: {fileID: 0}
+  chestTransform: {fileID: 0}
   difforigin: {x: -400, y: 0, z: 0}
 --- !u!1 &7269347836744094840
 GameObject:

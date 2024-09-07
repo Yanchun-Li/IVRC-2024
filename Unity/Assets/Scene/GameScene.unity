@@ -26139,6 +26139,7 @@ MonoBehaviour:
   slider: {fileID: 0}
   indexlist: 
   updateindextime: 0
+  duplicatedObject: {fileID: 0}
   duplicatedAvatar: {fileID: 0}
   pasttime: 0
 --- !u!82 &8597548624628191168
