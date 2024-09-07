@@ -36,6 +36,7 @@ public class ObjectDuplicator : MonoBehaviour
     void Start()
     {
         playerTimer = GameObject.FindObjectOfType<Timer>(); // Timerスクリプトのインスタンスを取得
+        newPosition = this.transform.position;
     }
 
     void Update()
@@ -69,9 +70,9 @@ public class ObjectDuplicator : MonoBehaviour
         if (isProcessing) return; // 既に処理中なら新たに開始しない
 
         isProcessing = true;
-        duplicatedObject = Instantiate(originalObject, newPosition, originalObject.transform.rotation);
-        duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        //duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
+        //duplicatedObject = Instantiate(originalObject, newPosition, originalObject.transform.rotation);
+        //duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
+        duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
         //duplicatedObject.transform.position = newPosition;
         StartCoroutine(UpdateAndDestroy());
         StartCoroutine(UpdateAvatarPosition());
@@ -82,7 +83,7 @@ public class ObjectDuplicator : MonoBehaviour
         yield return new WaitForSeconds(duration);
         while (pasttime < updateindextime) { }
         UpdateOriginalObject(originalObject, duplicatedObject);
-        Destroy(duplicatedObject);
+        //Destroy(duplicatedObject);
         Destroy(duplicatedAvatar);
         isProcessing = false; // 処理完了
     }

@@ -11009,6 +11009,7 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 3998591275651056779, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -11115,7 +11116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1141292432}
   - component: {fileID: 1141292431}
-  - component: {fileID: 1141292430}
   - component: {fileID: 1141292433}
   m_Layer: 0
   m_Name: Player2 Room Copy
@@ -11210,6 +11210,7 @@ MonoBehaviour:
   rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   newPosition: {x: 0, y: 0, z: 0}
   duration: 10
+  slider: {fileID: 168735890}
   slider: {fileID: 168735890}
   indexlist: 
   updateindextime: 0
@@ -26907,6 +26908,7 @@ MonoBehaviour:
   chestParent: {fileID: 5778406573754477521, guid: 50d4db3d451c3d449894a080f39ffa0f, type: 3}
   CopyWorld: {fileID: 2819564986524353054}
   Copy2World: {fileID: 1603755201}
+  Copy2World: {fileID: 1603755201}
   chests: []
 --- !u!82 &6570230585650369696
 AudioSource:
@@ -29739,7 +29741,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5725270511483907459}
   - component: {fileID: 2501044241778765929}
-  - component: {fileID: 8571247359601563916}
   m_Layer: 0
   m_Name: Player2 Room
   m_TagString: Untagged
