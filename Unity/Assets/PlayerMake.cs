@@ -34,12 +34,12 @@ using System.Collections.Generic;
             playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
             PhotonNetwork.NickName = "Player1";
          }
-         else if (playerlist.Count==2 & player2number == 0){
+         else if (playerlist.Count==2 && player2number == 0){
             position = new Vector3(200,1.1f,0);
             playerInstance=PhotonNetwork.Instantiate("Avatar2", position, Quaternion.identity);
             PhotonNetwork.NickName = "Player2";
          }
-         else if (playerlist.Count==2 & player2number == 1){
+         else if (playerlist.Count==2 && player2number == 1){
             position = new Vector3(0,1.1f,0);
             playerInstance=PhotonNetwork.Instantiate("Avatar1", position, Quaternion.identity);
          }else{
@@ -49,6 +49,8 @@ using System.Collections.Generic;
 
         if (playerInstance != null)
         {
+            Debug.Log($"Player instantiated at position {position} with nickname {PhotonNetwork.NickName}");
+            
             ChestRayInteraction chestRayInteraction = playerInstance.GetComponent<ChestRayInteraction>();
             if (chestRayInteraction != null)
             {
