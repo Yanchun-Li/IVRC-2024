@@ -30,6 +30,11 @@ public class Timer : MonoBehaviourPunCallbacks
     void Start(){
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlaying = true;
+        if (PhotonNetwork.LocalPlayer.NickName == "Player1"){
+                Timerspeed = 2;
+        }else if (PhotonNetwork.NickName == "Player2"){
+                Timerspeed = 1;
+        }
     }
 
     void Update()
