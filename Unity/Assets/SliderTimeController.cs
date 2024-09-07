@@ -44,7 +44,7 @@ public class SliderTimeController : MonoBehaviourPunCallbacks
         if (timerExist && timer.realtime > 0)
         {
             // 現在時刻より右に行かないようにスライダーの値を制限
-            timeSlider.value = Mathf.Min(timeSlider.value, timer.realtime - 10);
+            timeSlider.value = Mathf.Min(timeSlider.value,timer.realtime - 10);
             //UpdateCurrentTimeLabel();
         }
     }
