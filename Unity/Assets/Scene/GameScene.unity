@@ -3952,6 +3952,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2514675399181695721, guid: f54012181eacade4ea242c65f804720f, type: 3}
   m_PrefabInstance: {fileID: 502636901}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &502636903 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2483171112400622654, guid: f54012181eacade4ea242c65f804720f, type: 3}
+  m_PrefabInstance: {fileID: 502636901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &541865110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9072,7 +9077,7 @@ PrefabInstance:
     - target: {fileID: 3998591275651056779, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 167114648}
+      objectReference: {fileID: 502636903}
     - target: {fileID: 3998591275651056779, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -9084,6 +9089,10 @@ PrefabInstance:
     - target: {fileID: 3998591275651056782, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Name
       value: "\u904E\u53BB\u9077\u79FB\u9078\u629E\u753B\u9762"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998591275651056782, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 6485691861198456353, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_SizeDelta.y
