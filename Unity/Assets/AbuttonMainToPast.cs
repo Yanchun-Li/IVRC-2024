@@ -37,31 +37,33 @@ public class AbuttonMainToPast : MonoBehaviour
                 }
                 else
                 {
-                    // 遷移画面が表示されている場合、Raycastでボタンやスライダーの〇を検出
+                    // 遷移画面が表示されている場合、Raycastでボタンやスライダーのハンドルを検出
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // VRの場合はコントローラのRayを使う
                     RaycastHit hit;
 
                     if (Physics.Raycast(ray, out hit))
+                    {
+                        // ボタンの検出
+                        Button buttonHit = hit.transform.GetComponent<Button>();
+                        if (buttonHit != null)
                         {
-                            // ボタンの検出
-                            Button buttonHit = hit.transform.GetComponent<Button>();
-                            if (buttonHit != null)
+                            if (buttonHit == enterButton)
                             {
-                                if (buttonHit == enterButton)
-                                {
-                                    // Rayが潜入ボタンにヒットしていて、Aボタンが押された場合
-                                    OnEnterButtonPressed();
-                                }
-                                else if (buttonHit == backButton)
-                                {
-                                    // Rayが戻るボタンにヒットしていて、Aボタンが押された場合
-                                    OnBackButtonPressed();
-                                }
+                                // Rayが潜入ボタンにヒットしていて、Aボタンが押された場合
+                                OnEnterButtonPressed();
                             }
-                            else
+                            else if (buttonHit == backButton)
                             {
-                                // スライダーの検出
-                                Slider sliderHit = hit.transform.GetComponent<Slider>();
+                                // Rayが戻るボタンにヒットしていて、Aボタンが押された場合
+                                OnBackButtonPressed();
+                            }
+                        }
+                        else
+                        {
+                            // スライダーのハンドル部分にRayが当たっているかを確認
+                            if (hit.transform.name == "Handle")  // ハンドルのオブジェクト名が "Handle" の場合
+                            {
+                                Slider sliderHit = hit.transform.GetComponentInParent<Slider>();  // 親のスライダーコンポーネントを取得
                                 if (sliderHit != null && OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.RTouch))
                                 {
                                     // Aボタンが押されている間、コントローラの左右でスライダーの値を調整
@@ -70,8 +72,8 @@ public class AbuttonMainToPast : MonoBehaviour
                                 }
                             }
                         }
+                    }
                 }
-
             }
         }
 
