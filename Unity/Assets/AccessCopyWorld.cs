@@ -34,10 +34,10 @@ public class AccessCopyWorld : MonoBehaviour
             originalPosition = this.transform.position;
             originalRotation = this.transform.rotation;
 
-            if (accessOtherScene && getPosition != null){
-                StopCoroutine(getPosition);
-            }
-            getPosition = StartCoroutine(Duration(10.0f));
+            // if (accessOtherScene && getPosition != null){
+            //     StopCoroutine(getPosition);
+            // }
+            // getPosition = StartCoroutine(Duration(10.0f));
         }
     }
 
