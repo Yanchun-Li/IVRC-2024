@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class ObjectDuplicator : MonoBehaviour
+public class ObjectDuplicator : MonoBehaviourPunCallbacks
 {
     public GameObject originalObject;  // 元のオブジェクト
     public GameObject originalAvatar;  // 元のアバター
