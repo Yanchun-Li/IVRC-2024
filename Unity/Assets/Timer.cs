@@ -153,6 +153,7 @@ public class Timer : MonoBehaviourPunCallbacks
                     otherAccess = GetPlayerAccess(player);
                 }
             }
+            yield return null;
         }
         //アクセスが終了したらtrueに戻す
         accessfinish = true;
