@@ -149,7 +149,7 @@ public class AbuttonMainToPast : MonoBehaviourPunCallbacks
             startindex = objectDuplicator.startindex;
             Debug.Log("Start index in abutton" + startindex);
             Debug.Log("start index in object duplicator" + objectDuplicator.startindex);
-            StartCoroutine(accessCopyWorld.Duration(5.0f, startindex));  // AccessCopyWorldの処理を実行
+            StartCoroutine(accessCopyWorld.Duration(10.0f, startindex));  // AccessCopyWorldの処理を実行
         }
     }
 
