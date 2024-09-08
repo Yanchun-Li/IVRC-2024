@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;  
+using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
+using Photon.Realtime;
+using UnityEditor.UI;
 
-public class AbuttonMainToPast : MonoBehaviour
+public class AbuttonMainToPast : MonoBehaviourPunCallbacks
 {
     public GameObject uiCanvas;
-
+    public List<Player> playerlist;
     private ObjectDuplicator objectDuplicator;
     private AccessCopyWorld accessCopyWorld;
     public Slider slider;       // スライダーの参照
+    public float pasttime;
+    [SerializeField ]private int startindex;
 
     void Start()
     {
@@ -16,11 +23,26 @@ public class AbuttonMainToPast : MonoBehaviour
         objectDuplicator = GameObject.FindObjectOfType<ObjectDuplicator>();
         accessCopyWorld = GameObject.FindObjectOfType<AccessCopyWorld>();
 
-
+        // 経過時間を初期化
+        pasttime = 0f;
     }
 
 void Update()
-{
+{   
+    startindex = objectDuplicator.startindex;
+    playerlist = new List<Player>(PhotonNetwork.PlayerList);
+    if (playerlist.Count == 2)
+    {
+        pasttime += Time.deltaTime;
+    }
+    Debug.Log($"ACCESS COPY WORLD IS: {accessCopyWorld} (Before)");
+    if (accessCopyWorld == null){
+        accessCopyWorld = GameObject.FindObjectOfType<AccessCopyWorld>();
+        Debug.Log($"ACCESS COPY WORLD IS: {accessCopyWorld} (After)");
+        Debug.Log("Find Object of Type###################");
+
+    }
+
     if (PhotonNetwork.NickName == "Player1")
     {
         // Aボタンで遷移画面を表示
@@ -57,13 +79,15 @@ void Update()
         //     }
         // }
 
-        if (OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
+        if (OVRInput.Get(OVRInput.Button.Two, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
         {
             Debug.Log("Yボタンが押されています");
             if (slider != null)
             {
-                slider.value = Mathf.Min(slider.value + 30 * Time.deltaTime, slider.maxValue);  // スライダーの値が300を超えないように
+                slider.value = Mathf.Min(slider.value + 100 * Time.deltaTime , slider.maxValue);  // スライダーの値が300を超えないように
+                slider.value = Mathf.Min(slider.value, pasttime);
             }
+            Debug.Log("Slider Value is: " + slider.value);  
         }
 
         // Xボタン：スライダーの値を10減らす
@@ -76,13 +100,15 @@ void Update()
         //     }
         // }
 
-        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
+        if (OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
         {
             Debug.Log("Xボタンが押されています");
             if (slider != null)
             {
-                slider.value = Mathf.Max(slider.value - 30 * Time.deltaTime, slider.minValue);  // スライダーの値が0を下回らないように
+                slider.value = Mathf.Max(slider.value - 100 * Time.deltaTime, slider.minValue);  // スライダーの値が0を下回らないように
+                slider.value = Mathf.Min(slider.value, pasttime);
             }
+            Debug.Log("Slider Value is: " + slider.value);  
         }
         }
     }
@@ -117,7 +143,8 @@ void UpdateHandlePosition(float sliderValue)
         }
         if (accessCopyWorld != null)
         {
-            StartCoroutine(accessCopyWorld.Duration(5.0f));  // AccessCopyWorldの処理を実行
+            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!! ACCESS COPY WORLD == TRUE ####################");
+            StartCoroutine(accessCopyWorld.Duration(5.0f, startindex));  // AccessCopyWorldの処理を実行
         }
     }
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
+using Unity.VisualScripting;
 
 public class ObjectDuplicator : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class ObjectDuplicator : MonoBehaviour
     //public List<float> updateindextime; //更新をする時刻（秒）
     public float updateindextime; //更新をする時刻（秒）
     private int accessCount = 0;
+    public int startindex = 0;
     private Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); //エラー回避用
 
     public GameObject duplicatedObject;
@@ -98,8 +100,10 @@ public class ObjectDuplicator : MonoBehaviour
         }
 
         // 子オブジェクトの更新
-        for (int i = 0; i < original.transform.childCount; i++)
+        for (int i = 0; i < Mathf.Min(original.transform.childCount, duplicate.transform.childCount); i++)
         {
+            Debug.Log($"Number of original.transform.childCount: {original.transform.childCount}");
+            Debug.Log($"Number of duplicate.transform.childCount: {duplicate.transform.childCount}");
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
 
@@ -149,8 +153,8 @@ public class ObjectDuplicator : MonoBehaviour
 
     private IEnumerator UpdateAvatarPosition()
     {
-        int sliderValue = Mathf.Clamp((int)slider.value * 10, 0, indexlist.Count - 1);
-        int startindex = indexlist[sliderValue];
+        int sliderValue = Mathf.Clamp((int)slider.value * 10, 0, positionData.LengthPositions() - 1);
+        startindex = sliderValue;
         float timeElapsed = 0f;
         while (duplicatedAvatar != null && timeElapsed < 10f)
         {
@@ -168,6 +172,7 @@ public class ObjectDuplicator : MonoBehaviour
 
         Destroy(duplicatedAvatar); //10秒経過後にアバターを削除
         accessCount++;
+        indexlist.Add(startindex);
     }
 
     public void RecordWallRemovalTime()
