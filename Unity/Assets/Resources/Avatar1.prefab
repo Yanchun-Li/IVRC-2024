@@ -473,7 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPositionData: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
-  duplicatedAvatar: {fileID: 0}
 --- !u!114 &-3921197322405878867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,7 +1605,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5332501371808501440}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4abc2a1824261d438aa4864d7efe57d, type: 3}
   m_Name: 

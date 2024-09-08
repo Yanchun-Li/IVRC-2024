@@ -47,6 +47,8 @@ public class AccessCopyWorld : MonoBehaviour
     }
 
     public IEnumerator Duration(float duration, int startindex){
+        originalPosition = this.transform.position;
+        originalRotation = this.transform.rotation;
         OVRPlayerController.GetComponent<CharacterController>().enabled = false;
         OVRPlayerController.GetComponent<OVRPlayerController>().enabled = false;
 
@@ -68,7 +70,7 @@ public class AccessCopyWorld : MonoBehaviour
         OVRPlayerController.transform.rotation = Rotation;
         Debug.Log("get position and rotation");
         Debug.Log("diff origin in access copyworld" + difforigin);
-        Debug.Log($"Receiving Position{Position}, Rotation{Rotation}");
+        Debug.Log($"Receiving Position{Position}");
 
         OVRPlayerController.GetComponent<CharacterController>().enabled = true;
         OVRPlayerController.GetComponent<OVRPlayerController>().enabled = true;
@@ -88,7 +90,7 @@ public class AccessCopyWorld : MonoBehaviour
         OVRPlayerController.transform.position = originalPosition;
         OVRPlayerController.transform.rotation = originalRotation;
         
-        Debug.Log($"Resetted Position{Position}, Rotation{Rotation}");
+        Debug.Log($"Resetted Position{originalPosition}");
         OVRPlayerController.GetComponent<CharacterController>().enabled = true;
         OVRPlayerController.GetComponent<OVRPlayerController>().enabled = true;
 

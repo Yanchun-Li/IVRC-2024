@@ -3,8 +3,10 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Collections;
 using Oculus.Interaction;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerSpecificWallInteraction : MonoBehaviour
+public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
 {
     public string player1Tag = "Player1";
     public string movableWallTag = "Movable";
@@ -39,9 +41,10 @@ public class PlayerSpecificWallInteraction : MonoBehaviour
     }
 
     // プレイヤーが壁を "消す" 操作を行ったときに呼び出すメソッド
-    public void TryRemoveWall(GameObject player)
+    public void TryRemoveWall(Player player)
     {
-        if (player.CompareTag(player1Tag) && gameObject.CompareTag(movableWallTag))
+        player = PhotonNetwork.LocalPlayer;
+        if (player.NickName == player1Tag && gameObject.CompareTag(movableWallTag))
         {
             gameObject.SetActive(false);
         }
