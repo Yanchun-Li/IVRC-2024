@@ -77,7 +77,7 @@ public class Timer : MonoBehaviourPunCallbacks
                 foreach(Player player in playerlist)
                 if(player.NickName =="Player1")
                     {
-                        timerText.text=$"残り時間：{remaining.ToString("D3")}秒\nAボタンで過去に遷移\n左ジョイスティックで移動\n右ジョイスティック左右で回転、上でレイ\nレイを出したまま右トリガーで宝獲得/壁破壊\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+                        timerText.text=$"残り時間：{remaining.ToString("D3")}秒\nAボタン:過去に遷移\n左スティック:移動\n右スティック左右:回転,上:レイ\nレイ出したまま右トリガー:宝獲得/壁破壊\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
                     }
                 else
                     {
