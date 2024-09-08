@@ -1475,7 +1475,6 @@ MonoBehaviour:
   realtime: 0
   Camera: {fileID: 100012}
   Timerspeed: 1
-  endPanel: {fileID: 1056010450118485039}
 --- !u!1 &5332501371808501440
 GameObject:
   m_ObjectHideFlags: 0

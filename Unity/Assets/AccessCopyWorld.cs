@@ -12,7 +12,7 @@ public class AccessCopyWorld : MonoBehaviour
 
     [SerializeField] public ObjectPositionData otherpositionData;
     [SerializeField] public ObjectRotationData otherrotationData;
-    public List<int> indexlist; //共有を開始するインデックス、秒数ではないことに注意
+    // public List<int> indexlist; //共有を開始するインデックス、秒数ではないことに注意
 
     private int accessCount = 0;
     private Coroutine getPosition;
@@ -22,13 +22,14 @@ public class AccessCopyWorld : MonoBehaviour
     void Start()
     {
         ObjectDuplicator = GameObject.Find("Player2 Room Copy").GetComponent<ObjectDuplicator>();
-        indexlist =  ObjectDuplicator.indexlist; 
+        // indexlist =  ObjectDuplicator.indexlist; 
         UpdateBool(accessOtherScene); 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // indexlist =  ObjectDuplicator.indexlist; 
         if (OVRInput.GetDown(OVRInput.Button.One) && !accessOtherScene)
         {
             originalPosition = this.transform.position;
@@ -41,17 +42,18 @@ public class AccessCopyWorld : MonoBehaviour
         }
     }
 
-    public IEnumerator Duration(float duration){
+    public IEnumerator Duration(float duration, int startindex){
+
         accessOtherScene = true;
         UpdateBool(accessOtherScene);
         float pasttime = Time.time;
         Debug.Log("access player2 world");
 
-        Vector3 Position = otherpositionData.GetPosition(indexlist[accessCount]);
-        Quaternion Rotation = otherrotationData.GetRotation(indexlist[accessCount]);
+        Vector3 Position = otherpositionData.GetPosition(startindex);
+        Quaternion Rotation = otherrotationData.GetRotation(startindex);
         this.transform.position = Position;
         this.transform.rotation = Rotation;
-        if (indexlist[accessCount]>= otherpositionData.positions.Count){
+        if (startindex >= otherpositionData.positions.Count){
                 accessCount = 0;
                 Debug.Log("currentIndex is clear");
         }
