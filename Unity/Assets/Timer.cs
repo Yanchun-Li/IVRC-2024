@@ -19,7 +19,7 @@ public class Timer : MonoBehaviourPunCallbacks
     int myscore;
     int otherscore;
     int maxscore = 20;
-    bool isPlaying=false;//プレイ中か判定するブール
+    public bool isPlaying=false;//プレイ中か判定するブール
     bool myPlaying;
     bool otherPlaying;
 
