@@ -56,6 +56,7 @@ public class ObjectDuplicator : MonoBehaviour
         {
             updateindextime = pasttime * 2;
             Debug.Log($"update time is {updateindextime}");
+            Debug.Log($"real time is {pasttime}");
             //DuplicateAndMove();
         }
 
