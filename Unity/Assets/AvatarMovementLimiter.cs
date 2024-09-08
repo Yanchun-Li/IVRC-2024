@@ -9,7 +9,7 @@ public class AvatarMovementLimiter : MonoBehaviour
     public GameObject duplicatedAvatar;
     private Vector3 player1position;
     GameObject OVRPlayerController;
-    private float radius = 2f;  // 移動可能な半径を2mに設定
+    private float radius = 8f;  // 移動可能な半径を2mに設定
 
     void Start()
     {
