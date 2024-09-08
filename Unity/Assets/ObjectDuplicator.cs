@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.UI;
 
 public class ObjectDuplicator : MonoBehaviourPunCallbacks
@@ -31,6 +30,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
 
     public GameObject duplicatedAvatar;  // 複製されたアバター
     public GameObject duplicatedObject;
+    private PhotonView photonView;
 
     private void Start()
     {
@@ -108,38 +108,21 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         isProcessing = false;  // 処理が完了したのでフラグをリセット
     }
 
-    [PunRPC]
-    private void UpdateObjectRPC(string originalName, string duplicateName)
-    {
-        GameObject original = GameObject.Find(originalName);
-        GameObject duplicate = GameObject.Find(duplicateName);
-
-        if (original == null || duplicate == null)
-        {
-            Debug.LogError($"Original or duplicate object not found: {originalName}, {duplicateName}");
-            return;
-        }
-
-        if (original.CompareTag("Movable"))
-        {
-            if (!duplicate.gameObject.activeSelf)
-                {
-                    original.gameObject.SetActive(false);
-                }
-        }
-    }
-
     private void UpdateOriginalObject(GameObject original, GameObject duplicate)
     {
-        UpdateObjectHierarchy(original, duplicate);
-    }
-
-    private void UpdateObjectHierarchy(GameObject original, GameObject duplicate)
-    {
-        PhotonView photonView = original.GetComponent<PhotonView>();
-        if (photonView != null && photonView.IsMine)
-        {
-            photonView.RPC("UpdateObjectRPC", RpcTarget.All, original.name, duplicate.name);
+        // オブジェクトの更新
+        if (original.CompareTag("Movable"))
+         {
+            photonView = GetComponent<PhotonView>();
+            if (photonView != null){
+                if (!duplicate.gameObject.activeSelf)
+                {
+                    if (photonView.IsMine)
+                    {
+                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, original);
+                    }
+                }
+            }
         }
 
         // 子オブジェクトの更新
@@ -147,11 +130,34 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         {
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
-            UpdateObjectHierarchy(originalChild.gameObject, duplicateChild.gameObject);
+            if (originalChild.CompareTag("Movable"))
+            {
+                photonView = GetComponent<PhotonView>();
+                if (photonView != null){
+                    if (!duplicate.gameObject.activeSelf)
+                    {
+                        if (photonView.IsMine)
+                        {
+                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild);
+                        }
+                    }
+                }
+            }
+            
+            //孫以降には再帰的にやる
+            if (originalChild.childCount > 0)
+            {
+                UpdateOriginalObject(originalChild.gameObject, duplicateChild.gameObject);
+            }
         }
     }
 
-
+    [PunRPC]
+    private void RemoveRealWallRPC(GameObject wall)
+    {
+        wall.SetActive(false);
+        Debug.Log("real wall is deleted");
+    }
 
     // コルーチン：指定した時間でアバターの位置を更新
     private IEnumerator UpdateAvatarPosition()
