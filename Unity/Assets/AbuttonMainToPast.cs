@@ -48,7 +48,16 @@ void Update()
             }
 
             // Yボタン：スライダーの値を10増やす
-        if (Input.GetKey(KeyCode.JoystickButton3))  // ボタンが押され続けている間、値を変更
+        // if (Input.GetKey(KeyCode.JoystickButton3))  // ボタンが押され続けている間、値を変更
+        // {
+        //     Debug.Log("Yボタンが押されています");
+        //     if (slider != null)
+        //     {
+        //         slider.value = Mathf.Min(slider.value + 30 * Time.deltaTime, slider.maxValue);  // スライダーの値が300を超えないように
+        //     }
+        // }
+
+        if (OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
         {
             Debug.Log("Yボタンが押されています");
             if (slider != null)
@@ -58,7 +67,16 @@ void Update()
         }
 
         // Xボタン：スライダーの値を10減らす
-        if (Input.GetKey(KeyCode.JoystickButton2))  // ボタンが押され続けている間、値を変更
+        // if (Input.GetKey(KeyCode.JoystickButton2))  // ボタンが押され続けている間、値を変更
+        // {
+        //     Debug.Log("Xボタンが押されています");
+        //     if (slider != null)
+        //     {
+        //         slider.value = Mathf.Max(slider.value - 30 * Time.deltaTime, slider.minValue);  // スライダーの値が0を下回らないように
+        //     }
+        // }
+
+        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
         {
             Debug.Log("Xボタンが押されています");
             if (slider != null)
