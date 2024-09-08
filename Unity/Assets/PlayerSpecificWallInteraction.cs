@@ -70,5 +70,6 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
     private void RemoveWallRPC()
     {
         gameObject.SetActive(false);
+        Debug.Log("wall is deleted");
     }
 }
