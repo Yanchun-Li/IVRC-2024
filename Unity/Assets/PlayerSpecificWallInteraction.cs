@@ -10,13 +10,22 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
 {
     public string player1Tag = "Player1";
     public string movableWallTag = "Movable";
+    private PhotonView photonView;
+
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(player1Tag) && gameObject.CompareTag(movableWallTag))
         {
             // プレイヤー1が壁に触れたときの処理
-            EnableWallInteraction(true);
+           if (photonView.IsMine)
+            {
+                photonView.RPC("EnableWallInteractionRPC", RpcTarget.All, true);
+            }
         }
     }
 
@@ -25,10 +34,14 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
         if (other.CompareTag(player1Tag) && gameObject.CompareTag(movableWallTag))
         {
             // プレイヤー1が壁から離れたときの処理
-            EnableWallInteraction(false);
+           if (photonView.IsMine)
+            {
+                photonView.RPC("EnableWallInteraction", RpcTarget.All, false);
+            }
         }
     }
 
+    [PunRPC]
     public void EnableWallInteraction(bool enable)
     {
         // ここで壁の相互作用を有効/無効にする
@@ -46,7 +59,16 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
         Player player = PhotonNetwork.LocalPlayer;
         if (player.NickName == player1Tag && gameObject.CompareTag(movableWallTag))
         {
-            gameObject.SetActive(false);
+             if (photonView.IsMine)
+            {
+                photonView.RPC("RemoveWallRPC", RpcTarget.All);
+            }
         }
+    }
+
+    [PunRPC]
+    private void RemoveWallRPC()
+    {
+        gameObject.SetActive(false);
     }
 }
