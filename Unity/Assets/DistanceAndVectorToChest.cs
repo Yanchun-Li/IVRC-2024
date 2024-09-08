@@ -19,7 +19,16 @@ public class DistanceAndVectorToChest : MonoBehaviour
         // objectDuplicator または player1PositionData が null なら処理をスキップ
         if (objectDuplicator == null || player1PositionData == null || objectDuplicator.duplicatedAvatar == null)
         {
-            return;
+            if(!arrowPrefab.activeSelf)
+            {
+                return;
+            }
+
+            else if (arrowPrefab.activeSelf)
+            {
+                arrowPrefab.SetActive(false);
+            }
+            
         }
         else if (!arrowPrefab.activeSelf)
         {
