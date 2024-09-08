@@ -74,7 +74,16 @@ public class Timer : MonoBehaviourPunCallbacks
         if (popup == false){
             if (remaining > 0){
                 //残り時間がある場合
-                timerText.text=$"残り時間：{remaining.ToString("D3")}秒\nAボタンで過去に遷移\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+                foreach(Player player in playerlist)
+                if(player.NickName =="Player1")
+                    {
+                        timerText.text=$"残り時間：{remaining.ToString("D3")}秒\nAボタンで過去に遷移\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+                    }
+                else
+                    {
+                        timerText.text=$"残り時間：{remaining.ToString("D3")}秒\n自分のスコア：{myscore}\n相手のスコア：{otherscore}";
+                    }
+                
                 isPlaying = true;
             }else if(otherPlaying == true){
                 //player2を待つ状態
