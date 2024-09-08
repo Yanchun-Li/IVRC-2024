@@ -24,7 +24,7 @@ public class ObjectDuplicator : MonoBehaviour
     public float updateindextime; //更新をする時刻（秒）
     private int accessCount = 0;
     public int startindex = 0;
-    private Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); //エラー回避用
+    public Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); //エラー回避用
 
     public GameObject duplicatedObject;
     public GameObject duplicatedAvatar;
@@ -43,9 +43,9 @@ public class ObjectDuplicator : MonoBehaviour
 
     void Update()
     {
-        if (positionData.LengthPositions() != 0)
+        if (positionData.LengthPositions() > 2)
         {
-            difforigin = newPosition - positionData.GetPosition(0); //原点の違い（rotationは考慮しない）
+            difforigin = newPosition - positionData.GetPosition(2); //原点の違い（rotationは考慮しない）
             pasttime += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
         }
 
@@ -163,7 +163,12 @@ public class ObjectDuplicator : MonoBehaviour
                 startindex = 0;
                 Debug.Log("index is reset");
             }
+            Debug.Log($"position data{positionData.name}");
+            Debug.Log($"startindex:{startindex}");
+            Debug.Log($"PositionData.GetPosition:{positionData.GetPosition(startindex)}");
+            Debug.Log("difforigin is:" + difforigin);
             duplicatedAvatar.transform.position = positionData.GetPosition(startindex) + difforigin;
+            Debug.Log($"duplicatedAvatar.transform.position:{duplicatedAvatar.transform.position}");
             duplicatedAvatar.transform.rotation = rotationData.GetRotation(startindex);
             startindex++;
             timeElapsed += 0.1f;

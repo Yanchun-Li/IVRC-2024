@@ -48,11 +48,15 @@ public class AccessCopyWorld : MonoBehaviour
         UpdateBool(accessOtherScene);
         float pasttime = Time.time;
         Debug.Log("access player2 world");
-
+        Debug.Log($"Start index is:{startindex}");
         Vector3 Position = otherpositionData.GetPosition(startindex);
         Quaternion Rotation = otherrotationData.GetRotation(startindex);
-        this.transform.position = Position;
+        Vector3 difforigin = ObjectDuplicator.difforigin;
+        this.transform.position = Position + difforigin;
         this.transform.rotation = Rotation;
+        Debug.Log("get position and rotation");
+        Debug.Log("diff origin in access copyworld" + difforigin);
+        Debug.Log($"Receiving Position{Position}, Rotation{Rotation}");
         if (startindex >= otherpositionData.positions.Count){
                 accessCount = 0;
                 Debug.Log("currentIndex is clear");
@@ -63,6 +67,7 @@ public class AccessCopyWorld : MonoBehaviour
 
         this.transform.position = originalPosition;
         this.transform.rotation = originalRotation;
+        Debug.Log($"Resetted Position{Position}, Rotation{Rotation}");
         accessCount++;
         accessOtherScene = false;
         UpdateBool(accessOtherScene);
