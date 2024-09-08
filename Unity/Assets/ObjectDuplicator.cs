@@ -115,6 +115,11 @@ public class ObjectDuplicator : MonoBehaviour
             {
                 UpdateTransform(originalChild, duplicateChild);
                 UpdateComponents(originalChild.gameObject, duplicateChild.gameObject);
+
+                if (!duplicateChild.gameObject.activeSelf)
+                {
+                    originalChild.gameObject.SetActive(false);
+                }
             }
 
             // 子オブジェクトの位置、回転、スケールを更新
@@ -138,7 +143,6 @@ public class ObjectDuplicator : MonoBehaviour
         original.localPosition = duplicate.localPosition - difforigin;
         original.localRotation = duplicate.localRotation;
         original.localScale = duplicate.localScale;
-        original.gameObject.SetActive(duplicate.gameObject.activeSelf);
     }
 
     private void UpdateComponents(GameObject original, GameObject duplicate)
