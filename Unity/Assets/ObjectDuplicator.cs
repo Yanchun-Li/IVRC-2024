@@ -38,10 +38,10 @@ public class ObjectDuplicator : MonoBehaviour
 
     private void Update()
     {
-        if (positionData.LengthPositions() > 2)
+        if (positionData.LengthPositions() > 10)
         {
             // 位置データに基づいて原点のずれを計算
-            difforigin = newPosition - positionData.GetPosition(2);
+            difforigin = newPosition - positionData.GetPosition(10);
             difforigin.y = 0;  // Y軸方向は変えない
             pasttime += Time.deltaTime;  // 経過時間を記録
         }
