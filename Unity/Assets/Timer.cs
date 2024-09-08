@@ -18,15 +18,16 @@ public class Timer : MonoBehaviourPunCallbacks
     GameManager GameManager;
     int myscore;
     int otherscore;
+
     int maxscore = 20;
-    bool isPlaying=false;//プレイ中か判定するブール
+    public bool isPlaying=false;//プレイ中か判定するブール
     bool myPlaying;
     bool otherPlaying;
 
     bool otherAccess = false;//相手がアクセスしてきたかどうか
     bool popup = false;//ポップアップの表示
     bool accessfinish = true;//一回のアクセスが終了したとき
-
+    
     void Start(){
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlaying = true;
