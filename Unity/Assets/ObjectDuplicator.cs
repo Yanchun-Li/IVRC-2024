@@ -15,6 +15,7 @@ public class ObjectDuplicator : MonoBehaviour
     public float duration = 10f;  // 持続時間
     public Slider slider;         // 時間調整用のスライダー
 
+    private float updatetime; //更新する時間
     private int accessCount = 0;  // アクセス回数
     public int startindex = 0;    // 開始インデックス
     public Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); // 原点からのずれ
@@ -28,6 +29,7 @@ public class ObjectDuplicator : MonoBehaviour
     private int poolSize = 10;  // プールの最大サイズを10に制限
 
     public GameObject duplicatedAvatar;  // 複製されたアバター
+    public GameObject duplicatedObject;
 
     private void Start()
     {
@@ -47,7 +49,8 @@ public class ObjectDuplicator : MonoBehaviour
         // ボタンが押され、かつ処理中でない場合
         if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
         {
-            DuplicateAndMove();  // 複製と移動を実行
+            updatetime = pasttime * 2;
+            //DuplicateAndMove();  // 複製と移動を実行（別のスクリプトで呼び出すのでここでは呼ばない）
         }
 
         if (duplicatedAvatar != null)
@@ -98,8 +101,43 @@ public class ObjectDuplicator : MonoBehaviour
     private IEnumerator UpdateAndDestroy()
     {
         yield return new WaitForSeconds(duration);
+        yield return new WaitUntil(() => pasttime >= updatetime);
+        UpdateOriginalObject(originalObject, duplicatedObject);
         duplicatedAvatar.SetActive(false);  // アバターを無効化してプールに戻す
         isProcessing = false;  // 処理が完了したのでフラグをリセット
+    }
+
+    private void UpdateOriginalObject(GameObject original, GameObject duplicate)
+    {
+        // オブジェクトの更新
+        if (original.CompareTag("Movable"))
+         {
+            if (!duplicate.gameObject.activeSelf)
+            {
+                original.gameObject.SetActive(false);
+            }
+        }
+
+        // 子オブジェクトの更新
+        for (int i = 0; i < Mathf.Min(original.transform.childCount, duplicate.transform.childCount); i++)
+        {
+            Transform originalChild = original.transform.GetChild(i);
+            Transform duplicateChild = duplicate.transform.GetChild(i);
+
+            if (originalChild.CompareTag("Movable"))
+            {
+                if (!duplicateChild.gameObject.activeSelf)
+                {
+                    originalChild.gameObject.SetActive(false);
+                }
+            }
+            
+            //孫以降には再帰的にやる
+            if (originalChild.childCount > 0)
+            {
+                UpdateOriginalObject(originalChild.gameObject, duplicateChild.gameObject);
+            }
+        }
     }
 
     // コルーチン：指定した時間でアバターの位置を更新

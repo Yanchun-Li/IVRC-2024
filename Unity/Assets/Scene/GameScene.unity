@@ -11301,13 +11301,11 @@ MonoBehaviour:
   newPosition: {x: 0, y: 0, z: 0}
   duration: 10
   slider: {fileID: 168735890}
-  indexlist: 
-  updateindextime: 0
   startindex: 0
   difforigin: {x: 0, y: 0, z: 0}
-  duplicatedObject: {fileID: 1141292429}
-  duplicatedAvatar: {fileID: 0}
   pasttime: 0
+  duplicatedAvatar: {fileID: 0}
+  duplicatedObject: {fileID: 1141292429}
 --- !u!1001 &1142089063
 PrefabInstance:
   m_ObjectHideFlags: 0
