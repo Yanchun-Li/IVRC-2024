@@ -21,6 +21,13 @@ public class DistanceAndVectorToChest : MonoBehaviour
         {
             return;
         }
+        else if (!arrowPrefab.activeSelf)
+        {
+            arrowPrefab.SetActive(true);
+        }
+
+
+    
 
         // player1の位置をObjectPositionDataから取得
         if (player1PositionData.LengthPositions() > 0)
@@ -53,6 +60,7 @@ public class DistanceAndVectorToChest : MonoBehaviour
                 distanceText.text = "Distance: N/A";
             }
         }
+       
     }
 
     void FindNearestObjectWithinRadius(Vector3 playerPosition)
