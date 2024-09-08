@@ -430,7 +430,6 @@ MonoBehaviour:
   accessOtherScene: 0
   otherpositionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
   otherrotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
-  indexlist: 0000000064000000c8000000
 --- !u!114 &2202009327038131913
 MonoBehaviour:
   m_ObjectHideFlags: 0
