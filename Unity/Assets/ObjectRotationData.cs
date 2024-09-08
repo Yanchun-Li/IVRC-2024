@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "ObjectRotationData", menuName = "ScriptableObject/ObjectRotationData")]
 public class ObjectRotationData : ScriptableObject
@@ -18,5 +19,8 @@ public class ObjectRotationData : ScriptableObject
 
     public void ClearRotations(){
         Rotations.Clear();
+    }
+    public int LengthRotations(){
+        return Rotations.Count();
     }
 }
