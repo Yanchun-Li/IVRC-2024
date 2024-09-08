@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.UI;
 
 public class ObjectDuplicator : MonoBehaviour
@@ -109,13 +110,15 @@ public class ObjectDuplicator : MonoBehaviour
 
     private void UpdateOriginalObject(GameObject original, GameObject duplicate)
     {
-        // オブジェクトの更新
-        if (original.CompareTag("Movable"))
-         {
-            if (!duplicate.gameObject.activeSelf)
-            {
-                original.gameObject.SetActive(false);
-            }
+        UpdateObjectHierarchy(original, duplicate);
+    }
+
+    private void UpdateObjectHierarchy(GameObject original, GameObject duplicate)
+    {
+        PhotonView photonView = original.GetComponent<PhotonView>();
+        if (photonView != null && photonView.IsMine)
+        {
+            photonView.RPC("UpdateObjectRPC", RpcTarget.All, original.name, duplicate.name);
         }
 
         // 子オブジェクトの更新
@@ -123,22 +126,31 @@ public class ObjectDuplicator : MonoBehaviour
         {
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
-
-            if (originalChild.CompareTag("Movable"))
-            {
-                if (!duplicateChild.gameObject.activeSelf)
-                {
-                    originalChild.gameObject.SetActive(false);
-                }
-            }
-            
-            //孫以降には再帰的にやる
-            if (originalChild.childCount > 0)
-            {
-                UpdateOriginalObject(originalChild.gameObject, duplicateChild.gameObject);
-            }
+            UpdateObjectHierarchy(originalChild.gameObject, duplicateChild.gameObject);
         }
     }
+
+    [PunRPC]
+    private void UpdateObjectRPC(string originalName, string duplicateName)
+    {
+        GameObject original = GameObject.Find(originalName);
+        GameObject duplicate = GameObject.Find(duplicateName);
+
+        if (original == null || duplicate == null)
+        {
+            Debug.LogError($"Original or duplicate object not found: {originalName}, {duplicateName}");
+            return;
+        }
+
+        if (original.CompareTag("Movable"))
+        {
+            if (!duplicate.gameObject.activeSelf)
+                {
+                    original.gameObject.SetActive(false);
+                }
+        }
+    }
+
 
     // コルーチン：指定した時間でアバターの位置を更新
     private IEnumerator UpdateAvatarPosition()
