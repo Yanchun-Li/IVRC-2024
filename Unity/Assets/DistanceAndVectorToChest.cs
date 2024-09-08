@@ -19,8 +19,24 @@ public class DistanceAndVectorToChest : MonoBehaviour
         // objectDuplicator または player1PositionData が null なら処理をスキップ
         if (objectDuplicator == null || player1PositionData == null || objectDuplicator.duplicatedAvatar == null)
         {
-            return;
+            if(!arrowPrefab.activeSelf)
+            {
+                return;
+            }
+
+            else if (arrowPrefab.activeSelf)
+            {
+                arrowPrefab.SetActive(false);
+            }
+            
         }
+        else if (!arrowPrefab.activeSelf)
+        {
+            arrowPrefab.SetActive(true);
+        }
+
+
+    
 
         // player1の位置をObjectPositionDataから取得
         if (player1PositionData.LengthPositions() > 0)
@@ -53,6 +69,7 @@ public class DistanceAndVectorToChest : MonoBehaviour
                 distanceText.text = "Distance: N/A";
             }
         }
+       
     }
 
     void FindNearestObjectWithinRadius(Vector3 playerPosition)
