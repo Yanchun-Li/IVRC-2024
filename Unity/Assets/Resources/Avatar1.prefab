@@ -473,7 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPositionData: {fileID: 11400000, guid: bf705db339fa83740bc987e5db544aac, type: 2}
-  duplicatedAvatar: {fileID: 0}
 --- !u!114 &-3921197322405878867
 MonoBehaviour:
   m_ObjectHideFlags: 0
