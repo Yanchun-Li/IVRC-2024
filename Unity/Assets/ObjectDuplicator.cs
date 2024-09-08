@@ -52,12 +52,12 @@ public class ObjectDuplicator : MonoBehaviour
         }
 
         // 指定されたボタンが押され、かつ現在処理中でない場合に実行
-        // if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
-        // {
-        //     updateindextime = pasttime * 2;
-        //     Debug.Log("push A button and copy world");
-        //     DuplicateAndMove();
-        // }
+        if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
+        {
+            updateindextime = pasttime * 2;
+            Debug.Log($"update time is {updateindextime}");
+            //DuplicateAndMove();
+        }
 
         if (duplicatedAvatar != null)
         {
@@ -66,7 +66,7 @@ public class ObjectDuplicator : MonoBehaviour
         }
 
         // 壁を消す操作が実行されるタイミングでチェック
-        CheckAndRemoveWall();
+        //CheckAndRemoveWall();
     }
 
     public void DuplicateAndMove()

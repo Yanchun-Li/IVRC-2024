@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
-using UnityEditor.UI;
 
 public class AbuttonMainToPast : MonoBehaviourPunCallbacks
 {
