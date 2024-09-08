@@ -13,6 +13,7 @@ public class ObjectDuplicator : MonoBehaviour
 {
     public GameObject originalObject;
     public GameObject originalAvatar;
+    public GameObject copyAvatar;
     public ObjectPositionData positionData;
     public ObjectRotationData rotationData;
     public Vector3 newPosition;
@@ -46,6 +47,7 @@ public class ObjectDuplicator : MonoBehaviour
         if (positionData.LengthPositions() > 2)
         {
             difforigin = newPosition - positionData.GetPosition(2); //原点の違い（rotationは考慮しない）
+            difforigin.y = 0;
             pasttime += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
         }
 
@@ -74,7 +76,8 @@ public class ObjectDuplicator : MonoBehaviour
         isProcessing = true;
         //duplicatedObject = Instantiate(originalObject, newPosition, originalObject.transform.rotation);
         //duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        duplicatedAvatar = PhotonNetwork.Instantiate(originalAvatar.name, newPosition, Quaternion.identity);
+        //duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
+        duplicatedAvatar = Instantiate(copyAvatar, newPosition, Quaternion.identity);
         //duplicatedObject.transform.position = newPosition;
         StartCoroutine(UpdateAndDestroy());
         StartCoroutine(UpdateAvatarPosition());

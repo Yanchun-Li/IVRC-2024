@@ -11295,6 +11295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalObject: {fileID: 8571247359601563915}
   originalAvatar: {fileID: 100008, guid: 85ef7783b907b054ca38cd6b2be9da9c, type: 3}
+  copyAvatar: {fileID: 100008, guid: 80ae3c429bd7a0d4b86c45b87faa4bc4, type: 3}
   positionData: {fileID: 11400000, guid: 64c76fa37355b0a45ac93d3ae0459590, type: 2}
   rotationData: {fileID: 11400000, guid: fe9b2d960544ecd42bebfcb3c2a40621, type: 2}
   newPosition: {x: 0, y: 0, z: 0}
@@ -11303,6 +11304,7 @@ MonoBehaviour:
   indexlist: 
   updateindextime: 0
   startindex: 0
+  difforigin: {x: 0, y: 0, z: 0}
   duplicatedObject: {fileID: 1141292429}
   duplicatedAvatar: {fileID: 0}
   pasttime: 0
