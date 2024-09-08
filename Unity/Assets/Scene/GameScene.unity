@@ -3616,6 +3616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 673461174}
   slider: {fileID: 168735890}
+  pasttime: 0
+  startindex: 0
 --- !u!1001 &403385193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10854,7 +10856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 810891738208199455, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Text
-      value: "\u3000\u3000\u3000 playerB\u306E\u3069\u306E\u6642\u9593\u5E2F\u306B\u30EF\u30FC\u30D7\u3057\u307E\u3059\u304B\uFF1F(\uFF39\u30DC\u30BF\u30F3\u3067\u9032\u3080\u3001X\u30DC\u30BF\u30F3\u3067\u623B\u308B)"
+      value: "\u3000\u3000\u3000 playerB\u306E\u3069\u306E\u6642\u9593\u5E2F\u306B\u30EF\u30FC\u30D7\u3057\u307E\u3059\u304B\uFF1F\n\u3000\u3000\u3000(\uFF39\u30DC\u30BF\u30F3\u3067\u9032\u3080\u3001X\u30DC\u30BF\u30F3\u3067\u623B\u308B)"
       objectReference: {fileID: 0}
     - target: {fileID: 973835567276011233, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_IsActive
@@ -10912,6 +10914,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 1897463325074308277, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1989161880251847474, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -10926,6 +10932,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154499173520060496, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491827956667877651, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2632124766792516631, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
@@ -11045,6 +11055,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3998591275651056779, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998591275651056779, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_PlaneDistance
       value: 2
       objectReference: {fileID: 0}
@@ -11092,9 +11106,13 @@ PrefabInstance:
       propertyPath: m_Text
       value: "A\u30DC\u30BF\u30F3:\u6F5C\u5165\u3059\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 6229957913604516973, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6485691861198456353, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 21.054913
+      value: 48.598454
       objectReference: {fileID: 0}
     - target: {fileID: 6545024972739441883, guid: 867774622b03c4946b48a2311ed9f47d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -11284,6 +11302,7 @@ MonoBehaviour:
   slider: {fileID: 168735890}
   indexlist: 
   updateindextime: 0
+  startindex: 0
   duplicatedObject: {fileID: 1141292429}
   duplicatedAvatar: {fileID: 0}
   pasttime: 0
