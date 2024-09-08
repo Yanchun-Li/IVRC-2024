@@ -5,10 +5,10 @@ using Photon.Pun;
 public class AbuttonMainToPast : MonoBehaviour
 {
     public GameObject uiCanvas;
-    public Button enterButton;  // 潜入するボタン
-    public Button backButton;   // 戻るボタン
+
     private ObjectDuplicator objectDuplicator;
     private AccessCopyWorld accessCopyWorld;
+    public Slider slider;       // スライダーの参照
 
     void Start()
     {
@@ -16,56 +16,96 @@ public class AbuttonMainToPast : MonoBehaviour
         objectDuplicator = GameObject.FindObjectOfType<ObjectDuplicator>();
         accessCopyWorld = GameObject.FindObjectOfType<AccessCopyWorld>();
 
-        // 潜入するボタンにリスナーを追加
-        enterButton.onClick.AddListener(OnEnterButtonPressed);
 
-        // 戻るボタンにリスナーを追加
-        backButton.onClick.AddListener(OnBackButtonPressed);
     }
 
-    void Update()
+void Update()
+{
+    if (PhotonNetwork.NickName == "Player1")
     {
-        if(PhotonNetwork.NickName == "Player1")
+        // Aボタンで遷移画面を表示
+        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch) && !uiCanvas.activeSelf)
         {
+            uiCanvas.SetActive(true);
+            Debug.Log("Aボタンを押して遷移画面が開きました");
+        }
+        // UIがアクティブな時にボタン操作を受け付ける
+        else if (uiCanvas.activeSelf)
+        {
+            
+            // Aボタン：潜入する
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
-                if (!uiCanvas.activeSelf)
-                {
-                    // Aボタンで遷移画面を表示
-                    uiCanvas.SetActive(true);
-                }
-                else
-                {
-                    // 遷移画面が表示されている場合、Raycastでボタンを検出
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  // VRの場合はコントローラのRayを使う
-                    RaycastHit hit;
+                OnEnterButtonPressed();
+                Debug.Log("Aボタンが押されました");
+            }
 
-                    if (Physics.Raycast(ray, out hit))
-                    {
-                        Button buttonHit = hit.transform.GetComponent<Button>();
-                        if (buttonHit != null)
-                        {
-                            if (buttonHit == enterButton)
-                            {
-                                // Rayが潜入ボタンにヒットしていて、Aボタンが押された場合
-                                OnEnterButtonPressed();
-                            }
-                            else if (buttonHit == backButton)
-                            {
-                                // Rayが戻るボタンにヒットしていて、Aボタンが押された場合
-                                OnBackButtonPressed();
-                            }
-                        }
-                    }
-                }
+            // Bボタン：戻る
+            if (OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.RTouch))
+            {
+                OnBackButtonPressed();
+                Debug.Log("Bボタンが押されました");
+            }
+
+            // Yボタン：スライダーの値を10増やす
+        // if (Input.GetKey(KeyCode.JoystickButton3))  // ボタンが押され続けている間、値を変更
+        // {
+        //     Debug.Log("Yボタンが押されています");
+        //     if (slider != null)
+        //     {
+        //         slider.value = Mathf.Min(slider.value + 30 * Time.deltaTime, slider.maxValue);  // スライダーの値が300を超えないように
+        //     }
+        // }
+
+        if (OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
+        {
+            Debug.Log("Yボタンが押されています");
+            if (slider != null)
+            {
+                slider.value = Mathf.Min(slider.value + 30 * Time.deltaTime, slider.maxValue);  // スライダーの値が300を超えないように
             }
         }
 
-        else
+        // Xボタン：スライダーの値を10減らす
+        // if (Input.GetKey(KeyCode.JoystickButton2))  // ボタンが押され続けている間、値を変更
+        // {
+        //     Debug.Log("Xボタンが押されています");
+        //     if (slider != null)
+        //     {
+        //         slider.value = Mathf.Max(slider.value - 30 * Time.deltaTime, slider.minValue);  // スライダーの値が0を下回らないように
+        //     }
+        // }
+
+        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))  // ボタンが押され続けている間、値を変更
         {
-            //Player2がAボタンを押しても何も起こらない
+            Debug.Log("Xボタンが押されています");
+            if (slider != null)
+            {
+                slider.value = Mathf.Max(slider.value - 30 * Time.deltaTime, slider.minValue);  // スライダーの値が0を下回らないように
+            }
+        }
         }
     }
+    else
+    {
+        // Player2がAボタンを押しても何も起こらない
+    }
+}
+
+// ハンドルの位置を更新するメソッド
+void UpdateHandlePosition(float sliderValue)
+{
+    // スライダーの範囲に基づいてハンドルの位置を調整
+    RectTransform handleRectTransform = slider.handleRect;
+
+    if (handleRectTransform != null)
+    {
+        float normalizedValue = (sliderValue - slider.minValue) / (slider.maxValue - slider.minValue);  // 正規化されたスライダーの値
+        Vector2 newHandlePosition = new Vector2(normalizedValue * handleRectTransform.rect.width, handleRectTransform.anchoredPosition.y);
+        handleRectTransform.anchoredPosition = newHandlePosition;
+    }
+}
+
 
     void OnEnterButtonPressed()
     {

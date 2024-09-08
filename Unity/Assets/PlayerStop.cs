@@ -21,6 +21,7 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         playerlist = new List<Player>(PhotonNetwork.PlayerList);
         //playerの人数が二人になるまで、移動・座標保存・タイマーを止めておく
         player1 = GameObject.Find("Avatar1(Clone)");
+        player1.GetComponent<PlayerController>().enabled = false;
         //player1.GetComponent<OVRPlayerController>().enabled = false;
         player1.GetComponent<ObjectTransformSave>().enabled = false;
         GameManager = GameObject.Find("GameManager");
@@ -38,6 +39,7 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         if (playerlist.Count == 2 & !gameStart){
             //player1.GetComponent<OVRPlayerController>().enabled = true;
             GameManager.GetComponent<PlayerDataController>().enabled=true;
+            player1.GetComponent<PlayerController>().enabled = true;
             //player1.GetComponent<ObjectTransformSave>().enabled = true;
             StartCoroutine("GameStart");
         }

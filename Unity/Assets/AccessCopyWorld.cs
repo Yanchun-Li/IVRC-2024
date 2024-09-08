@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class AccessCopyWorld : MonoBehaviour
 {
@@ -19,8 +21,9 @@ public class AccessCopyWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ObjectDuplicator = GameObject.Find("Player2 Room").GetComponent<ObjectDuplicator>();
-        indexlist =  ObjectDuplicator.indexlist;  
+        ObjectDuplicator = GameObject.Find("Player2 Room Copy").GetComponent<ObjectDuplicator>();
+        indexlist =  ObjectDuplicator.indexlist; 
+        UpdateBool(accessOtherScene); 
     }
 
     // Update is called once per frame
@@ -31,15 +34,16 @@ public class AccessCopyWorld : MonoBehaviour
             originalPosition = this.transform.position;
             originalRotation = this.transform.rotation;
 
-            if (accessOtherScene && getPosition != null){
-                StopCoroutine(getPosition);
-            }
-            getPosition = StartCoroutine(Duration(5.0f));
+            // if (accessOtherScene && getPosition != null){
+            //     StopCoroutine(getPosition);
+            // }
+            // getPosition = StartCoroutine(Duration(10.0f));
         }
     }
 
     public IEnumerator Duration(float duration){
         accessOtherScene = true;
+        UpdateBool(accessOtherScene);
         float pasttime = Time.time;
         Debug.Log("access player2 world");
 
@@ -59,5 +63,19 @@ public class AccessCopyWorld : MonoBehaviour
         this.transform.rotation = originalRotation;
         accessCount++;
         accessOtherScene = false;
+        UpdateBool(accessOtherScene);
+    }
+
+    private void UpdateBool(bool accessing)
+    {
+        ExitGames.Client.Photon.Hashtable access = new ExitGames.Client.Photon.Hashtable() { { "isAccessing", accessing } };
+        try
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(access);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error setting custom properties: {e.Message}");
+        }
     }
 }

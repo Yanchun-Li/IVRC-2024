@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f9c27118592cb48b6e315fc01e1c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 0
+  timeLimit: 300
   timerText: {fileID: 7275594914642575051}
   realtime: 0
   Camera: {fileID: 100012}

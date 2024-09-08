@@ -7,7 +7,7 @@ using Photon.Realtime;
 public class SetPosition : MonoBehaviourPunCallbacks
 {
     private Vector3 startposition1 = new Vector3(0f,0f,0f);
-    private Vector3 startposition2 = new Vector3(200f,0f,0f);
+    private Vector3 startposition2 = new Vector3(200f,1.1f,0f);
     private Vector3 position;
     private bool avatarname = false;
 
@@ -35,8 +35,10 @@ public class SetPosition : MonoBehaviourPunCallbacks
             }else if (PhotonNetwork.NickName == "Player2"){
                 position = startposition2;
                 avatarname = true;
+                Debug.Log($"Player2 instantiated at MASTERposition {position}");
             }
             this.transform.position += position;
+            
         }
     }
 }
