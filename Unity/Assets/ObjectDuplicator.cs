@@ -108,6 +108,27 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         isProcessing = false;  // 処理が完了したのでフラグをリセット
     }
 
+    [PunRPC]
+    private void UpdateObjectRPC(string originalName, string duplicateName)
+    {
+        GameObject original = GameObject.Find(originalName);
+        GameObject duplicate = GameObject.Find(duplicateName);
+
+        if (original == null || duplicate == null)
+        {
+            Debug.LogError($"Original or duplicate object not found: {originalName}, {duplicateName}");
+            return;
+        }
+
+        if (original.CompareTag("Movable"))
+        {
+            if (!duplicate.gameObject.activeSelf)
+                {
+                    original.gameObject.SetActive(false);
+                }
+        }
+    }
+
     private void UpdateOriginalObject(GameObject original, GameObject duplicate)
     {
         UpdateObjectHierarchy(original, duplicate);
@@ -130,26 +151,6 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         }
     }
 
-    [PunRPC]
-    private void UpdateObjectRPC(string originalName, string duplicateName)
-    {
-        GameObject original = GameObject.Find(originalName);
-        GameObject duplicate = GameObject.Find(duplicateName);
-
-        if (original == null || duplicate == null)
-        {
-            Debug.LogError($"Original or duplicate object not found: {originalName}, {duplicateName}");
-            return;
-        }
-
-        if (original.CompareTag("Movable"))
-        {
-            if (!duplicate.gameObject.activeSelf)
-                {
-                    original.gameObject.SetActive(false);
-                }
-        }
-    }
 
 
     // コルーチン：指定した時間でアバターの位置を更新
