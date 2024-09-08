@@ -101,9 +101,9 @@ public class ObjectDuplicator : MonoBehaviour
     private IEnumerator UpdateAndDestroy()
     {
         yield return new WaitForSeconds(duration);
+        duplicatedAvatar.SetActive(false);  // アバターを無効化してプールに戻す
         yield return new WaitUntil(() => pasttime >= updatetime);
         UpdateOriginalObject(originalObject, duplicatedObject);
-        duplicatedAvatar.SetActive(false);  // アバターを無効化してプールに戻す
         isProcessing = false;  // 処理が完了したのでフラグをリセット
     }
 

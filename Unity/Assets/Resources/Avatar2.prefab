@@ -396,6 +396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreIncrement: 1
   myscore: 0
+  timer: {fileID: 0}
+  oVRPlayerController: {fileID: 0}
+  ControllInteractor: {fileID: 0}
 --- !u!114 &-4648936349802647440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,6 +1478,7 @@ MonoBehaviour:
   realtime: 0
   Camera: {fileID: 100012}
   Timerspeed: 1
+  isPlaying: 0
 --- !u!1 &5332501371808501440
 GameObject:
   m_ObjectHideFlags: 0
