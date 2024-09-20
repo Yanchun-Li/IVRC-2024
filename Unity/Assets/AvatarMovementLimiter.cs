@@ -21,6 +21,7 @@ public class AvatarMovementLimiter : MonoBehaviour
             return; // objectDuplicatorまたはobjectPositionDataがnullなら何もしない
         }
 
+
         if (objectDuplicator.duplicatedAvatar != null && objectPositionData.LengthPositions() > 0)
         {
             Vector3 avatarPosition = objectDuplicator.duplicatedAvatar.transform.position;  // duplicatedAvatarの現在位置を取得
@@ -28,11 +29,14 @@ public class AvatarMovementLimiter : MonoBehaviour
 
             float distanceFromCenter = Vector3.Distance(player1position, avatarPosition);  // 円心からduplicatedAvatarまでの距離を計算
 
+
             if (distanceFromCenter > radius)  // 半径を超えたら、可動範囲に戻す
             {
                 Vector3 direction = (avatarPosition - player1position).normalized;  // 円心からの方向ベクトル
                 objectDuplicator.duplicatedAvatar.transform.position = player1position + direction * radius;  // エッジに戻す
             }
+
         }
     }
 }
+

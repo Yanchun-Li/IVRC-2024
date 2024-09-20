@@ -361,10 +361,10 @@ MonoBehaviour:
       - m_Target: {fileID: -8470970825106468977}
         m_TargetAssemblyTypeName: PlayerSpecificWallInteraction, Assembly-CSharp
         m_MethodName: TryRemoveWall
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 100008, guid: 3650c168421b5c54786ec447a044b9e3, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

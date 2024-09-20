@@ -10,7 +10,8 @@ public class ChestCreate : MonoBehaviourPunCallbacks
 {
     [SerializeField] int number = 10;//宝箱の数
     [SerializeField] GameObject chestParent;
-    [SerializeField] GameObject CopyWorld;//コピーすべき先
+    [SerializeField] GameObject CopyWorld;//コピーすべき先（player2の部屋）
+    [SerializeField] GameObject Copy2World;//コピーすべき先（player2のコピー）
     private bool createTreasure = false;//宝の生成は1ゲームにつき1回
     public List<GameObject> chests = new List<GameObject>();
     private ChestRayInteraction chestRayInteraction;
@@ -53,14 +54,21 @@ public class ChestCreate : MonoBehaviourPunCallbacks
             Vector3 localposition = new Vector3(x,0.1f,z);
             Transform origin = this.transform.GetChild(mergedArray[i]);
             Transform Copyorigin = CopyWorld.transform.GetChild(mergedArray[i]);
+            Transform Copy2origin = Copy2World.transform.GetChild(mergedArray[i]);
             Vector3 originalPosition = origin.position;
             Vector3 CopyoriginalPosition = Copyorigin.position;
             GameObject chest1 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+originalPosition,Quaternion.identity);
-            GameObject chest2 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+CopyoriginalPosition,Quaternion.identity);
+            GameObject chest2 = PhotonNetwork.Instantiate("Chest Parent 001",localposition+CopyoriginalPosition,Quaternion.identity);            
             // GameObject chest1 = Instantiate(chestParent,localposition+originalPosition,Quaternion.identity);
             // GameObject chest2 =Instantiate(chestParent,localposition+CopyoriginalPosition,Quaternion.identity);
             chests.Add(chest1);
             chests.Add(chest2);
+            
+            if (i<4){
+                GameObject chest3 = PhotonNetwork.Instantiate("Chest Parent 002",localposition+Copy2origin.position,Quaternion.identity);
+                chests.Add(chest3);
+            }
+
             if (chestRayInteraction != null)
             {
                 chestRayInteraction.OnNewChestSpawned(chest1);

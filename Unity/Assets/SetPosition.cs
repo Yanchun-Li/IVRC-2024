@@ -14,6 +14,8 @@ public class SetPosition : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        this.GetComponent<CharacterController>().enabled = false;
+        this.GetComponent<OVRPlayerController>().enabled = false;
         if (PhotonNetwork.LocalPlayer.NickName == "Player1"){
                 position = startposition1;
                 avatarname = true;
@@ -35,8 +37,15 @@ public class SetPosition : MonoBehaviourPunCallbacks
             }else if (PhotonNetwork.NickName == "Player2"){
                 position = startposition2;
                 avatarname = true;
+                Debug.Log($"Player2 instantiated at MASTERposition {position}");
             }
             this.transform.position += position;
+        }
+        Debug.Log($"this.transform.position is {this.transform.position}");
+
+        if (avatarname == true){
+            this.GetComponent<CharacterController>().enabled = true;
+            this.GetComponent<OVRPlayerController>().enabled = true;
         }
     }
 }
