@@ -134,7 +134,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
             {
                 photonView = GetComponent<PhotonView>();
                 if (photonView != null){
-                    if (!duplicate.gameObject.activeSelf)
+                    if (!duplicateChild.gameObject.activeSelf)
                     {
                         if (photonView.IsMine)
                         {
