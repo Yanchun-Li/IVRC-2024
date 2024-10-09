@@ -71,3 +71,11 @@ UIの通り、スライダーでplayer2の何分何秒に行けるかを操作�
 timeはObjectDuplicator.csのrealtimeを参照。
 AボタンのRayドラッグでスライダーを動かせる。
 AbuttonMainToPast.csで、メイン画面でAボタンを任意の場所で押すと遷移画面に、そこでAボタンドラッグでスライダー操作、戻るor潜入するボタン上で（rayで）Aボタンを押すとメイン画面に戻ったり過去に潜入できたりするようになった
+
+## チュートリアルについて
+-チュートリアルのシーンはローカルで管理
+-AとX同時押しでスキップ可能
+-現在のタスクは「移動」「宝取得」「壁消去」のみ、これらのタスクをMovementTask.cs、TreasureTask.cs、WallTask.csで設計
+-設計時はITutorialTask.csで定義したinterfaceを利用している
+-TutorialManagerでそれぞれのスクリプトを呼び出している
+-20241007時点で、微調整をする予定

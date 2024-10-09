@@ -42,6 +42,10 @@ MonoBehaviour:
   - ReceiveSerializedData
   - RequestDataSync
   - DuplicateAndMove
+  - EnableWallInteraction
+  - RemoveWallRPC
+  - UpdateObjectRPC
+  - RemoveRealWallRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

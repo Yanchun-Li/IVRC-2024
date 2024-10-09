@@ -1,136 +1,150 @@
-using UnityEngine;
-using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.XR;
+using UnityEngine;
 using Photon.Pun;
-using Photon.Pun.Demo.Cockpit;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
-public class ObjectDuplicator : MonoBehaviour
+public class ObjectDuplicator : MonoBehaviourPunCallbacks
 {
-    public GameObject originalObject;
-    public GameObject originalAvatar;
-    public GameObject copyAvatar;
-    public ObjectPositionData positionData;
-    public ObjectRotationData rotationData;
-    public Vector3 newPosition;
-    public float duration = 10f;
-    public Slider slider; //スライダーを参照
-    //public float startime=2f; //共有を開始する時刻、ここでは秒単位でOK
-    [SerializeField] public List<int> indexlist; //共有を開始するインデックス
-    //public List<float> updateindextime; //更新をする時刻（秒）
-    public float updateindextime; //更新をする時刻（秒）
-    private int accessCount = 0;
-    public int startindex = 0;
-    public Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); //エラー回避用
+    public GameObject originalObject;  // 元のオブジェクト
+    public GameObject originalAvatar;  // 元のアバター
+    public GameObject copyAvatar;      // コピーアバター
+    public ObjectPositionData positionData;  // 位置データの格納
+    public ObjectRotationData rotationData;  // 回転データの格納
+    public Vector3 newPosition;  // 新しい位置
+    public float duration = 10f;  // 持続時間
+    public Slider slider;         // 時間調整用のスライダー
 
+    private float updatetime; //更新する時間
+    private int accessCount = 0;  // アクセス回数
+    public int startindex = 0;    // 開始インデックス
+    public Vector3 difforigin = new Vector3(0.0f, 0.0f, 0.0f); // 原点からのずれ
+
+    private bool isProcessing = false;  // 重複操作を防ぐフラグ
+    private float moveSpeed = 0.05f;    // 移動速度
+    public float pasttime = 0.0f;       // 経過時間
+
+    // オブジェクトプール部分
+    private List<GameObject> avatarPool = new List<GameObject>();  // アバター用のオブジェクトプール
+    private int poolSize = 10;  // プールの最大サイズを10に制限
+
+    public GameObject duplicatedAvatar;  // 複製されたアバター
     public GameObject duplicatedObject;
-    public GameObject duplicatedAvatar;
-    private bool isProcessing = false;
-    private float moveSpeed = 0.05f;
-    public float pasttime = 0.0f;
+    private PhotonView photonView;
 
-    private List<float> wallRemovalTimes = new List<float>();
-    private Timer playerTimer;
-
-    void Start()
+    private void Start()
     {
-        playerTimer = GameObject.FindObjectOfType<Timer>(); // Timerスクリプトのインスタンスを取得
-        newPosition = this.transform.position;
+        newPosition = this.transform.position;  // 初期位置を設定
     }
 
-    void Update()
+    private void Update()
     {
-        if (positionData.LengthPositions() > 2)
+        if (positionData.LengthPositions() > 10)
         {
-            difforigin = newPosition - positionData.GetPosition(2); //原点の違い（rotationは考慮しない）
-            difforigin.y = 0;
-            pasttime += Time.deltaTime; //位置情報を記録し始めてからの時間を記録する
+            // 位置データに基づいて原点のずれを計算
+            difforigin = newPosition - positionData.GetPosition(10);
+            difforigin.y = 0;  // Y軸方向は変えない
+            pasttime += Time.deltaTime;  // 経過時間を記録
         }
 
-        // 指定されたボタンが押され、かつ現在処理中でない場合に実行
+        // ボタンが押され、かつ処理中でない場合
         if (OVRInput.GetDown(OVRInput.Button.One) && !isProcessing)
         {
-            updateindextime = pasttime * 2;
-            Debug.Log($"update time is {updateindextime}");
-            Debug.Log($"real time is {pasttime}");
-            //DuplicateAndMove();
+            updatetime = pasttime * 2;
+            //DuplicateAndMove();  // 複製と移動を実行（別のスクリプトで呼び出すのでここでは呼ばない）
         }
 
         if (duplicatedAvatar != null)
         {
-            Debug.Log("duplicated Avatar is null");
-            SmoothMove();
+            SmoothMove();  // アバターのスムーズな移動を実行
+        }
+    }
+
+    // オブジェクトプールからアバターを取得。プールに空きがなければ新しいオブジェクトを作成
+    private GameObject GetPooledAvatar()
+    {
+        foreach (var avatar in avatarPool)
+        {
+            if (!avatar.activeInHierarchy)
+            {
+                return avatar;
+            }
         }
 
-        // 壁を消す操作が実行されるタイミングでチェック
-        //CheckAndRemoveWall();
+        // プールに空きがあり、新しいオブジェクトが作成可能な場合
+        if (avatarPool.Count < poolSize)
+        {
+            GameObject newAvatar = Instantiate(copyAvatar, newPosition, Quaternion.identity);
+            avatarPool.Add(newAvatar);
+            return newAvatar;
+        }
+
+        return null;  // プールが満杯の場合、新しいオブジェクトは作成しない
     }
 
+    // オブジェクトを複製して移動させる
     public void DuplicateAndMove()
     {
-        if (isProcessing) return; // 既に処理中なら新たに開始しない
+        if (isProcessing) return;  // 処理中の場合、操作を無視
 
         isProcessing = true;
-        //duplicatedObject = Instantiate(originalObject, newPosition, originalObject.transform.rotation);
-        //duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        //duplicatedAvatar = Instantiate(originalAvatar, newPosition, Quaternion.identity);
-        duplicatedAvatar = Instantiate(copyAvatar, newPosition, Quaternion.identity);
-        //duplicatedObject.transform.position = newPosition;
-        StartCoroutine(UpdateAndDestroy());
-        StartCoroutine(UpdateAvatarPosition());
+        duplicatedAvatar = GetPooledAvatar();  // プールからアバターを取得
+
+        if (duplicatedAvatar != null)
+        {
+            duplicatedAvatar.SetActive(true);  // オブジェクトを有効化
+            StartCoroutine(UpdateAndDestroy());  // 更新と削除の処理を開始
+            StartCoroutine(UpdateAvatarPosition());  // アバターの位置更新を開始
+        }
     }
 
+    // コルーチン：一定時間後にオブジェクトを非表示にする
     private IEnumerator UpdateAndDestroy()
     {
         yield return new WaitForSeconds(duration);
-        while (pasttime < updateindextime) { }
+        duplicatedAvatar.SetActive(false);  // アバターを無効化してプールに戻す
+        yield return new WaitUntil(() => pasttime >= updatetime);
         UpdateOriginalObject(originalObject, duplicatedObject);
-        //Destroy(duplicatedObject);
-        Destroy(duplicatedAvatar);
-        isProcessing = false; // 処理完了
+        isProcessing = false;  // 処理が完了したのでフラグをリセット
     }
 
     private void UpdateOriginalObject(GameObject original, GameObject duplicate)
     {
         // オブジェクトの更新
         if (original.CompareTag("Movable"))
-        {
-            UpdateTransform(original.transform, duplicate.transform);
-            UpdateComponents(original.gameObject, duplicate.gameObject);
+         {
+            photonView = GetComponent<PhotonView>();
+            if (photonView != null){
+                if (!duplicate.gameObject.activeSelf)
+                {
+                    if (photonView.IsMine)
+                    {
+                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, original);
+                    }
+                }
+            }
         }
 
         // 子オブジェクトの更新
         for (int i = 0; i < Mathf.Min(original.transform.childCount, duplicate.transform.childCount); i++)
         {
-            // Debug.Log($"Number of original.transform.childCount: {original.transform.childCount}");
-            // Debug.Log($"Number of duplicate.transform.childCount: {duplicate.transform.childCount}");
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
-
             if (originalChild.CompareTag("Movable"))
             {
-                UpdateTransform(originalChild, duplicateChild);
-                UpdateComponents(originalChild.gameObject, duplicateChild.gameObject);
-
-                if (!duplicateChild.gameObject.activeSelf)
-                {
-                    originalChild.gameObject.SetActive(false);
+                photonView = GetComponent<PhotonView>();
+                if (photonView != null){
+                    if (!duplicateChild.gameObject.activeSelf)
+                    {
+                        if (photonView.IsMine)
+                        {
+                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild);
+                        }
+                    }
                 }
             }
-
-            // 子オブジェクトの位置、回転、スケールを更新
-            originalChild.localPosition = duplicateChild.localPosition;
-            originalChild.localRotation = duplicateChild.localRotation;
-            originalChild.localScale = duplicateChild.localScale;
-
-            // 必要に応じて、他のコンポーネントの状態も更新
-            UpdateComponents(originalChild.gameObject, duplicateChild.gameObject);
-
-            // 孫オブジェクトがある場合、再帰的に処理
+            
+            //孫以降には再帰的にやる
             if (originalChild.childCount > 0)
             {
                 UpdateOriginalObject(originalChild.gameObject, duplicateChild.gameObject);
@@ -138,88 +152,42 @@ public class ObjectDuplicator : MonoBehaviour
         }
     }
 
-    private void UpdateTransform(Transform original, Transform duplicate)
+    [PunRPC]
+    private void RemoveRealWallRPC(GameObject wall)
     {
-        original.localPosition = duplicate.localPosition - difforigin;
-        original.localRotation = duplicate.localRotation;
-        original.localScale = duplicate.localScale;
+        wall.SetActive(false);
+        Debug.Log("real wall is deleted");
     }
 
-    private void UpdateComponents(GameObject original, GameObject duplicate)
-    {
-        // 例: Rendererコンポーネントの更新
-        Renderer originalRenderer = original.GetComponent<Renderer>();
-        Renderer duplicateRenderer = duplicate.GetComponent<Renderer>();
-        if (originalRenderer != null && duplicateRenderer != null)
-        {
-            originalRenderer.material = duplicateRenderer.material;
-        }
-
-        // 他のコンポーネントの更新もここに追加
-        // 例: Rigidbody, Collider, Custom Scriptsなど
-    }
-
+    // コルーチン：指定した時間でアバターの位置を更新
     private IEnumerator UpdateAvatarPosition()
     {
         int sliderValue = Mathf.Clamp((int)slider.value * 10, 0, positionData.LengthPositions() - 1);
         startindex = sliderValue;
         float timeElapsed = 0f;
+
         while (duplicatedAvatar != null && timeElapsed < 10f)
         {
             if (startindex >= positionData.positions.Count)
             {
-                startindex = 0;
-                Debug.Log("index is reset");
+                startindex = 0;  // インデックスが範囲を超えた場合リセット
             }
-            Debug.Log($"position data{positionData.name}");
-            Debug.Log($"startindex:{startindex}");
-            Debug.Log($"PositionData.GetPosition:{positionData.GetPosition(startindex)}");
-            Debug.Log("difforigin is:" + difforigin);
-            duplicatedAvatar.transform.position = positionData.GetPosition(startindex) + difforigin;
-            Debug.Log($"duplicatedAvatar.transform.position:{duplicatedAvatar.transform.position}");
-            duplicatedAvatar.transform.rotation = rotationData.GetRotation(startindex);
+
+            duplicatedAvatar.transform.position = positionData.GetPosition(startindex) + difforigin;  // アバターの位置を更新
+            duplicatedAvatar.transform.rotation = rotationData.GetRotation(startindex);  // アバターの回転を更新
             startindex++;
             timeElapsed += 0.1f;
-            yield return new WaitForSeconds(0.1f);
-        }
 
-        Destroy(duplicatedAvatar); //10秒経過後にアバターを削除
-        accessCount++;
-        indexlist.Add(startindex);
-    }
-
-    public void RecordWallRemovalTime()
-    {
-        float wallRemovalTime = slider.value * playerTimer.Timerspeed * Time.deltaTime;
-        wallRemovalTimes.Add(wallRemovalTime);
-        Debug.Log($"Wall removal time recorded: {wallRemovalTime}");
-    }
-
-    private void CheckAndRemoveWall()
-    {
-        foreach (float wallRemovalTime in wallRemovalTimes)
-        {
-            if (Mathf.Abs(playerTimer.realtime - wallRemovalTime) <= Time.deltaTime)
-            {
-                if (duplicatedObject != null && duplicatedObject.CompareTag("Movable"))
-                {
-                    duplicatedObject.SetActive(false);
-                    Debug.Log("Wall removed at correct time.");
-                }
-            }
+            yield return new WaitForSeconds(0.1f);  // 0.1秒ごとに更新
         }
     }
 
-    void SmoothMove()
+    // アバターをスムーズに移動させる
+    private void SmoothMove()
     {
-        // 获取右手摇杆的输入
-        Vector2 input = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
-        Vector3 direction = new Vector3(input.x, 0, input.y);
-
-        // 将方向矢量与玩家朝向匹配
-        direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * direction;
-
-        // 按照输入调整duplicatedAvatar的位置
-        duplicatedAvatar.transform.position += direction * moveSpeed * Time.deltaTime;
+        Vector2 input = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);  // 右スティックの入力を取得
+        Vector3 direction = new Vector3(input.x, 0, input.y);  // 入力を方向ベクトルに変換
+        direction = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * direction;  // カメラの向きに合わせて方向を変換
+        duplicatedAvatar.transform.position += direction * moveSpeed * Time.deltaTime;  // 入力に基づいてアバターをスムーズに移動
     }
 }

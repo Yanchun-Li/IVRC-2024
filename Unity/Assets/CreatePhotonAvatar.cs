@@ -53,6 +53,7 @@ public class CreatePhotonAvatar : MonoBehaviourPunCallbacks
                 Targets[i].transform.localRotation = rootTargets[i].transform.localRotation;
             }
             // Debug.Log($"name {masterPlayerObject.name} and position {masterPlayerObject.transform.position}");
+            //Debug.Log($"name {masterPlayerObject.name} and position {masterPlayerObject.transform.position}");
 
         }
     }

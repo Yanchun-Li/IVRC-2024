@@ -9,6 +9,12 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     public int scoreIncrement = 1;
     public int myscore;
 
+    public Timer timer;
+
+    public OVRPlayerController oVRPlayerController;
+
+    public GameObject ControllInteractor;
+
 
     private List<InteractableUnityEventWrapper> chestInteractables = new List<InteractableUnityEventWrapper>();
 
@@ -150,6 +156,11 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
                 wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
             }
         }
+
+        if (timer.isPlaying == false)
+        {
+            ControllInteractor.SetActive(false);
+        }
     }
 
     public int GetScore()
@@ -170,4 +181,5 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         }
         return ans;
     }
+
 }
