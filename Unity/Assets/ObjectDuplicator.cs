@@ -106,8 +106,8 @@ public class ObjectDuplicator : MonoBehaviour
         // 子オブジェクトの更新
         for (int i = 0; i < Mathf.Min(original.transform.childCount, duplicate.transform.childCount); i++)
         {
-            Debug.Log($"Number of original.transform.childCount: {original.transform.childCount}");
-            Debug.Log($"Number of duplicate.transform.childCount: {duplicate.transform.childCount}");
+            // Debug.Log($"Number of original.transform.childCount: {original.transform.childCount}");
+            // Debug.Log($"Number of duplicate.transform.childCount: {duplicate.transform.childCount}");
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
 
