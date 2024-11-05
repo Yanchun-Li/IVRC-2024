@@ -22,7 +22,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
 
     private bool isProcessing = false;  // 重複操作を防ぐフラグ
     private float moveSpeed = 0.05f;    // 移動速度
-    public float pasttime = 0.0f;       // 経過時間
+    private float pasttime = 0.0f;       // 経過時間
 
     // オブジェクトプール部分
     private List<GameObject> avatarPool = new List<GameObject>();  // アバター用のオブジェクトプール
@@ -138,7 +138,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
                     {
                         if (photonView.IsMine)
                         {
-                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild);
+                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild.gameObject);
                         }
                     }
                 }
