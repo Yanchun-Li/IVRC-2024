@@ -116,9 +116,10 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         // オブジェクトの更新
         if (original.CompareTag("Movable"))
          {
-            Debug.Log($"find movable wall, {original.name}");
-            photonView = GetComponent<PhotonView>();
+            Debug.Log($"find movable wall, {original.name} and this activity is {original.activeSelf}");
+            photonView = orignal.GetComponent<PhotonView>();
             if (photonView != null){
+                Debug.Log($"{duplicate.name}'s activity is {duplicate.activeSelf}");
                 if (!duplicate.activeSelf)
                 {
                     Debug.Log($"{duplicate.name} is not active, try to remove {original.name}");
@@ -138,7 +139,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
             if (originalChild.gameObject.CompareTag("Movable"))
             {
                 Debug.Log($"find movable wall, {originalChild.gameObject.name}");
-                photonView = GetComponent<PhotonView>();
+                photonView = originalChild.gameObject.GetComponent<PhotonView>();
                 if (photonView != null){
                     if (!duplicateChild.gameObject.activeSelf)
                     {
