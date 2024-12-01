@@ -170,7 +170,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RemoveRealWallRPC(int viewID)
     {
-        Debug.Log($"Try RemoveRealWallRPC")
+        Debug.Log($"Try RemoveRealWallRPC");
         PhotonView targetPhotonView = PhotonView.Find(viewID);
         if (targetPhotonView != null){
             GameObject wall = targetPhotonView.gameObject;

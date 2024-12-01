@@ -3,13 +3,11 @@ using Oculus.Interaction;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
-using Unity.VisualScripting;
 
 public class ChestRayInteraction : MonoBehaviourPunCallbacks
 {
     public int scoreIncrement = 1;
     public int myscore;
-    public float ChestPositionX;
 
     public Timer timer;
 
@@ -35,17 +33,20 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         Debug.Log($"Score initialized to {myscore}");
     }
 
-    void Update(){
+    void Update()
+    {
         int otherscore = -1;
         var playerlist = new List<Player>(PhotonNetwork.PlayerList);
-        if (playerlist.Count > 0){
-            foreach (Player player in playerlist){
+        if (playerlist.Count > 0)
+        {
+            foreach (Player player in playerlist)
+            {
                 if (!player.IsLocal)
                 {
                     otherscore = GetPlayerScore(player);
                     Debug.Log($"other score is {otherscore}");
                 }
-                else if(player.IsLocal)
+                else if (player.IsLocal)
                 {
                     //myscore = GetPlayerScore(player);
                     Debug.Log($"my score is {myscore}");
@@ -90,16 +91,25 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         //部屋の位置によって点数変更（各部屋の中心から±8の領域に宝箱生成、余裕をもって±9とする）
         //部屋の中心：21番（260,-60）、22番（140,60）、23番（260,60）、24番（140,-60）
         Vector3 position = chestObject.transform.position;
-        if (260-9<position.x  & position.x<260+9 & -60-9<position.z & position.z<-60+9){
+        if (260 - 9 < position.x & position.x < 260 + 9 & -60 - 9 < position.z & position.z < -60 + 9)
+        {
             scoreIncrement = 2;
-        }else if (140-9<position.x  & position.x<140+9 & 60-9<position.z & position.z<60+9){
+        }
+        else if (140 - 9 < position.x & position.x < 140 + 9 & 60 - 9 < position.z & position.z < 60 + 9)
+        {
             scoreIncrement = 2;
-        }else if (260-9<position.x  & position.x<260+9 & 60-9<position.z & position.z<60+9){
+        }
+        else if (260 - 9 < position.x & position.x < 260 + 9 & 60 - 9 < position.z & position.z < 60 + 9)
+        {
             scoreIncrement = 2;
-        }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
+        }
+        else if (140 - 9 < position.x & position.x < 140 + 9 & -60 - 9 < position.z & position.z < -60 + 9)
+        {
             scoreIncrement = 2;
-        }else{
-            scoreIncrement = 2;
+        }
+        else
+        {
+            scoreIncrement = 1;
         }
         // スコアを加算
         myscore += scoreIncrement;
@@ -153,12 +163,9 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         // クリーンアップ
         foreach (var wrapper in chestInteractables)
         {
-            if (wrapper != null) 
+            if (wrapper != null)
             {
-                ChestPositionX = wrapper.gameObject.transform.position.x;
-                if (ChestPositionX > -100){
-                    wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
-                }
+                wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
             }
         }
 
@@ -181,8 +188,9 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
     public int GetPlayerScore(Player player)
     {
         int ans = 0;
-        if (player.CustomProperties.TryGetValue("Score", out object score)){
-            ans = (int) score;
+        if (player.CustomProperties.TryGetValue("Score", out object score))
+        {
+            ans = (int)score;
         }
         return ans;
     }
