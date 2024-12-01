@@ -116,8 +116,8 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         // オブジェクトの更新
         if (original.CompareTag("Movable"))
          {
-            Debug.Log($"find movable wall, {original.name} and this activity is {original.activeSelf}");
-            photonView = orignal.GetComponent<PhotonView>();
+            photonView = original.GetComponent<PhotonView>();
+            Debug.Log($"find movable wall, {original.name} IsMine:{photonView.IsMine} Owner:{photonView.Owner} LocalPlayer:{PhotonNetwork.LocalPlayer}");
             if (photonView != null){
                 Debug.Log($"{duplicate.name}'s activity is {duplicate.activeSelf}");
                 if (!duplicate.activeSelf)
@@ -125,7 +125,8 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
                     Debug.Log($"{duplicate.name} is not active, try to remove {original.name}");
                     if (photonView.IsMine)
                     {
-                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, original);
+                        Debug.Log("try to use RemoveRealWallRPC");
+                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, true);
                     }
                 }
             }
@@ -136,23 +137,23 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         {
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
-            if (originalChild.gameObject.CompareTag("Movable"))
-            {
-                Debug.Log($"find movable wall, {originalChild.gameObject.name}");
-                photonView = originalChild.gameObject.GetComponent<PhotonView>();
-                if (photonView != null){
-                    if (!duplicateChild.gameObject.activeSelf)
-                    {
-                        Debug.Log($"{duplicateChild.gameObject.name} is not active, try to remove {originalChild.gameObject.name}");
-                        if (photonView.IsMine)
-                        {
-                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild.gameObject);
-                        }
-                    }
-                }
-            }
+            // if (originalChild.gameObject.CompareTag("Movable"))
+            // {
+            //     Debug.Log($"find movable wall, {originalChild.gameObject.name}");
+            //     photonView = originalChild.gameObject.GetComponent<PhotonView>();
+            //     if (photonView != null){
+            //         if (!duplicateChild.gameObject.activeSelf)
+            //         {
+            //             Debug.Log($"{duplicateChild.gameObject.name} is not active, try to remove {originalChild.gameObject.name}");
+            //             if (photonView.IsMine)
+            //             {
+            //                 photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild.gameObject);
+            //             }
+            //         }
+            //     }
+            // }
             
-            //孫以降には再帰的にやる
+            // //孫以降には再帰的にやる
             if (originalChild.childCount > 0)
             {
                 UpdateOriginalObject(originalChild.gameObject, duplicateChild.gameObject);
