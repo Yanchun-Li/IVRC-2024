@@ -3,11 +3,13 @@ using Oculus.Interaction;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 
 public class ChestRayInteraction : MonoBehaviourPunCallbacks
 {
     public int scoreIncrement = 1;
     public int myscore;
+    public float ChestPositionX;
 
     public Timer timer;
 
@@ -151,7 +153,8 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         // クリーンアップ
         foreach (var wrapper in chestInteractables)
         {
-            if (wrapper != null)
+            ChestPositionX = wrapper.gameObject.transform.position.x;
+            if ((wrapper != null) && (ChestPositionX > -100))
             {
                 wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
             }
