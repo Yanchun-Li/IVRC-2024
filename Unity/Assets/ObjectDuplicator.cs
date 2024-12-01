@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using Oculus.Interaction.Editor;
 
 public class ObjectDuplicator : MonoBehaviourPunCallbacks
 {
@@ -163,10 +164,17 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void RemoveRealWallRPC(GameObject wall)
+    public void RemoveRealWallRPC(int viewID)
     {
-        wall.SetActive(false);
-        Debug.Log($"deleted wall name is {wall.name}");
+        PhotonView targetPhotonView = PhotonView.Find(viewID);
+        if (targetPhotonView != null){
+            GameObject wall = targetPhotonView.gameObject;
+            wall.SetActive(false);
+            Debug.Log($"deleted wall name is {wall.name}");
+        }
+        else{
+             Debug.LogWarning($"No object found with ViewID: {viewID}");
+        }
     }
 
     // コルーチン：指定した時間でアバターの位置を更新
