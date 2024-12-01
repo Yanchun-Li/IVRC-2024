@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using Oculus.Interaction.Editor;
+using UnityEditor.PackageManager;
 
 public class ObjectDuplicator : MonoBehaviourPunCallbacks
 {
@@ -128,7 +129,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
                     if (photonView.IsMine)
                     {
                         Debug.Log("try to use RemoveRealWallRPC");
-                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, true);
+                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, photonView.ViewID);
                     }
                 }
             }
