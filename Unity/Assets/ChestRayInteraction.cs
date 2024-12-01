@@ -97,7 +97,7 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
             scoreIncrement = 2;
         }else{
-            scoreIncrement = 1;
+            scoreIncrement = 2;
         }
         // スコアを加算
         myscore += scoreIncrement;
