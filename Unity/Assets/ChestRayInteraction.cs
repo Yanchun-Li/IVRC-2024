@@ -153,10 +153,12 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         // クリーンアップ
         foreach (var wrapper in chestInteractables)
         {
-            ChestPositionX = wrapper.gameObject.transform.position.x;
-            if ((wrapper != null) && (ChestPositionX > -100))
+            if (wrapper != null) 
             {
-                wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
+                ChestPositionX = wrapper.gameObject.transform.position.x;
+                if (ChestPositionX > -100){
+                    wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
+                }
             }
         }
 
