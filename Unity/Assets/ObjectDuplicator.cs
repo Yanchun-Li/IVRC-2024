@@ -117,8 +117,9 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         if (original.CompareTag("Movable"))
          {
             Debug.Log($"find movable wall, {original.name} and this activity is {original.activeSelf}");
-            photonView = orignal.GetComponent<PhotonView>();
+            photonView = original.GetComponent<PhotonView>();
             if (photonView != null){
+                Debug.Log($"PhotonView found on {original.name}. IsMine: {photonView.IsMine}, Owner: {photonView.Owner}, Local Player: {PhotonNetwork.LocalPlayer}");
                 Debug.Log($"{duplicate.name}'s activity is {duplicate.activeSelf}");
                 if (!duplicate.activeSelf)
                 {
