@@ -58,7 +58,7 @@ public class AbuttonMainToPast : MonoBehaviourPunCallbacks
                 // Aボタン：潜入する
                 if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
                 {
-                    OnEnterButtonPressed();
+                    Invoke("OnEnterButtonPressed",0.1f);
                     Debug.Log("Aボタンが押されました");
                 }
 

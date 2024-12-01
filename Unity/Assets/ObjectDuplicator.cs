@@ -22,7 +22,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
 
     private bool isProcessing = false;  // 重複操作を防ぐフラグ
     private float moveSpeed = 0.05f;    // 移動速度
-    public float pasttime = 0.0f;       // 経過時間
+    private float pasttime = 0.0f;       // 経過時間
 
     // オブジェクトプール部分
     private List<GameObject> avatarPool = new List<GameObject>();  // アバター用のオブジェクトプール
@@ -113,10 +113,12 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         // オブジェクトの更新
         if (original.CompareTag("Movable"))
          {
+            Debug.Log($"find movable wall, {original.name}");
             photonView = GetComponent<PhotonView>();
             if (photonView != null){
-                if (!duplicate.gameObject.activeSelf)
+                if (!duplicate.activeSelf)
                 {
+                    Debug.Log($"{duplicate.name} is not active, try to remove {original.name}");
                     if (photonView.IsMine)
                     {
                         photonView.RPC("RemoveRealWallRPC", RpcTarget.All, original);
@@ -130,15 +132,17 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         {
             Transform originalChild = original.transform.GetChild(i);
             Transform duplicateChild = duplicate.transform.GetChild(i);
-            if (originalChild.CompareTag("Movable"))
+            if (originalChild.gameObject.CompareTag("Movable"))
             {
+                Debug.Log($"find movable wall, {originalChild.gameObject.name}");
                 photonView = GetComponent<PhotonView>();
                 if (photonView != null){
                     if (!duplicateChild.gameObject.activeSelf)
                     {
+                        Debug.Log($"{duplicateChild.gameObject.name} is not active, try to remove {originalChild.gameObject.name}");
                         if (photonView.IsMine)
                         {
-                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild);
+                            photonView.RPC("RemoveRealWallRPC", RpcTarget.All, originalChild.gameObject);
                         }
                     }
                 }
@@ -156,7 +160,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
     private void RemoveRealWallRPC(GameObject wall)
     {
         wall.SetActive(false);
-        Debug.Log("real wall is deleted");
+        Debug.Log($"deleted wall name is {wall.name}");
     }
 
     // コルーチン：指定した時間でアバターの位置を更新
