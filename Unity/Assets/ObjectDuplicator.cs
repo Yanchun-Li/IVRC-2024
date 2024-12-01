@@ -113,10 +113,12 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
         // オブジェクトの更新
         if (original.CompareTag("Movable"))
          {
+            Debug.Log("find movable wall");
             photonView = GetComponent<PhotonView>();
             if (photonView != null){
                 if (!duplicate.gameObject.activeSelf)
                 {
+                    Debug.Log("wall is not active, try to remove wall");
                     if (photonView.IsMine)
                     {
                         photonView.RPC("RemoveRealWallRPC", RpcTarget.All, original);
