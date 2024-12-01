@@ -33,10 +33,12 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
     public GameObject duplicatedAvatar;  // 複製されたアバター
     public GameObject duplicatedObject;
     private PhotonView photonView;
+    private PhotonView roomPhotonView;
 
     private void Start()
     {
         newPosition = this.transform.position;  // 初期位置を設定
+        roomPhotonView = this.GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -128,8 +130,9 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
                     Debug.Log($"{duplicate.name} is not active, try to remove {original.name}");
                     if (photonView.IsMine)
                     {
-                        Debug.Log("try to use RemoveRealWallRPC");
-                        photonView.RPC("RemoveRealWallRPC", RpcTarget.All, photonView.ViewID);
+                        int ID = photonView.ViewID;
+                        Debug.Log($"try to use RemoveRealWallRPC, ID is {ID}");
+                        roomPhotonView.RPC("RemoveRealWallRPC", RpcTarget.All, ID);
                     }
                 }
             }
