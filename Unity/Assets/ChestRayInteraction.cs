@@ -92,13 +92,18 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         Vector3 position = chestObject.transform.position;
         if (260-9<position.x  & position.x<260+9 & -60-9<position.z & position.z<-60+9){
             scoreIncrement = 2;
-        }else if (140-9<position.x  & position.x<140+9 & 60-9<position.z & position.z<60+9){
+        }
+        else if (140-9<position.x  & position.x<140+9 & 60-9<position.z & position.z<60+9){
             scoreIncrement = 2;
-        }else if (260-9<position.x  & position.x<260+9 & 60-9<position.z & position.z<60+9){
+        }
+        else if (260-9<position.x  & position.x<260+9 & 60-9<position.z & position.z<60+9){
             scoreIncrement = 2;
-        }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
+        }
+        else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
             scoreIncrement = 2;
-        }else{
+        }
+        else
+        {
             scoreIncrement = 1;
         }
         // スコアを加算
