@@ -18,6 +18,7 @@ public class Timer : MonoBehaviourPunCallbacks
     GameManager GameManager;
     int myscore;
     int otherscore;
+    float deleted_time = -1.0f;//壁が消える時間（初期値適当）
 
     int maxscore = 20;
     public bool isPlaying = false;//プレイ中か判定するブール
@@ -64,7 +65,7 @@ public class Timer : MonoBehaviourPunCallbacks
             {
                 otherscore = GameManager.GetPlayerScore(player);
                 otherPlaying = GetPlayerBool(player);
-                otherAccess = GetPlayerAccess(player);
+                otherAccess = GetPlayerAccess(player);//相手が介入中か
             }
             else if (player.IsLocal)
             {
@@ -74,11 +75,18 @@ public class Timer : MonoBehaviourPunCallbacks
             //Debug.Log($"my score is {myscore}, and othre score is {otherscore}");
         }
 
-        if (otherAccess == true & accessfinish == true)
+        if (otherAccess == true & accessfinish == true)//介入を開始したとき
         {
             popup = true;
             accessfinish = false;
             StartCoroutine(PopupWindow(timeLimit, (int)realtime));
+            deleted_time = timeLimit - realtime * 2;
+        }
+
+        //壁が消える合図（介入と同タイミングのときはこっちを表示しないこととする）
+        if ((int)deleted_time == remaining && popup == false){
+            popup = true;
+            StartCoroutine(DeleteNotification());
         }
 
         //timerTextを更新していく（他人が介入していないとき）
@@ -167,9 +175,10 @@ public class Timer : MonoBehaviourPunCallbacks
     private System.Collections.IEnumerator PopupWindow(int timelimit, int realtime)
     {
         int updatetime = timelimit - realtime * 2;//スピードを2で固定（参照無理だった・・・）
-        timerText.text = $"相手がこちらの世界に介入しました\nこちらの世界に反映されるのは残り時間{updatetime}秒の時です\n※このウィンドウは自動的に消滅します";
-        yield return new WaitForSeconds(3.0f);
+        timerText.text = $"相手が介入を開始しました\nこちらに反映されるのは残り時間{updatetime}秒の時です\n※この文章は自動的に消滅します";
+        yield return new WaitForSeconds(4.0f);
         popup = false;
+        //相手の介入が終わるまでポップアップを再度表示しないためのループ
         while (otherAccess == true)
         {
             var playerlist = new List<Player>(PhotonNetwork.PlayerList);
@@ -184,6 +193,12 @@ public class Timer : MonoBehaviourPunCallbacks
         }
         //アクセスが終了したらtrueに戻す
         accessfinish = true;
+    }
+
+    private System.Collections.IEnumerator DeleteNotification(){
+        timerText.text = "相手の介入が反映されました\n壁が消えているかもしれないので、確認してみましょう\n※この文章は自動的に消滅します";
+        yield return new WaitForSeconds(4.0f);
+        popup = false;
     }
 
 }
