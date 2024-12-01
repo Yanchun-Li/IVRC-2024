@@ -92,6 +92,7 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
 
         if (duplicatedAvatar != null)
         {
+            Debug.Log("create duplicateAvatar");
             duplicatedAvatar.SetActive(true);  // オブジェクトを有効化
             StartCoroutine(UpdateAndDestroy());  // 更新と削除の処理を開始
             StartCoroutine(UpdateAvatarPosition());  // アバターの位置更新を開始
@@ -101,9 +102,11 @@ public class ObjectDuplicator : MonoBehaviourPunCallbacks
     // コルーチン：一定時間後にオブジェクトを非表示にする
     private IEnumerator UpdateAndDestroy()
     {
+        Debug.Log($"start UpdateAndDestroy Coroutine, duration is {duration}, pasttime is {pasttime}, updatetime is {updatetime}");
         yield return new WaitForSeconds(duration);
         duplicatedAvatar.SetActive(false);  // アバターを無効化してプールに戻す
         yield return new WaitUntil(() => pasttime >= updatetime);
+        Debug.Log("start UpdateOrignalObject Coroutine");
         UpdateOriginalObject(originalObject, duplicatedObject);
         isProcessing = false;  // 処理が完了したのでフラグをリセット
     }
