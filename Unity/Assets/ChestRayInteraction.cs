@@ -106,7 +106,7 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
             scoreIncrement = 2;
         }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
             scoreIncrement = 2;
-        }else if (-100<position.x){
+        }else if (-100 > position.x){
             scoreIncrement = 0;
         }
         else{

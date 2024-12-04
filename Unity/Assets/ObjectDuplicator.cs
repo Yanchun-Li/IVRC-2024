@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
-using Oculus.Interaction.Editor;
-using UnityEditor.PackageManager;
+//using Oculus.Interaction.Editor;
+//using UnityEditor.PackageManager;
 
 public class ObjectDuplicator : MonoBehaviourPunCallbacks
 {
