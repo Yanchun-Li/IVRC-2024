@@ -91,6 +91,7 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         //部屋の位置によって点数変更（各部屋の中心から±8の領域に宝箱生成、余裕をもって±9とする）
         //部屋の中心：21番（260,-60）、22番（140,60）、23番（260,60）、24番（140,-60）
         Vector3 position = chestObject.transform.position;
+        
         if (260 - 9 < position.x & position.x < 260 + 9 & -60 - 9 < position.z & position.z < -60 + 9)
         {
             scoreIncrement = 2;
@@ -102,13 +103,12 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         else if (260 - 9 < position.x & position.x < 260 + 9 & 60 - 9 < position.z & position.z < 60 + 9)
         {
             scoreIncrement = 2;
-        }
-        else if (140 - 9 < position.x & position.x < 140 + 9 & -60 - 9 < position.z & position.z < -60 + 9)
-        {
+        }else if (140-9<position.x  & position.x<140+9 & -60-9<position.z & position.z<-60+9){
             scoreIncrement = 2;
+        }else if (-100 > position.x){
+            scoreIncrement = 0;
         }
-        else
-        {
+        else{
             scoreIncrement = 1;
         }
         // スコアを加算

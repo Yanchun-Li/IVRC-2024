@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 3901238032973064490}
   - component: {fileID: 7482283270945502954}
   - component: {fileID: 5826949706711735274}
+  - component: {fileID: 2752229476272008706}
+  - component: {fileID: -3346492339118996240}
   m_Layer: 8
   m_Name: TutorialMovableWall
   m_TagString: Movable
@@ -343,10 +345,10 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5539356657749761588}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: -3346492339118996240}
+        m_TargetAssemblyTypeName: Delete_Wall, Assembly-CSharp
+        m_MethodName: TutorialRemove
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5214,3 +5216,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 3901238032973064490}
+--- !u!114 &2752229476272008706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539356657749761588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e084c0ff578c3c44a20bc46bfe62b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1Tag: Player1
+  movableWallTag: Movable
+  explosionParticle: {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+--- !u!114 &-3346492339118996240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539356657749761588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54464aa51aa794d478fa32f30dbd8312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionParticle: {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}

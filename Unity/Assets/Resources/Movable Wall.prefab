@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Tag: Player1
   movableWallTag: Movable
+  explosionParticle: {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
 --- !u!198 &3353966931053432148
 ParticleSystem:
   m_ObjectHideFlags: 0
