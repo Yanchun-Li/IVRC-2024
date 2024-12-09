@@ -10,6 +10,7 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
 {
     public string player1Tag = "Player1";
     public string movableWallTag = "Movable";
+    public ParticleSystem explosionParticle;
     private PhotonView photonView;
 
     private void Awake()
@@ -69,7 +70,18 @@ public class PlayerSpecificWallInteraction : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RemoveWallRPC()
     {
-        gameObject.SetActive(false);
+        StartCoroutine(Destruction(gameObject));
+        //gameObject.SetActive(false);
+        //Debug.Log("wall is deleted");
+    }
+
+    private IEnumerator Destruction(GameObject wall){
+        Transform particleTransform = this.gameObject.transform;
+        var particle = Instantiate(explosionParticle, particleTransform);
+        particle.transform.position = this.gameObject.transform.position;
+        particle.Play();
+        yield return new WaitForSeconds(1.2f);
+        wall.SetActive(false);
         Debug.Log("wall is deleted");
     }
 }
