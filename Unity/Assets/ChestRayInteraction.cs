@@ -168,7 +168,6 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
                 wrapper.WhenSelect.RemoveListener(() => OnChestSelected(wrapper.gameObject));
             }
         }
-
         if (timer.isPlaying == false)
         {
             ControllInteractor.SetActive(false);
