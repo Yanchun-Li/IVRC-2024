@@ -34,18 +34,18 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         loading = GameObject.Find("Avatar1(Clone)/Canvas/Loading");
         loading.SetActive(true);
         UIChangerObject = GameObject.Find("UIChangerObject");
-        UIChangerObject.GetComponent<AbuttonMainToPast>().enable = false;
+        UIChangerObject.GetComponent<AbuttonMainToPast>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerlist = new List<Player>(PhotonNetwork.PlayerList);
+        var playerlist = new List<Player>(PhotonNetwork.PlayerList);
         if (playerlist.Count == 2 & !gameStart){
             //player1.GetComponent<OVRPlayerController>().enabled = true;
             GameManager.GetComponent<PlayerDataController>().enabled=true;
             player1.GetComponent<PlayerController>().enabled = true;
-            UIChangerObject.GetComponent<AbuttonMainToPast>().enable = true;
+            UIChangerObject.GetComponent<AbuttonMainToPast>().enabled = true;
             player1.GetComponent<ChestRayInteraction>().enabled = true;
             //player1.GetComponent<ObjectTransformSave>().enabled = true;
             StartCoroutine("GameStart");
@@ -57,7 +57,6 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         // }
 
         //状態の更新
-        var playerlist = new List<Player>(PhotonNetwork.PlayerList);
         foreach (Player player in playerlist)
         {
             if (player.IsLocal){
@@ -68,7 +67,7 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         //ゲーム開始かつプレイが終わったらいろいろ止める(UIChangerObjectのAbutton~とPlayer1のChestrayinteraction)
         if (gameStart == true && isPlaying == false){
             //player1.GetComponent<PlayerController>().enabled = false;
-            UIChangerObject.GetComponent<AbuttonMainToPast>().enable = false;
+            UIChangerObject.GetComponent<AbuttonMainToPast>().enabled = false;
             player1.GetComponent<ChestRayInteraction>().enabled = false;
         }
     }
@@ -81,7 +80,7 @@ public class PlayerStop : MonoBehaviourPunCallbacks
         timer.SetActive(true);
     }
 
-    private bool GetBool(var player){
+    private bool GetBool(Player player){
         bool isPlaying = true;//適当な初期値
         if (player.CustomProperties.TryGetValue("isPlaying", out object playing)){
             isPlaying = (bool)playing;

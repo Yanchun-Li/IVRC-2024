@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class ChestRayInteraction : MonoBehaviourPunCallbacks
 {
-    public int scoreIncrement = 1;
+    public int scoreIncrement = 0;
     public int myscore;
 
     public Timer timer;
@@ -85,13 +85,39 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
             Debug.LogWarning($"InteractableUnityEventWrapper not found on chest: {chestObject.name}");
         }
     }
+    private bool GetPlayerBool(Player player)
+    {
+        bool playcheck = false;//エラー回避用に初期値false
+        if (player.CustomProperties.TryGetValue("isPlaying", out object play))
+        {
+            playcheck = (bool)play;
+        }
+        return playcheck;
+    }
+
+    private bool PlayerisPlaying()
+    {
+        bool myPlaying = false;
+        var playerlist = new List<Player>(PhotonNetwork.PlayerList);
+        foreach (Player player in playerlist)
+        {
+            if (player.IsLocal)
+            {
+                myPlaying = GetPlayerBool(player);
+            }
+        }
+        return myPlaying;
+    }
 
     public void OnChestSelected(GameObject chestObject)
     {
         //部屋の位置によって点数変更（各部屋の中心から±8の領域に宝箱生成、余裕をもって±9とする）
         //部屋の中心：21番（260,-60）、22番（140,60）、23番（260,60）、24番（140,-60）
         Vector3 position = chestObject.transform.position;
-        
+        bool PlayerMode = false;
+
+        PlayerMode = PlayerisPlaying();
+        if (PlayerMode){
         if (260 - 9 < position.x & position.x < 260 + 9 & -60 - 9 < position.z & position.z < -60 + 9)
         {
             scoreIncrement = 2;
@@ -110,6 +136,9 @@ public class ChestRayInteraction : MonoBehaviourPunCallbacks
         }
         else{
             scoreIncrement = 1;
+        }
+        }else{
+            scoreIncrement = 0;
         }
         // スコアを加算
         myscore += scoreIncrement;
